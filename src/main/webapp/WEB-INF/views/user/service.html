@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout/layout::head">
+</head>
+<body>
+<!-- link css all Services -->
+<link rel="stylesheet" href="/css/allServices.css">
+<!-- header -->
+<header th:replace="/layout/layout::header"></header>
+
+<main>
+	<div class="container">
+		<div class="service__block">
+			<h3 class="title">SHINE COMBO CẮT GỘI 10 BƯỚC</h3>
+			<div class="over-flow">
+				<img src="/img/bannerIMG.jpg" alt="" class="image">
+			</div>
+			<p class="sub-desc">Dịch vụ chăm sóc tóc đặc biệt dùng kèm Shine Combo</p>
+			<div class="list-ser">
+				<div class="img__block"><img src="/img/infoServices/item-1.jpg" alt=""></div>
+				<div class="img__block"><img src="/img/infoServices/item-2.jpg" alt=""></div>
+				<div class="img__block"><img src="/img/infoServices/item-3.jpg" alt=""></div>
+				<div class="img__block"><img src="/img/infoServices/item-4.jpg" alt=""></div>
+			</div>
+		</div>
+		<div class="service__block">
+			<h3 class="title">LẤY RÁY TAI</h3>
+			<div class="over-flow">
+				<img src="/img/combo/30shine-dich-vu-lay-ray-tai.jpg" alt="" class="image"/>
+			</div>
+		</div>
+		<div class="service__block">
+			<h3 class="title">UỐN</h3>
+			<div class="over-flow">
+				<img src="/img/combo/20220104-banner-uon-1.jpg" alt="" class="image">
+			</div>
+		</div>
+		<div class="service__block">
+			<h3 class="title">DƯỠNG - PHỤC HỒI</h3>
+			<div class="row__service--two">
+				<div class="over-flow">
+					<img src="/img/combo/banner-phuc-hoi-nano-2.jpg" alt="" class="image">
+				</div>
+				<div class="img-b">
+					<img src="/img/combo/20211217-hap-duong-oliu-2.jpg" alt="">
+				</div>
+			</div>
+		</div>
+		<div class="service__block">
+			<h3 class="title">DỊCH VỤ NHUỘM</h3>
+			<!-- row 1 -->
+			<div class="row">
+				<div class="over-flow">
+					<img src="/img/combo/nhuom/item1.jpg" alt="" class="image">
+				</div>
+				<div class="info">
+					<p>
+						<strong>"Tóc bạc sớm: Cách nào để lấy lại phong độ đàn ông đích
+							thực?"</strong> <br>
+						Một người đàn ông có trong tay sức khỏe, sự thành đạt trong sự
+						nghiệp, hạnh phúc gia đình… liệu có đã hoàn hảo? Thực ra đó là
+						“đủ” chứ chưa thể “đầy” nếu như họ chưa hài lòng về ngoại hình,
+						một nhu cầu thực tế trong thời hiện đại. Vì vậy, đối với đàn
+						ông, tóc bạc sớm sẽ mang đến cảm giác giảm phong độ rõ đi trông
+						thấy. Ái ngại, tự ti sẽ thay thế cho sự tự tin, mạnh mẽ khi đứng
+						trước người đối diện.
+					</p>
+					<a th:href="@{/order}"><button>Đặt lịch ngay</button></a>
+				</div>
+			</div>
+			<!-- row 2 -->
+			<div class="row">
+				<div class="over-flow">
+					<img src="/img/combo/nhuom/item2.jpg" alt="" class="image">
+				</div>
+				<div class="info">
+					<p>
+						<strong>"Cắt tóc giúp nam giới gọn gàng hơn, nhưng màu tóc mới
+							là điều quan trọng định hình phong cách của người đó"</strong>
+						<br>
+						Đàn ông Việt khi trưởng thành thường không thích nhuộm tóc, và
+						có quan điểm: người Á Đông thì tóc phải đen, hay trẻ con thì mới
+						nhuộm tóc. Quan điểm này không đúng cũng chẳng sai. Quan trọng
+						là chọn đúng màu, đúng kiểu thì không những vẻ ngoài được nâng
+						cấp mà còn trở nên bắt mắt và mới mẻ hơn.
+					</p>
+					<a th:href="@{/order}"><button>Đặt lịch ngay</button></a>
+				</div>
+			</div>
+			<!-- row 3 -->
+			<div class="row">
+				<div class="over-flow">
+					<img src="/img/combo/nhuom/item3.jpg" alt="" class="image">
+				</div>
+				<div class="info">
+					<p>
+						<strong>"Cắt tóc giúp nam giới gọn gàng hơn, nhưng màu tóc mới
+							là điều quan trọng định hình phong cách của người đó"</strong>
+						<br>
+						Đàn ông Việt khi trưởng thành thường không thích nhuộm tóc, và
+						có quan điểm: người Á Đông thì tóc phải đen, hay trẻ con thì mới
+						nhuộm tóc. Quan điểm này không đúng cũng chẳng sai. Quan trọng
+						là chọn đúng màu, đúng kiểu thì không những vẻ ngoài được nâng
+						cấp mà còn trở nên bắt mắt và mới mẻ hơn.
+					</p>
+					<a th:href="@{/order}"><button>Đặt lịch Ngay</button></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+
+<!-- footer -->
+<footer th:replace="/layout/layout::footer"></footer>
+<th:block th:replace="/layout/layout::foot"></th:block>
+</body>
+</html>

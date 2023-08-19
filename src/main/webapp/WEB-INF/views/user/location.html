@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout/layout::head">
+</head>
+<body>
+<!-- link locations -->
+<link rel="stylesheet" href="/css/locations.css">
+<!-- header -->
+<header th:replace="/layout/layout::header"></header>
+
+<!-- location -->
+<main>
+	<!-- banner -->
+	<div class="banner-location">
+		<img src="/img/bannerLocations.jpg" alt="banner">
+		<div class="location-info">
+			<h2 class="title">HỆ THỐNG SALON CỦA 30SHINE</h2>
+			<p class="desc">
+				Tính đến hiện tại, chuỗi salon tóc nam 30Shine có 88 salon tại những
+				vị trí đắc địa nhất Hà Nội, TP. Hồ Chí Minh và các tỉnh lân cận. Hãy
+				tìm đến salon 30Shine gần anh nhất để tận hưởng trải nghiệm cắt tóc
+				nam đỉnh cao!
+			</p>
+		</div>
+	</div>
+	<!-- locations -->
+	<div class="locations">
+		<h2 class="title">Các Địa Điểm Salon Trên Khắp Việt Nam</h2>
+		<div class="container">
+			<div class="list-location">
+				<div style="width: 100%;" class="accordion accordion-flush"
+					  id="accordionFlushExample">
+					<div class="accordion-item">
+						<h2 class="accordion-header">
+							<button class="accordion-button collapsed" type="button"
+									  data-bs-toggle="collapse"
+									  data-bs-target="#flush-collapseOne" aria-expanded="false"
+									  aria-controls="flush-collapseOne">
+								TP. HÀ NỘI (20)
+							</button>
+						</h2>
+						<div id="flush-collapseOne" class="accordion-collapse collapse show"
+							  data-bs-parent="#accordionFlushExample">
+							<div class="accordion-body">
+								<ul>
+									<li>
+										<p>
+											I. <strong>B14 Chung cư Kim Liên, Phạm Ngọc Thạch, P.
+											Kim
+											Liên, Q. Đống Đa, Hà Nội</strong>
+										</p>
+										<button type="button" class="btn btn-warning">Đang bảo trì</button>
+									</li>
+									<li>
+										<p>
+											II. <strong>50BT4 X2 Nguyễn Phan Chánh, Q. Hoàng Mai,
+											Hà
+											Nội</strong>
+										</p>
+										<button type="button" class="btn btn-warning">Đang bảo trì</button>
+									</li>
+									<li>
+										<p>
+											III. <strong>
+											109 Trần Quốc Hoàn, P. Dịch Vọng Hậu, Q. Cầu Giấy,
+											Hà
+											Nội</strong>
+										</p>
+										<button type="button" class="btn btn-warning">Đang bảo trì</button>
+									</li>
+									<li>
+										<p>
+											IV. <strong>56 Nguyễn Huy Tưởng, P. TX Trung, Q. Thanh
+											Xuân, Hà Nội</strong>
+										</p>
+										<button type="button" class="btn btn-warning">Đang bảo trì</button>
+									</li>
+									<li>
+										<p>
+											V. <strong>Chelsea Park, 116 Trung Kính, P. Yên Hòa,
+											Q.
+											Cầu Giấy, Hà Nội</strong>
+										</p>
+										<button type="button" class="btn btn-warning">Đang bảo trì</button>
+									</li>
+									<li><a href="#!">.....</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header">
+							<button class="accordion-button collapsed" type="button"
+									  data-bs-toggle="collapse"
+									  data-bs-target="#flush-collapseTwo" aria-expanded="false"
+									  aria-controls="flush-collapseTwo">
+								TP. HỒ CHÍ MINH (42)
+							</button>
+						</h2>
+						<div id="flush-collapseTwo" class="accordion-collapse collapse"
+							  data-bs-parent="#accordionFlushExample">
+							<div class="accordion-body">
+								<ul>
+									<li>
+										<p>
+											I. <strong>408 Nguyễn Thị Thập, Phường Tân Quy, Quận
+											7, HCM</strong>
+										</p>
+										<button type="button" class="btn btn-warning">Đang bảo trì</button>
+									</li>
+									<li>
+										<p>
+											II. <strong>190 Hòa Bình, Hiệp Tân, Tân Phú, Thành phố
+											Hồ Chí Minh</strong>
+										</p>
+										<button type="button" class="btn btn-warning">Đang bảo trì</button>
+									</li>
+									<li>
+										<p>
+											III. <strong>186 Đinh Tiên Hoàng, Phường Đa Kao, Quận
+											1, HCM</strong>
+										</p>
+										<button type="button" class="btn btn-warning">Đang bảo trì</button>
+									</li>
+									<li>
+										<p>
+											IV. <strong>112 Phổ Quang, Phường 9, Q.Phú Nhuận, TP
+											Hồ Chí Minh</strong>
+										</p>
+										<button type="button" class="btn btn-warning">Đang bảo trì</button>
+									</li>
+									<li>
+										<p>
+											V. <strong>76 Phan Văn Hớn, P. Tân Thới Nhất, Quận 12,
+											TP Hồ Chí Minh</strong>
+										</p>
+										<button type="button" class="btn btn-warning">Đang bảo trì</button>
+									</li>
+									<li><a href="#!">.....</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header">
+							<button class="accordion-button collapsed" type="button"
+									  data-bs-toggle="collapse"
+									  data-bs-target="#flush-collapseThree" aria-expanded="false"
+									  aria-controls="flush-collapseThree">
+								ĐÀ NẴNG (2)
+							</button>
+						</h2>
+						<div id="flush-collapseThree" class="accordion-collapse
+                  collapse" data-bs-parent="#accordionFlushExample">
+							<div class="accordion-body">
+								<ul>
+									<li>
+										<p>
+											I. <strong>345 Nguyễn Văn Linh, P. Thạc Gián, Quận
+											Thanh
+											Khê, Đà Nẵng</strong>
+										</p>
+										<button type="button" class="btn btn-warning">Đang bảo trì</button>
+									</li>
+									<li>
+										<p>
+											II. <strong>130 Xô Viết Nghệ Tĩnh, Phường Hòa Cường
+											Nam, Quận Hải Châu, Đà Nẵng</strong>
+										</p>
+										<button type="button" class="btn btn-warning">Đang bảo trì</button>
+									</li>
+									<li><a href="#!">.....</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="accordion-item">
+						<h2 class="accordion-header">
+							<button class="accordion-button collapsed" type="button"
+									  data-bs-toggle="collapse"
+									  data-bs-target="#flush-collapseFour" aria-expanded="false"
+									  aria-controls="flush-collapseFour">
+								MORE OTHER (15)
+							</button>
+						</h2>
+						<div id="flush-collapseFour" class="accordion-collapse collapse"
+							  data-bs-parent="#accordionFlushExample">
+							<div class="accordion-body">
+								<ul>
+									<li>
+										<p>I. <strong>
+											135 Trần Hưng Đạo, Phường An Phú, Quận Ninh Kiều,
+											Cần Thơ</strong></p>
+										<button type="button" class="btn btn-warning">Đang bảo trì</button>
+									</li>
+									<li>
+										<p>II. <strong>
+											205 Đường 30/4, P. Xuân Khánh, Quận Ninh Kiều, Cần
+											Thơ</strong></p>
+										<button type="button" class="btn btn-warning">Đang bảo trì</button>
+									</li>
+									<li><a href="#!">.....</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="img-block">
+				<img src="/img/map.png" alt="">
+			</div>
+		</div>
+	</div>
+</main>
+
+<!-- footer -->
+<footer th:replace="/layout/layout::footer"></footer>
+<th:block th:replace="/layout/layout::foot"></th:block>
+</body>
+</html>

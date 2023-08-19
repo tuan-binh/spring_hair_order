@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout/layout::head">
+</head>
+<body>
+<!-- link css fake news -->
+<link rel="stylesheet" href="/css/news.css">
+<!-- header -->
+<header th:replace="/layout/layout::header"></header>
+
+<!-- news -->
+<main>
+	<div class="newFeeds">
+		<div class="container">
+			<h2 class="title" style="text-align: center">Những tin tức về 30 Shine</h2>
+			<!-- foreach news -->
+			<div class="flex-news">
+			
+			</div>
+		</div>
+	</div>
+</main>
+
+<!-- footer -->
+<footer th:replace="/layout/layout::footer"></footer>
+<th:block th:replace="/layout/layout::foot"></th:block>
+</body>
+</html>

@@ -1,0 +1,132 @@
+.order input[type="radio"] {
+  display: none;
+}
+
+.order label {
+  display: block;
+  min-width: 100px;
+}
+
+.item {
+  /* position: absolute; */
+  padding: 20px;
+  width: 400px;
+  /* height: 500px; */
+  border-radius: 8px;
+  background: #eaeaea;
+}
+
+.item .title {
+  text-align: center;
+  padding: 10px;
+}
+
+.item .info {
+  text-align: center;
+  font-size: 20px;
+}
+
+.order button {
+  margin: 5px;
+}
+
+.calender-time {
+  border-radius: 8px;
+  background: #666666;
+  /* height: 130px; */
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+.actionDone {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.done {
+  display: inline-block;
+  width: 80%;
+  transition: all 0.5s ease;
+}
+
+.done:hover {
+  opacity: 0.7;
+}
+
+.choose-your-time input[type="date"] {
+  width: 90%;
+  padding: 5px;
+  margin: 10px;
+  background: #eaeaea;
+  border: none;
+  outline: none;
+}
+
+.calender-time {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.calender-time button {
+  width: 30%;
+}
+
+.order .active {
+  border: 1px solid #ffcc33 !important;
+  color: black !important;
+  background: #ffcc33 !important;
+}
+
+.choose-city {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.choose-service {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.flex-form {
+  display: flex;
+  padding: 100px;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.flex-form h2 {
+  margin-bottom: 20px;
+}
+
+.flex-form h2 i {
+  margin-right: 10px;
+}
+
+.flex-barber {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 20px;
+  width: calc((300px * 3) + (20px * 2));
+}
+
+.flex-barber .barber {
+  width: 300px;
+  /* height: 250px; */
+}
+
+.barber img {
+  width: 100%;
+  /* border-radius: 8px; */
+  padding: 15px;
+  /* margin: 15px; */
+}
+
+.active_barber {
+  outline: 5px solid #ffcc33;
+}

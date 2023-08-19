@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout/layout::head">
+</head>
+<body>
+<!-- link css order -->
+<link rel="stylesheet" href="/css/order.css">
+<!-- header -->
+<header th:replace="/layout/layout::header"></header>
+
+<!-- form order -->
+<main>
+	<!-- carousel -->
+	<div class="banner">
+		<div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="/img/slide/slide-1.jpg" class="d-block w-100" alt="..."/>
+				</div>
+				<div class="carousel-item">
+					<img src="/img/slide/slide-2.jpg" class="d-block w-100" alt="..."/>
+				</div>
+				<div class="carousel-item">
+					<img src="/img/slide/slide-3.jpg" class="d-block w-100" alt="..."/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- form order -->
+	<form action="" class="flex-form">
+		<!-- option -->
+		<div class="order">
+			<div class="item">
+				<h2 class="title">Đặt Lịch Giữ Chỗ</h2>
+				<p class="info">SĐT: <span class="tel"></span></p>
+				<h5>1. Chọn địa điểm</h5>
+				<div class="choose-city">
+					<input type="radio" name="city"/>
+					<label class="btn btn-secondary choose_city">HÀ NỘI</label>
+					<input type="radio" name="city"/>
+					<label class="btn btn-secondary choose_city">HỒ CHÍ MINH</label>
+					<input type="radio" name="city"/>
+					<label class="btn btn-secondary choose_city">ĐÀ NẴNG</label>
+				</div>
+				<h5>2. Chọn dịnh vụ</h5>
+				<div class="choose-service">
+					<input type="radio" name="service"/>
+					<label class="btn btn-secondary choose_service"
+					>Cắt gội massage</label
+					>
+					<input type="radio" name="service"/>
+					<label class="btn btn-secondary choose_service"
+					>Uốn nhập khẩu</label
+					>
+					<input type="radio" name="service"/>
+					<label class="btn btn-secondary choose_service"
+					>Nhuộm nhập khẩu ý</label
+					>
+				</div>
+				<div class="choose-your-time">
+					<h5>3. Chọn thời gian</h5>
+					<input type="date" name=""/>
+					<div class="calender-time">
+						<input type="radio" name="timeOrder" value="7h - 10h"/>
+						<label class="btn btn-outline-warning choose_time">7h - 10h</label>
+						<input type="radio" name="timeOrder" value="10h - 12h"/>
+						<label class="btn btn-outline-warning choose_time">10h - 12h</label>
+						<input type="radio" name="timeOrder" value="12h - 14h"/>
+						<label class="btn btn-outline-warning choose_time">12h - 14h</label>
+						<input type="radio" name="timeOrder" value="14h - 16h"/>
+						<label class="btn btn-outline-warning choose_time">14h - 16h</label>
+						<input type="radio" name="timeOrder" value="16h - 18h"/>
+						<label class="btn btn-outline-warning choose_time">16h - 18h</label>
+						<input type="radio" name="timeOrder" value="18h - 20h"/>
+						<label class="btn btn-outline-warning choose_time">18h - 20h</label>
+						<input type="radio" name="timeOrder" value="20h - 22h"/>
+						<label class="btn btn-outline-warning choose_time">20h - 22h</label>
+						<input type="radio" name="timeOrder" id="" value="22h - 24h"/>
+						<label class="btn btn-outline-warning choose_time">22h - 24h</label>
+					</div>
+				</div>
+				<div class="actionDone">
+					<button class="btn btn-warning done">Hoàn tất</button>
+				</div>
+			</div>
+		</div>
+		<div class="select_barber">
+			<h2><i class="fa-solid fa-users"></i> Lựa Chọn Barber</h2>
+			<!-- option barber -->
+			<div class="flex-barber">
+				<!-- barber -->
+				<div class="barber active_barber">
+					<img src="/img/barber/barber1.jpg" alt=""/>
+				</div>
+				<div class="barber">
+					<img src="/img/barber/barber2.jpg" alt=""/>
+				</div>
+				<div class="barber">
+					<img src="/img/barber/barber3.jpg" alt=""/>
+				</div>
+				<div class="barber">
+					<img src="/img/barber/barber4.jpg" alt=""/>
+				</div>
+				<div class="barber">
+					<img src="/img/barber/barber5.jpg" alt=""/>
+				</div>
+				<div class="barber">
+					<img src="/img/barber/barber6.jpg" alt=""/>
+				</div>
+			</div>
+		</div>
+	</form>
+</main>
+
+
+<!-- footer -->
+<footer th:replace="/layout/layout::footer"></footer>
+<th:block th:replace="/layout/layout::foot"></th:block>
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        effect: "cards",
+        grabCursor: true,
+    });
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script>
+    <!-- choose_city -->
+    let city = document.querySelectorAll(".choose-city .choose_city");
+    city.forEach(function (e) {
+        e.onclick = function () {
+            let active = document.querySelector(".choose-city .btn.active");
+            if (active) {
+                active.classList.remove("active");
+            }
+            e.classList.add("active");
+            valueCity = e.innerText;
+        };
+    });
+    <!-- choose_service -->
+    let service = document.querySelectorAll(".choose-service .choose_service");
+    service.forEach(function (e) {
+        e.onclick = function () {
+            let active = document.querySelector(".choose-service .btn.active");
+            if (active) {
+                active.classList.remove("active");
+            }
+            e.classList.add("active");
+        };
+    });
+    <!-- time_order -->
+    let timeOrder = document.querySelectorAll(".choose-your-time .choose_time");
+    timeOrder.forEach(function (e) {
+        e.onclick = function () {
+            let active = document.querySelector(".choose-your-time .btn.active");
+            if (active) {
+                active.classList.remove("active");
+            }
+            e.classList.add("active");
+        };
+    });
+    <!-- barber	-->
+    let barbers = document.querySelectorAll(".flex-barber .barber");
+    barbers.forEach(function (e) {
+        e.onclick = function () {
+            let active = document.querySelector(".barber.active_barber");
+            if (active) {
+                active.classList.remove("active_barber");
+            }
+            e.classList.add("active_barber");
+        };
+    });
+</script>
+</body>
+</html>

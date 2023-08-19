@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout/layout::head">
+</head>
+<body>
+<!-- link css hair style -->
+<link rel="stylesheet" href="/css/hairStyle.css" />
+<!-- header -->
+<header th:replace="/layout/layout::header"></header>
+
+<!-- layout giống pinterest -->
+<main>
+	<div class="container">
+		<h3 class="title">
+			CÙNG 30SHINE KHÁM PHÁ <br />
+			<b>XU HƯỚNG TÓC HOT NHẤT</b>
+		</h3>
+		<!-- foreach -->
+		<div class="list-hair">
+<!--			<div class="row1"></div>-->
+<!--			<div class="row2"></div>-->
+<!--			<div class="row3"></div>-->
+<!--			<div class="row4"></div>-->
+<!--			<div class="row5"></div>-->
+		</div>
+	</div>
+</main>
+
+<!-- footer -->
+<footer th:replace="/layout/layout::footer"></footer>
+<th:block th:replace="/layout/layout::foot"></th:block>
+</body>
+</html>
