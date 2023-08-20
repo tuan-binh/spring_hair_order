@@ -1,10 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout/layout::head">
 </head>
 <body>
+<!-- link css order -->
+<link rel="stylesheet" href="/css/order.css">
+<!-- link css history -->
+<link rel="stylesheet" href="/css/history.css">
+<!-- header -->
+<header th:replace="/layout/layout::header"></header>
 
+<!-- main history -->
+<main>
+	<!-- history user order hair -->
+	<div class="history">
+		<div class="container">
+			<h2 class="title">Lịch Sử Đặt Lịch 30 Shine</h2>
+			<table class="table">
+				<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">NAME</th>
+					<th scope="col">SỐ ĐIỆN THOẠI</th>
+					<th scope="col">ĐỊA ĐIỂM</th>
+					<th scope="col">DỊNH VỤ</th>
+					<th scope="col">THỜI GIAN</th>
+					<th scope="col">ACTION</th>
+					<th scope="col">STATUS</th>
+				</tr>
+				</thead>
+				<tbody>
+				<!-- <tr>
+					<th scope="row">1</th>
+					<td>Bình</td>
+					<td>0968837785</td>
+					<td>Hà Nội</td>
+					<td>Gội Đầu</td>
+					<td>Ngày: 21/4/2023 Giờ: 16h - 18h</td>
+					<td>
+						<button type="button" class="btn btn-success">Sửa</button>
+						<button type="button" class="btn btn-danger">Hủy Kèo</button>
+					</td>
+				</tr> -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+</main>
+
+<!-- footer -->
+<footer th:replace="/layout/layout::footer"></footer>
+<th:block th:replace="/layout/layout::foot"></th:block>
+<script>
+
+</script>
 </body>
 </html>

@@ -1,10 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Title</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout/layout::head">
+
 </head>
 <body>
+<style>
+	.title {
+		text-align: center;
+	}
+	
+	.list-favorite {
+		padding: 100px 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 15px;
+	}
+	
+	.list-favorite .item {
+		width: calc(100% / 5.4);
+		height: 350px;
+		margin-bottom: 15px;
+		position: relative;
+	}
+	
+	.list-favorite .item img {
+		width: 100%;
+		height: 100%;
+		border-radius: 12px;
+		display: block;
+		height: 100%;
+		object-fit: cover;
+	}
+	
+	.list-favorite h3 {
+		margin: auto;
+		color: #999898;
+	}
+	
+	.item .close {
+		opacity: 0;
+		position: absolute;
+		inset: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 60px;
+		color: red;
+		background: rgba(0, 0, 0, 0.35);
+		border-radius: 12px;
+		transition: all 0.3s ease;
+	}
+	
+	.item .close:hover {
+		opacity: 1;
+	}
+</style>
+<!-- header -->
+<header th:replace="/layout/layout::header"></header>
 
+<!-- show list favourite -->
+<main>
+	<div class="container">
+		<h3 class="title">
+			Danh Sách Yêu Thích Kiểu Tóc<br>
+			<b>XU HƯỚNG TÓC HOT NHẤT</b>
+		</h3>
+		<div class="list-favorite">
+			<!-- <div class="item">
+				<img src="/assets/img/hairStyle/boy-1.jpg" alt="">
+				<div class="close">
+					<i class="fa-regular fa-circle-xmark"></i>
+				</div>
+			</div> -->
+		</div>
+	</div>
+</main>
+
+<!-- footer -->
+<footer th:replace="/layout/layout::footer"></footer>
+<th:block th:replace="/layout/layout::foot"></th:block>
 </body>
 </html>

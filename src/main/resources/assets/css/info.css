@@ -56,10 +56,13 @@
 input[type="text"],
 input[type="number"] {
   margin: 5px;
-  padding: 5px;
+  padding: 5px 10px;
   display: block;
   width: 50%;
   outline: none;
+  border-radius: 8px;
+  background: transparent;
+  border-color: #ccc;
 }
 .page__item .sub-title {
   text-align: center;
@@ -74,9 +77,12 @@ input[type="number"] {
 .page__item .center input[type="text"],
 .page__item .center input[type="number"] {
   margin: 5px;
-  padding: 5px;
+  padding: 5px 10px;
   display: block;
   width: 100%;
+  border-radius: 8px;
+  background: transparent;
+  border-color: #ccc;
 }
 
 .page__item .center {

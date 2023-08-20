@@ -3,17 +3,62 @@
 <head th:replace="/layout/layout::head">
 </head>
 <body>
+<!-- link css information -->
+<link rel="stylesheet" href="/css/info.css">
 <!-- header -->
 <header th:replace="/layout/layout::header"></header>
 
-<!-- news -->
+<!-- Change Information -->
 <main>
-	<div class="newFeeds">
+	<!-- page information -->
+	<div class="information">
+		<h2 class="title">Thông Tin Cá Nhân</h2>
 		<div class="container">
-			<h2 class="title" style="text-align: center">Những tin tức về 30 Shine</h2>
-			<!-- foreach news -->
-			<div class="flex-news">
-			
+			<ul class="tab">
+				<li><a class="tab__item active" href="#!">Tất Cả Thông Tin</a></li>
+				<li><a class="tab__item" href="#!">Đổi Tên</a></li>
+				<li><a class="tab__item" href="#!">Đổi Mật Khẩu</a></li>
+			</ul>
+			<div class="page">
+				<div class="page__item action">
+					<h3 class="sub-title">Tất Cả Thông Tin</h3>
+					<label for="name">Họ Và Tên: <span style="color:red">*</span></label>
+					<input class="oldName" id="name" type="text" disabled>
+					<label for="phone">Số Điện Thoại: <span style="color:red">*</span></label>
+					<input class="oldPhone" id="phone" type="text" disabled>
+					<label>Thông tin cá nhân:</label>
+					<p class="desc">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit.
+						Laudantium autem iste optio repellat alias nulla, est pariatur.
+						Quam laudantium, accusantium officiis, repellendus nostrum illum
+						magnam enim odit praesentium doloremque vitae.</p>
+				</div>
+				<div class="page__item">
+					<h3 class="sub-title">Thay Đổi Tên</h3>
+					<div class="center">
+						<label for="oldName">Họ Và Tên Cũ:</label>
+						<input class="oldName" id="oldName" type="text" disabled>
+						<form action="" class="newName">
+							<label for="newName">Họ Và Tên Mới:</label>
+							<input type="text" name="name" id="newName">
+							<button class="btn btn-primary">Xác Nhận</button>
+						</form>
+					</div>
+				</div>
+				<div class="page__item">
+					<h3 class="sub-title">Thay Đổi Mật Khẩu</h3>
+					<div class="center">
+						<label for="oldPhone">Mật Khẩu Cũ:</label>
+						<input class="oldPS" id="oldPhone" type="text" disabled>
+						<form action="" class="newPass">
+							<label for="newPass">Mật Khẩu Mới:</label>
+							<input type="text" id="newPass" name="Pass">
+							<label for="confirmPass">Xác Nhận Mật Khẩu:</label>
+							<input type="text" id="confirmPass" name="confirmPass">
+							<button class="btn btn-primary">Xác Nhận</button>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -22,5 +67,27 @@
 <!-- footer -->
 <footer th:replace="/layout/layout::footer"></footer>
 <th:block th:replace="/layout/layout::foot"></th:block>
+<script>
+	let allTabs = document.querySelectorAll(".tab__item");
+	let allPages = document.querySelectorAll(".page__item");
+	
+	
+	let out = document.querySelector(".out");
+	
+	allTabs.forEach(function (e, i) {
+		let page = allPages[i];
+		e.onclick = function () {
+			let active = document.querySelector(".tab__item.active");
+			active.classList.remove("active");
+			let action = document.querySelector(".page__item.action");
+			if (active) {
+				action.classList.remove("action");
+			}
+			
+			e.classList.add("active");
+			page.classList.add("action");
+		};
+	});
+</script>
 </body>
 </html>
