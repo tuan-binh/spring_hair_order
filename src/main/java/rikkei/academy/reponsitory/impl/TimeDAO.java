@@ -1,7 +1,6 @@
 package rikkei.academy.reponsitory.impl;
 
-import org.springframework.stereotype.Component;
-import rikkei.academy.model.Type;
+import rikkei.academy.model.Times;
 import rikkei.academy.reponsitory.IBaseDAO;
 
 import javax.sql.DataSource;
@@ -12,28 +11,27 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-public class TypeDAO implements IBaseDAO<Type, Integer> {
+public class TimeDAO implements IBaseDAO<Times, Integer> {
 	
 	private DataSource dataSource;
 	private Connection con;
 	
 	@Override
-	public List<Type> findAll() {
-		List<Type> list = new ArrayList<>();
+	public List<Times> findAll() {
+		List<Times> list = new ArrayList<>();
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 		try {
-			CallableStatement callSt = con.prepareCall("{call FIND_ALL_TYPE}");
+			CallableStatement callSt = con.prepareCall("{call FIND_ALL_TIMES}");
 			ResultSet rs = callSt.executeQuery();
 			while (rs.next()) {
-				int id = rs.getInt("id_type");
-				String typeName = rs.getString("type_name");
+				int id = rs.getInt("id_time");
+				String time = rs.getString("time");
 				boolean status = rs.getBoolean("status");
-				list.add(new Type(id, typeName, status));
+				list.add(new Times(id, time, status));
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -50,24 +48,23 @@ public class TypeDAO implements IBaseDAO<Type, Integer> {
 	}
 	
 	@Override
-	public void save(Type type) {
+	public void save(Times times) {
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		
 		try {
-			if (findById(type.getId()) == null) {
-				CallableStatement callSt = con.prepareCall("{call INSERT_TYPE(?,?)}");
-				callSt.setString(1, type.getTypeName());
+			if (findById(times.getId()) == null) {
+				CallableStatement callSt = con.prepareCall("{call INSERT_TIMES(?,?)}");
+				callSt.setString(1, times.getTime());
 				callSt.setBoolean(2, true);
 				callSt.executeUpdate();
 			} else {
-				CallableStatement callSt = con.prepareCall("{call UPDATE_TYPE(?,?,?)}");
-				callSt.setInt(1, type.getId());
-				callSt.setString(2, type.getTypeName());
-				callSt.setBoolean(3, type.isStatus());
+				CallableStatement callSt = con.prepareCall("{call UPDATE_TIMES(?,?,?)}");
+				callSt.setInt(1, times.getId());
+				callSt.setString(2, times.getTime());
+				callSt.setBoolean(3, times.isStatus());
 				callSt.executeUpdate();
 			}
 		} catch (SQLException e) {
@@ -89,21 +86,21 @@ public class TypeDAO implements IBaseDAO<Type, Integer> {
 	}
 	
 	@Override
-	public Type findById(Integer id) {
-		Type type = null;
+	public Times findById(Integer id) {
+		Times time = null;
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 		try {
-			CallableStatement callSt = con.prepareCall("{call FINDBYID_TYPE(?)}");
+			CallableStatement callSt = con.prepareCall("{call FINDBYID_TIMES(?)}");
 			callSt.setInt(1, id);
 			ResultSet rs = callSt.executeQuery();
 			while (rs.next()) {
-				String typeName = rs.getString("type_name");
+				String myTime = rs.getString("time");
 				boolean status = rs.getBoolean("status");
-				type = new Type(id, typeName, status);
+				time = new Times(id, myTime, status);
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -116,8 +113,6 @@ public class TypeDAO implements IBaseDAO<Type, Integer> {
 				}
 			}
 		}
-		
-		return type;
+		return time;
 	}
 }
-
