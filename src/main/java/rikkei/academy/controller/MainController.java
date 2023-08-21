@@ -10,7 +10,7 @@ public class MainController {
 	
 	@GetMapping
 	public String user() {
-		return "user/index";
+		return "user/login";
 	}
 	
 	@GetMapping("/news")

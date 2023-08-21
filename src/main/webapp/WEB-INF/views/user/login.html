@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout/layout::head">
+</head>
+<body>
+<!-- link css login -->
+<link rel="stylesheet" href="/css/login.css" />
+
+<!-- login -->
+<div class="flex_login">
+	<div class="swiper mySwiper">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide">
+				<img src="/img/banner_login/banner_1.webp" alt="" />
+			</div>
+			<div class="swiper-slide">
+				<img src="/img/banner_login/banner_2.jpg" alt="" />
+			</div>
+			<div class="swiper-slide">
+				<img src="/img/banner_login/banner_3.webp" alt="" />
+			</div>
+		</div>
+		<!-- <div class="swiper-button-next"></div>
+		<div class="swiper-button-prev"></div>
+		<div class="swiper-pagination"></div> -->
+		<div class="autoplay-progress">
+			<svg viewBox="0 0 48 48">
+				<circle cx="24" cy="24" r="20"></circle>
+			</svg>
+			<span></span>
+		</div>
+	</div>
+	
+	<form class="card">
+		<a class="singup">Sign In</a>
+		<div class="inputBox1">
+			<input type="number" required="required" />
+			<span class="user">Phone</span>
+		</div>
+		
+		<div class="inputBox">
+			<input type="text" required="required" />
+			<span>Username</span>
+		</div>
+		
+		<div class="inputBox">
+			<input type="password" required="required" />
+			<span>Password</span>
+		</div>
+		
+		<button class="enter">SIGN IN</button>
+	</form>
+</div>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+
+<!-- Initialize Swiper -->
+<script>
+	const progressCircle = document.querySelector(".autoplay-progress svg");
+	const progressContent = document.querySelector(".autoplay-progress span");
+	let swiper = new Swiper(".mySwiper", {
+		spaceBetween: 30,
+		centeredSlides: true,
+		autoplay: {
+			delay: 2500,
+			disableOnInteraction: false,
+		},
+		pagination: {
+			el: ".swiper-pagination",
+			clickable: true,
+		},
+		navigation: {
+			nextEl: ".swiper-button-next",
+			prevEl: ".swiper-button-prev",
+		},
+		on: {
+			autoplayTimeLeft(s, time, progress) {
+				progressCircle.style.setProperty("--progress", 1 - progress);
+				progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+			},
+		},
+	});
+</script>
+</body>
+</html>
