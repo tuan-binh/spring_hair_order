@@ -95,8 +95,25 @@ input[type="number"] {
 }
 
 .center .btn {
-  margin-top: 15px !important;
   display: block;
   width: 90%;
-  margin: 0 auto;
+  margin: 15px auto;
+}
+
+.choose-city {
+  padding: 5px;
+}
+
+.choose-city {
+  display: flex;
+  gap: 10px;
+}
+
+.choose-city input[type="radio"] {
+  display: none;
+}
+
+.choose-city label {
+  border: none;
+  transition: all 0.3s ease;
 }

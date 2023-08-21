@@ -30,13 +30,13 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
 	@Value("${path_image}")
 	private String pathUpload;
 	
-	@Value("driver")
+	@Value("${driver}")
 	private String driver;
-	@Value("url")
+	@Value("${url}")
 	private String url;
-	@Value("username")
+	@Value("${username}")
 	private String username;
-	@Value("password")
+	@Value("${password}")
 	private String password;
 	
 	private ApplicationContext applicationContext;
@@ -98,14 +98,14 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
 		
 	}
 
-//	@Bean
-//	public DataSource dataSource() {
-//		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//		dataSource.setDriverClassName(driver);
-//		dataSource.setUrl(url);
-//		dataSource.setUsername(username);
-//		dataSource.setPassword(password);
-//		return dataSource;
-//	}
+	@Bean
+	public DataSource dataSource() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName(driver);
+		dataSource.setUrl(url);
+		dataSource.setUsername(username);
+		dataSource.setPassword(password);
+		return dataSource;
+	}
 	
 }

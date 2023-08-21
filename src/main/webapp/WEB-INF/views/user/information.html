@@ -21,17 +21,25 @@
 			</ul>
 			<div class="page">
 				<div class="page__item action">
-					<h3 class="sub-title">Tất Cả Thông Tin</h3>
-					<label for="name">Họ Và Tên: <span style="color:red">*</span></label>
-					<input class="oldName" id="name" type="text" disabled>
-					<label for="phone">Số Điện Thoại: <span style="color:red">*</span></label>
-					<input class="oldPhone" id="phone" type="text" disabled>
-					<label>Thông tin cá nhân:</label>
-					<p class="desc">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Laudantium autem iste optio repellat alias nulla, est pariatur.
-						Quam laudantium, accusantium officiis, repellendus nostrum illum
-						magnam enim odit praesentium doloremque vitae.</p>
+					<div class="center">
+						<h3 class="sub-title">Tất Cả Thông Tin</h3>
+						<label>Họ Và Tên: <span style="color: red">*</span></label>
+						<input class="oldName" type="text" disabled/>
+						<label>Số Điện Thoại: <span style="color: red">*</span></label>
+						<input class="oldPhone" type="text" disabled/>
+						<label>Thông tin cá nhân:</label>
+						<form action="">
+							<div class="choose-city">
+								<input type="radio" name="city" id="hanoi"/>
+								<label class="btn btn-secondary choose_city" for="hanoi">HÀ NỘI</label>
+								<input type="radio" name="city" id="danang"/>
+								<label class="btn btn-secondary choose_city" for="danang">ĐÀ NẴNG</label>
+								<input type="radio" name="city" id="hochiminh"/>
+								<label class="btn btn-secondary choose_city" for="hochiminh">HỒ CHÍ MINH</label>
+							</div>
+							<button class="btn btn-primary">Xác Nhận</button>
+						</form>
+					</div>
 				</div>
 				<div class="page__item">
 					<h3 class="sub-title">Thay Đổi Tên</h3>
@@ -86,6 +94,17 @@
 			
 			e.classList.add("active");
 			page.classList.add("action");
+		};
+	});
+	
+	let city = document.querySelectorAll(".choose-city .choose_city");
+	city.forEach(function (e) {
+		e.onclick = function () {
+			let active = document.querySelector(".choose-city .btn.active");
+			if (active) {
+				active.classList.remove("active");
+			}
+			e.classList.add("active");
 		};
 	});
 </script>
