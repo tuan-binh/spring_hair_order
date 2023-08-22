@@ -10,7 +10,17 @@ public class MainController {
 	
 	@GetMapping
 	public String user() {
-		return "user/index";
+		return "user/login";
+	}
+	
+	@GetMapping("/signUp")
+	public String signUp() {
+		return "user/register";
+	}
+	
+	@GetMapping("/signIn")
+	public String signIn() {
+		return "user/login";
 	}
 	
 	@GetMapping("/news")

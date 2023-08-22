@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class AddressDTO implements IBaseDAO<Address, Integer> {
+public class AddressDAO implements IBaseDAO<Address, Integer> {
 	
 	private DataSource dataSource;
 	private Connection con;

@@ -22,6 +22,17 @@ public class Users {
 		orders = new ArrayList<>();
 	}
 	
+	public Users(String phone, String password) {
+		this.phone = phone;
+		this.password = password;
+	}
+	
+	public Users(String fullName, String phone, String password) {
+		this.fullName = fullName;
+		this.phone = phone;
+		this.password = password;
+	}
+	
 	public Users(int id, String fullName, String phone, String password, String address, Set<Roles> role, Set<Hair> favourite, List<Orders> orders, boolean status) {
 		this.id = id;
 		this.fullName = fullName;

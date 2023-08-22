@@ -158,7 +158,7 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 			throw new RuntimeException(e);
 		}
 		try {
-			CallableStatement callSt = con.prepareCall("{call FINDROLEDETAIL__BYIDUSER(?)}");
+			CallableStatement callSt = con.prepareCall("{call FINDROLEDETAIL_BYIDUSER(?)}");
 			callSt.setInt(1, idUser);
 			ResultSet rs = callSt.executeQuery();
 			while (rs.next()) {
@@ -267,6 +267,69 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 		try {
 			CallableStatement callSt = con.prepareCall("{call DELETE_FAVOURITE(?)}");
 			callSt.setInt(1, idDel);
+			callSt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}
+	}
+	
+	public Users login(Users user) {
+		Users myUser = null;
+		try {
+			con = dataSource.getConnection();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			CallableStatement callSt = con.prepareCall("{call LOGIN(?,?)}");
+			callSt.setString(1, user.getPhone());
+			callSt.setString(2, user.getPassword());
+			ResultSet rs = callSt.executeQuery();
+			while (rs.next()) {
+				int id = rs.getInt("id_user");
+				String fullName = rs.getString("full_name");
+				String phone = rs.getString("phone");
+				String password = rs.getString("password");
+				String address = rs.getString("address");
+				Set<Roles> roles = getRolesByIdUser(id);
+				Set<Hair> hair = getHairByIdUser(id);
+				List<Orders> orders = getOrderByIdUser(id);
+				boolean status = rs.getBoolean("status");
+				myUser = new Users(id, fullName, phone, password, address, roles, hair, orders, status);
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}
+		return myUser;
+	}
+	
+	public void register(Users user) {
+		try {
+			con = dataSource.getConnection();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			CallableStatement callSt = con.prepareCall("{call REGISTER(?,?,?)}");
+			callSt.setString(1, user.getFullName());
+			callSt.setString(2, user.getPhone());
+			callSt.setString(3, user.getPassword());
 			callSt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

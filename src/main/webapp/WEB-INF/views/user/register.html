@@ -4,20 +4,20 @@
 </head>
 <body>
 <!-- link css login -->
-<link rel="stylesheet" href="/css/register.css" />
+<link rel="stylesheet" href="/css/register.css"/>
 
 <!-- login -->
 <div class="flex_login">
 	<div class="swiper mySwiper">
 		<div class="swiper-wrapper">
 			<div class="swiper-slide">
-				<img src="/img/banner_login/banner_1.webp" alt="" />
+				<img src="/img/banner_login/banner_1.webp" alt=""/>
 			</div>
 			<div class="swiper-slide">
-				<img src="/img/banner_login/banner_2.jpg" alt="" />
+				<img src="/img/banner_login/banner_2.jpg" alt=""/>
 			</div>
 			<div class="swiper-slide">
-				<img src="/img/banner_login/banner_3.webp" alt="" />
+				<img src="/img/banner_login/banner_3.webp" alt=""/>
 			</div>
 		</div>
 		<!-- <div class="swiper-button-next"></div>
@@ -33,26 +33,26 @@
 	
 	<form class="card">
 		<a class="singup">Sign Up</a>
+		<div class="inputBox">
+			<input type="text" required="required"/>
+			<span>FullName</span>
+		</div>
+		
 		<div class="inputBox1">
-			<input type="number" required="required" />
+			<input type="number" required="required"/>
 			<span class="user">Phone</span>
 		</div>
 		
 		<div class="inputBox">
-			<input type="text" required="required" />
-			<span>Username</span>
-		</div>
-		
-		<div class="inputBox">
-			<input type="password" required="required" />
+			<input type="password" required="required"/>
 			<span>Password</span>
 		</div>
 		
 		<div class="inputBox">
-			<input type="password" required="required" />
+			<input type="password" required="required"/>
 			<span>Re_Password</span>
 		</div>
-		
+		<p>Can you <a style="color: #1c51ff" th:href="@{/signIn}">Sign In ?</a></p>
 		<button class="enter">SIGN UP</button>
 	</form>
 </div>
