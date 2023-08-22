@@ -5,14 +5,16 @@ public class UserRegisterDTO {
 	private String fullName;
 	private String phone;
 	private String password;
+	private String confirmPassword;
 	
 	public UserRegisterDTO() {
 	}
 	
-	public UserRegisterDTO(String fullName, String phone, String password) {
+	public UserRegisterDTO(String fullName, String phone, String password, String confirmPassword) {
 		this.fullName = fullName;
 		this.phone = phone;
 		this.password = password;
+		this.confirmPassword = confirmPassword;
 	}
 	
 	public String getFullName() {
@@ -38,4 +40,13 @@ public class UserRegisterDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+	
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
+	}
+	
 }

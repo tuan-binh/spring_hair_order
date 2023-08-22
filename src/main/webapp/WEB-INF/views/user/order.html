@@ -5,6 +5,7 @@
 <body>
 <!--&lt;!&ndash; link css order &ndash;&gt;-->
 <link rel="stylesheet" href="/css/order.css">
+<th:block th:replace="/layout/layout::toastify"></th:block>
 <!-- header -->
 <header th:replace="/layout/layout::header"></header>
 
@@ -122,7 +123,6 @@
 <th:block th:replace="/layout/layout::foot"></th:block>
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-<th:block th:replace="/layout/layout::toastify"></th:block>
 <!-- Initialize Swiper -->
 <script>
 	var swiper = new Swiper(".mySwiper", {

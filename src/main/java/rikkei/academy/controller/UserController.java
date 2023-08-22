@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import rikkei.academy.config.Validate;
 import rikkei.academy.dto.request.UserLoginDTO;
 import rikkei.academy.dto.request.UserRegisterDTO;
@@ -39,6 +40,11 @@ public class UserController {
 			return null;
 		}
 		//	user
+		if (!user.isStatus()) {
+			model.addAttribute("block", "Tài Khoản Của Bạn Đã Bị Khóa");
+			return "user/login";
+		}
+		
 		model.addAttribute("message", "true");
 		session.setAttribute("data_user", user);
 		session.setAttribute("your_name", "<i class='fa-solid fa-crown'></i> " + user.getFullName());
@@ -47,8 +53,22 @@ public class UserController {
 	}
 	
 	@PostMapping("/handleRegister")
-	public String handleRegister(@ModelAttribute("dataRegister") UserRegisterDTO userRegisterDTO) {
-		return "user/login";
+	public String handleRegister(@ModelAttribute("dataRegister") UserRegisterDTO userRegisterDTO, Model model) {
+		if (!userService.checkExistPhone(userRegisterDTO.getPhone())) {
+			model.addAttribute("message_error", "phone");
+			return "user/register";
+		}
+		if (!Validate.checkPassword(userRegisterDTO.getPassword())) {
+			model.addAttribute("message_error", "password2");
+			return "user/register";
+		}
+		if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
+			model.addAttribute("message_error", "password1");
+			return "user/register";
+		}
+		
+		userService.register(userRegisterDTO);
+		return "redirect:/";
 	}
 	
 }

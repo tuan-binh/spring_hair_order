@@ -5,6 +5,8 @@
 <body>
 <!-- link css all Services -->
 <link rel="stylesheet" href="/css/allServices.css">
+<th:block th:replace="/layout/layout::toastify"></th:block>
+
 <!-- header -->
 <header th:replace="/layout/layout::header"></header>
 
@@ -113,7 +115,6 @@
 <!-- footer -->
 <footer th:replace="/layout/layout::footer"></footer>
 <th:block th:replace="/layout/layout::foot"></th:block>
-<th:block th:replace="/layout/layout::toastify"></th:block>
 
 </body>
 </html>

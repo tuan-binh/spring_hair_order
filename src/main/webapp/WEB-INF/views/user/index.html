@@ -3,6 +3,8 @@
 <head th:replace="/layout/layout::head">
 </head>
 <body>
+<th:block th:replace="/layout/layout::toastify"></th:block>
+
 <!-- Header -->
 <header th:replace="/layout/layout::header"></header>
 <main>
@@ -302,7 +304,6 @@
 
 <th:block th:replace="/layout/layout::foot"></th:block>
 <th:block th:replace="/layout/layout::script_aos"></th:block>
-<th:block th:replace="/layout/layout::toastify"></th:block>
 
 </body>
 </html>

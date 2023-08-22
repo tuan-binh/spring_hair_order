@@ -5,6 +5,7 @@
 <body>
 <!-- link css login -->
 <link rel="stylesheet" href="/css/register.css"/>
+<th:block th:replace="/layout/layout::toastify"></th:block>
 
 <!-- login -->
 <div class="flex_login">
@@ -31,7 +32,7 @@
 		</div>
 	</div>
 	
-	<form class="card" th:object="${dataRegister}">
+	<form th:action="@{/user/handleRegister}" method="post" class="card" th:object="${dataRegister}">
 		<a class="singup">Sign Up</a>
 		<div class="inputBox">
 			<input type="text" required="required" th:field="*{fullName}"/>
@@ -49,17 +50,62 @@
 		</div>
 		
 		<div class="inputBox">
-			<input type="password" required="required" name="confirmPassword"/>
+			<input type="password" required="required" th:field="*{confirmPassword}"/>
 			<span>Re_Password</span>
 		</div>
 		<p>Can you <a style="color: #1c51ff" th:href="@{/signIn}">Sign In ?</a></p>
 		<button class="enter">SIGN UP</button>
 	</form>
 </div>
+<!-- Toast Message -->
+<th:block th:switch="${message_error}">
+	<th:block th:case="'password1'">
+		<script>
+			Toastify({
+				text: "Mật Khẩu Không Trùng Nhau",
+				gravity: 'top',
+				position: 'center',
+				duration: 3000,
+				style: {
+					background: "#0093E9",
+					backgroundImage: "linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)"
+				}
+			}).showToast();
+		</script>
+	</th:block>
+	<th:block th:case="'password2'">
+		<script>
+			Toastify({
+				text: "Mật khẩu phải lơn hơn 6 kí tự",
+				gravity: 'top',
+				position: 'center',
+				duration: 3000,
+				style: {
+					background: "#0093E9",
+					backgroundImage: "linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)"
+				}
+			}).showToast();
+		</script>
+	</th:block>
+	<th:block th:case="'phone'">
+		<script>
+			Toastify({
+				text: "Số Điện Thoại Đã Trùng Hoặc Không Đúng Định Dạng",
+				gravity: 'top',
+				position: 'center',
+				duration: 3000,
+				style: {
+					background: "#0093E9",
+					backgroundImage: "linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)"
+				}
+			}).showToast();
+		</script>
+	</th:block>
+</th:block>
+
 
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<th:block th:replace="/layout/layout::toastify"></th:block>
 
 <!-- Initialize Swiper -->
 <script>

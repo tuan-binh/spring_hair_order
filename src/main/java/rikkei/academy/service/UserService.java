@@ -47,4 +47,13 @@ public class UserService {
 		userDAO.register(user);
 	}
 	
+	public boolean checkExistPhone(String phone) {
+		for (Users u : userDAO.findAll()) {
+			if (u.getPhone().equals(phone)) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
 }

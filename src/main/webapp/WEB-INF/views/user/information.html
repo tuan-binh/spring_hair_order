@@ -5,6 +5,8 @@
 <body>
 <!-- link css information -->
 <link rel="stylesheet" href="/css/info.css">
+<th:block th:replace="/layout/layout::toastify"></th:block>
+
 <!-- header -->
 <header th:replace="/layout/layout::header"></header>
 
@@ -75,7 +77,6 @@
 <!-- footer -->
 <footer th:replace="/layout/layout::footer"></footer>
 <th:block th:replace="/layout/layout::foot"></th:block>
-<th:block th:replace="/layout/layout::toastify"></th:block>
 <script>
 	let allTabs = document.querySelectorAll(".tab__item");
 	let allPages = document.querySelectorAll(".page__item");
