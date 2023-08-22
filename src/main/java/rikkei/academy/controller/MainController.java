@@ -1,26 +1,40 @@
 package rikkei.academy.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import rikkei.academy.dto.request.UserLoginDTO;
+import rikkei.academy.dto.request.UserRegisterDTO;
+import rikkei.academy.model.Users;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/")
 public class MainController {
 	
 	@GetMapping
-	public String user() {
+	public String user(Model model) {
+		model.addAttribute("dataLogin", new UserLoginDTO());
 		return "user/login";
 	}
 	
 	@GetMapping("/signUp")
-	public String signUp() {
+	public String signUp(Model model) {
+		model.addAttribute("dataRegister", new UserRegisterDTO());
 		return "user/register";
 	}
 	
 	@GetMapping("/signIn")
-	public String signIn() {
+	public String signIn(Model model) {
+		model.addAttribute("dataLogin", new UserLoginDTO());
 		return "user/login";
+	}
+	
+	@GetMapping("/index")
+	public String index() {
+		return "user/index";
 	}
 	
 	@GetMapping("/news")
@@ -64,7 +78,9 @@ public class MainController {
 	}
 	
 	@GetMapping("/logout")
-	public String logout() {
+	public String logout(HttpSession session) {
+		session.removeAttribute("data_user");
+		session.removeAttribute("your_name");
 		return "redirect:/";
 	}
 }

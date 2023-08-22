@@ -1,5 +1,6 @@
 package rikkei.academy.reponsitory.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import rikkei.academy.model.Barbers;
 import rikkei.academy.reponsitory.IBaseDAO;
@@ -15,6 +16,7 @@ import java.util.List;
 @Component
 public class BarberDAO implements IBaseDAO<Barbers, Integer> {
 	
+	@Autowired
 	private DataSource dataSource;
 	private Connection con;
 	

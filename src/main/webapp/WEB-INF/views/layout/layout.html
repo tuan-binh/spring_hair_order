@@ -28,7 +28,8 @@
 	<link rel="stylesheet" href="/css/main.css"/>
 	<!-- link responsive -->
 	<link rel="stylesheet" href="/css/reponsive.css"/>
-
+	<!-- Toastify -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 </head>
 <body>
 
@@ -36,7 +37,7 @@
 <header class="header" th:fragment="header">
 	<div class="container">
 		<nav>
-			<a th:href="@{/}">
+			<a th:href="@{/index}">
 				<img src="/img/logo.jpg" alt="logo"/>
 			</a>
 			<ul>
@@ -52,16 +53,13 @@
 					<a th:href="@{/location}">30SHINE GẦN NHẤT</a>
 				</li>
 				<!-- Nếu chưa đăng nhập vào case này -->
-				<!--				<li>-->
-				<!--					<div class="action">-->
-				<!--						<a href="#!" class="login"><i class="fa-solid fa-crown"></i> Đăng Nhập</a>-->
-				<!--					</div>-->
-				<!--				</li>-->
-				<!-- Nếu đăng nhập rồi thì vào case này -->
 				<li>
-					<div class="dropdown">
-						<a href="#!" class="login" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-crown"></i>
-							ADMIN</a>
+					<div class="action" th:if="${#httpSession.getAttribute('data_user') == null}">
+						<a href="#" class="login"><i class="fa-solid fa-crown"></i> Đăng Nhập</a>
+					</div>
+					<div class="dropdown" th:if="${#httpSession.getAttribute('data_user') != null}">
+						<a href="#" class="login" data-bs-toggle="dropdown" aria-expanded="false"
+							 th:utext="${#httpSession.getAttribute('your_name')}"></a>
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item" th:href="@{/information}">Thông Tin Cá Nhân</a></li>
 							<li><a class="dropdown-item" th:href="@{/favourite}">Danh Sách Yêu Thích</a></li>
@@ -132,5 +130,6 @@
 		AOS.init();
 	</script>
 </th:block>
+<script th:fragment="toastify" type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </body>
 </html>

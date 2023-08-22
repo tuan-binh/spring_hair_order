@@ -31,25 +31,25 @@
 		</div>
 	</div>
 	
-	<form class="card">
+	<form class="card" th:object="${dataRegister}">
 		<a class="singup">Sign Up</a>
 		<div class="inputBox">
-			<input type="text" required="required"/>
+			<input type="text" required="required" th:field="*{fullName}"/>
 			<span>FullName</span>
 		</div>
 		
 		<div class="inputBox1">
-			<input type="number" required="required"/>
+			<input type="number" required="required" th:field="*{phone}"/>
 			<span class="user">Phone</span>
 		</div>
 		
 		<div class="inputBox">
-			<input type="password" required="required"/>
+			<input type="password" required="required" th:field="*{password}"/>
 			<span>Password</span>
 		</div>
 		
 		<div class="inputBox">
-			<input type="password" required="required"/>
+			<input type="password" required="required" name="confirmPassword"/>
 			<span>Re_Password</span>
 		</div>
 		<p>Can you <a style="color: #1c51ff" th:href="@{/signIn}">Sign In ?</a></p>
@@ -59,6 +59,7 @@
 
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<th:block th:replace="/layout/layout::toastify"></th:block>
 
 <!-- Initialize Swiper -->
 <script>

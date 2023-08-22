@@ -2,22 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/layout/layout::head">
 </head>
+<th:block th:replace="/layout/layout::toastify"></th:block>
 <body>
 <!-- link css login -->
-<link rel="stylesheet" href="/css/login.css" />
+<link rel="stylesheet" href="/css/login.css"/>
 
 <!-- login -->
 <div class="flex_login">
 	<div class="swiper mySwiper">
 		<div class="swiper-wrapper">
 			<div class="swiper-slide">
-				<img src="/img/banner_login/banner_1.webp" alt="" />
+				<img src="/img/banner_login/banner_1.webp" alt=""/>
 			</div>
 			<div class="swiper-slide">
-				<img src="/img/banner_login/banner_2.jpg" alt="" />
+				<img src="/img/banner_login/banner_2.jpg" alt=""/>
 			</div>
 			<div class="swiper-slide">
-				<img src="/img/banner_login/banner_3.webp" alt="" />
+				<img src="/img/banner_login/banner_3.webp" alt=""/>
 			</div>
 		</div>
 		<!-- <div class="swiper-button-next"></div>
@@ -31,15 +32,15 @@
 		</div>
 	</div>
 	
-	<form class="card">
+	<form th:action="@{/user/handleLogin}" method="post" class="card" th:object="${dataLogin}">
 		<a class="singup">Sign In</a>
 		<div class="inputBox1">
-			<input type="number" required="required" />
+			<input type="number" required="required" th:field="*{phone}"/>
 			<span class="user">Phone</span>
 		</div>
 		
 		<div class="inputBox">
-			<input type="password" required="required" />
+			<input type="password" required="required" th:field="*{password}"/>
 			<span>Password</span>
 		</div>
 		<p>Can you <a style="color: #1c51ff" th:href="@{/signUp}">Sign Up ?</a></p>
@@ -47,7 +48,34 @@
 		<button class="enter">SIGN IN</button>
 	</form>
 </div>
-
+<th:block th:if="${message == 'false'}">
+	<script>
+		Toastify({
+			text: "Sai Tài Khoản Hoặc Mật Khẩu",
+			gravity: 'top',
+			position: 'center',
+			duration: 3000,
+			style: {
+				background: "#FFFFFF",
+				backgroundImage: "linear-gradient(225deg, #FFFFFF 0%, #6284FF 19%, #FF0000 53%)"
+			}
+		}).showToast();
+	</script>
+</th:block>
+<th:block th:if="${message == 'true'}">
+	<script>
+		Toastify({
+			text: "Đăng Nhập Thành Công",
+			gravity: 'top',
+			position: 'center',
+			duration: 3000,
+			style: {
+				background: "#0093E9",
+				backgroundImage: "linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)"
+			}
+		}).showToast();
+	</script>
+</th:block>
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 

@@ -23,6 +23,7 @@ public class OrderDAO implements IBaseDAO<Orders, Integer> {
 	private TypeDAO typeDAO;
 	@Autowired
 	private TimeDAO timeDAO;
+	@Autowired
 	private DataSource dataSource;
 	private Connection con;
 	

@@ -8,6 +8,7 @@ import rikkei.academy.model.Roles;
 import rikkei.academy.model.Users;
 import rikkei.academy.reponsitory.IBaseDAO;
 
+
 import javax.sql.DataSource;
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -27,9 +28,9 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 	private RoleDAO roleDAO;
 	@Autowired
 	private OrderDAO orderDAO;
-	
+	@Autowired
 	private DataSource dataSource;
-	private Connection con;
+	private Connection con = null;
 	
 	@Override
 	public List<Users> findAll() {
@@ -294,16 +295,17 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 			callSt.setString(2, user.getPassword());
 			ResultSet rs = callSt.executeQuery();
 			while (rs.next()) {
+				myUser = new Users();
 				int id = rs.getInt("id_user");
-				String fullName = rs.getString("full_name");
-				String phone = rs.getString("phone");
-				String password = rs.getString("password");
-				String address = rs.getString("address");
-				Set<Roles> roles = getRolesByIdUser(id);
-				Set<Hair> hair = getHairByIdUser(id);
-				List<Orders> orders = getOrderByIdUser(id);
-				boolean status = rs.getBoolean("status");
-				myUser = new Users(id, fullName, phone, password, address, roles, hair, orders, status);
+				myUser.setId(id);
+				myUser.setFullName(rs.getString("full_name"));
+				myUser.setPhone(rs.getString("phone"));
+				myUser.setPassword(rs.getString("password"));
+				myUser.setAddress(rs.getString("address"));
+				myUser.setRole(getRolesByIdUser(id));
+				myUser.setFavourite(getHairByIdUser(id));
+				myUser.setOrders(getOrderByIdUser(id));
+				myUser.setStatus(rs.getBoolean("status"));
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -326,10 +328,11 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 			throw new RuntimeException(e);
 		}
 		try {
-			CallableStatement callSt = con.prepareCall("{call REGISTER(?,?,?)}");
+			CallableStatement callSt = con.prepareCall("{call REGISTER(?,?,?,?)}");
 			callSt.setString(1, user.getFullName());
 			callSt.setString(2, user.getPhone());
 			callSt.setString(3, user.getPassword());
+			callSt.setBoolean(4, true);
 			callSt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
