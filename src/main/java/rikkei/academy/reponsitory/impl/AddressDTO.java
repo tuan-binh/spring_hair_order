@@ -1,5 +1,6 @@
 package rikkei.academy.reponsitory.impl;
 
+import org.springframework.stereotype.Component;
 import rikkei.academy.model.Address;
 import rikkei.academy.reponsitory.IBaseDAO;
 
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class AddressDTO implements IBaseDAO<Address, Integer> {
 	
 	private DataSource dataSource;

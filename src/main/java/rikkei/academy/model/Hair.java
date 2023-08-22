@@ -4,6 +4,7 @@ public class Hair {
 	private int id;
 	private String url;
 	private int row;
+	private boolean status;
 	
 	public Hair() {
 	}
@@ -12,6 +13,13 @@ public class Hair {
 		this.id = id;
 		this.url = url;
 		this.row = row;
+	}
+	
+	public Hair(int id, String url, int row, boolean status) {
+		this.id = id;
+		this.url = url;
+		this.row = row;
+		this.status = status;
 	}
 	
 	public int getId() {
@@ -36,5 +44,13 @@ public class Hair {
 	
 	public void setRow(int row) {
 		this.row = row;
+	}
+	
+	public boolean isStatus() {
+		return status;
+	}
+	
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 }

@@ -2,23 +2,25 @@ package rikkei.academy.model;
 
 public class Orders {
 	private int id;
-	private Users user;
+	private int idUser;
 	private Barbers barber;
 	private Type type;
 	private Times time;
 	private String address;
+	private Reviews reviews;
 	private boolean status;
 	
 	public Orders() {
 	}
 	
-	public Orders(int id, Users user, Barbers barber, Type type, Times time, String address, boolean status) {
+	public Orders(int id, int idUser, Barbers barber, Type type, Times time, String address, Reviews reviews, boolean status) {
 		this.id = id;
-		this.user = user;
+		this.idUser = idUser;
 		this.barber = barber;
 		this.type = type;
 		this.time = time;
 		this.address = address;
+		this.reviews = reviews;
 		this.status = status;
 	}
 	
@@ -30,12 +32,12 @@ public class Orders {
 		this.id = id;
 	}
 	
-	public Users getUser() {
-		return user;
+	public int getIdUser() {
+		return idUser;
 	}
 	
-	public void setUser(Users user) {
-		this.user = user;
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
 	}
 	
 	public Barbers getBarber() {
@@ -68,6 +70,14 @@ public class Orders {
 	
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	
+	public Reviews getReviews() {
+		return reviews;
+	}
+	
+	public void setReviews(Reviews reviews) {
+		this.reviews = reviews;
 	}
 	
 	public boolean isStatus() {

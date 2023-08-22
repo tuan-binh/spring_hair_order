@@ -4,16 +4,14 @@ public class Reviews {
 	private int id;
 	private String comment;
 	private int rate;
-	private Orders order;
 	
 	public Reviews() {
 	}
 	
-	public Reviews(int id, String comment, int rate, Orders order) {
+	public Reviews(int id, String comment, int rate) {
 		this.id = id;
 		this.comment = comment;
 		this.rate = rate;
-		this.order = order;
 	}
 	
 	public int getId() {
@@ -38,13 +36,5 @@ public class Reviews {
 	
 	public void setRate(int rate) {
 		this.rate = rate;
-	}
-	
-	public Orders getOrder() {
-		return order;
-	}
-	
-	public void setOrder(Orders order) {
-		this.order = order;
 	}
 }
