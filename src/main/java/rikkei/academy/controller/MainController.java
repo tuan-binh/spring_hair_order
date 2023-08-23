@@ -1,23 +1,30 @@
 package rikkei.academy.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import rikkei.academy.dto.request.UserLoginDTO;
 import rikkei.academy.dto.request.UserRegisterDTO;
+import rikkei.academy.model.Hair;
 import rikkei.academy.model.Users;
+import rikkei.academy.service.HairService;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
 public class MainController {
 	
+	@Autowired
+	private HairService hairService;
+	
 	@GetMapping
-	public String user(Model model) {
-		model.addAttribute("dataLogin", new UserLoginDTO());
-		return "user/login";
+	public String user() {
+		return "user/index";
 	}
 	
 	@GetMapping("/signUp")
@@ -37,18 +44,53 @@ public class MainController {
 		return "user/index";
 	}
 	
-	@GetMapping("/news")
-	public String news() {
-		return "user/news";
-	}
-	
 	@GetMapping("/service")
 	public String service() {
 		return "user/service";
 	}
 	
 	@GetMapping("/hair")
-	public String hair() {
+	public String hair(HttpSession session, Model model) {
+		Users user = (Users) session.getAttribute("data_user");
+		
+		List<Hair> hairs = hairService.findAll();
+		if (user != null) {
+			for (Hair h : hairs) {
+				for (Hair u : user.getFavourite()) {
+					if (h.getId() == u.getId()) {
+						h.setStatus(true);
+					}
+				}
+			}
+		}
+		
+		List<Hair> hair1 = new ArrayList<>();
+		List<Hair> hair2 = new ArrayList<>();
+		List<Hair> hair3 = new ArrayList<>();
+		List<Hair> hair4 = new ArrayList<>();
+		List<Hair> hair5 = new ArrayList<>();
+		for (Hair h : hairs) {
+			if (h.getRow() == 1) {
+				hair1.add(h);
+			}
+			if (h.getRow() == 2) {
+				hair2.add(h);
+			}
+			if (h.getRow() == 3) {
+				hair3.add(h);
+			}
+			if (h.getRow() == 4) {
+				hair4.add(h);
+			}
+			if (h.getRow() == 5) {
+				hair5.add(h);
+			}
+		}
+		model.addAttribute("hair1", hair1);
+		model.addAttribute("hair2", hair2);
+		model.addAttribute("hair3", hair3);
+		model.addAttribute("hair4", hair4);
+		model.addAttribute("hair5", hair5);
 		return "user/hair";
 	}
 	
@@ -59,6 +101,7 @@ public class MainController {
 	
 	@GetMapping("/order")
 	public String order() {
+		
 		return "user/order";
 	}
 	

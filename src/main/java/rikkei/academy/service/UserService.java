@@ -33,8 +33,8 @@ public class UserService {
 		userDAO.addNewFavourite(idUser, idHair);
 	}
 	
-	public void deleteFavourite(int idDel) {
-		userDAO.deleteFavourite(idDel);
+	public void deleteFavourite(int idUser,int idHair) {
+		userDAO.deleteFavourite(idUser,idHair);
 	}
 	
 	public Users login(UserLoginDTO userLoginDTO) {

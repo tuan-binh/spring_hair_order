@@ -76,6 +76,20 @@
 		}).showToast();
 	</script>
 </th:block>
+<th:block th:if="${phone == 'Số Điện Thoại Định Dạng'}">
+	<script>
+		Toastify({
+			text: "Số Điện Thoại Định Dạng",
+			gravity: 'top',
+			position: 'center',
+			duration: 3000,
+			style: {
+				background: "#FFFFFF",
+				backgroundImage: "linear-gradient(225deg, #FFFFFF 0%, #6284FF 19%, #FF0000 53%)"
+			}
+		}).showToast();
+	</script>
+</th:block>
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 

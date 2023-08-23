@@ -259,15 +259,16 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 		}
 	}
 	
-	public void deleteFavourite(int idDel) {
+	public void deleteFavourite(int idUser, int idHair) {
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 		try {
-			CallableStatement callSt = con.prepareCall("{call DELETE_FAVOURITE(?)}");
-			callSt.setInt(1, idDel);
+			CallableStatement callSt = con.prepareCall("{call DELETE_FAVOURITE(?,?)}");
+			callSt.setInt(1, idUser);
+			callSt.setInt(2, idHair);
 			callSt.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

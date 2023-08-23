@@ -4,7 +4,7 @@ public class Hair {
 	private int id;
 	private String url;
 	private int row;
-	private boolean status;
+	private boolean status = false;
 	
 	public Hair() {
 	}

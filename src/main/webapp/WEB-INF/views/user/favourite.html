@@ -5,6 +5,11 @@
 </head>
 <body>
 <style>
+	
+	main {
+		padding: 100px;
+	}
+	
 	.title {
 		text-align: center;
 	}
@@ -28,11 +33,10 @@
 		height: 100%;
 		border-radius: 12px;
 		display: block;
-		height: 100%;
 		object-fit: cover;
 	}
 	
-	.list-favorite h3 {
+	.empty {
 		margin: auto;
 		color: #999898;
 	}
@@ -67,14 +71,21 @@
 			Danh Sách Yêu Thích Kiểu Tóc<br>
 			<b>XU HƯỚNG TÓC HOT NHẤT</b>
 		</h3>
-		<div class="list-favorite">
-			<!-- <div class="item">
-				<img src="/assets/img/hairStyle/boy-1.jpg" alt="">
-				<div class="close">
-					<i class="fa-regular fa-circle-xmark"></i>
+		<th:block th:if="${#ctx.session.data_user.favourite.size()}>0">
+			<div class="list-favorite">
+				<div class="item" th:each="img:${session.data_user.favourite}">
+					<img th:src="@{|/img/hairStyle/${img.url}|}" alt="">
+					<a th:href="@{/hair/delete/{id}(id=${img.id})}" class="close">
+						<i class="fa-regular fa-circle-xmark"></i>
+					</a>
 				</div>
-			</div> -->
-		</div>
+			</div>
+		</th:block>
+		<th:block th:unless="${#ctx.session.data_user.favourite.size()}>0">
+			<div class="list-favorite">
+				<h3 class="empty">Your Favorite empty</h3>
+			</div>
+		</th:block>
 	</div>
 </main>
 

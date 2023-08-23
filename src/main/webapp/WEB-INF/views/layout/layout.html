@@ -44,9 +44,6 @@
 				<li><a th:href="@{/service}">TRẢI NGHIỆM DỊNH VỤ</a></li>
 				<li><a href="#angels">30SHINE'S ANGELS</a></li>
 				<li>
-					<a th:href="@{/news}">HÀNH TRÌNH TỎA SÁNG</a>
-				</li>
-				<li>
 					<a th:href="@{/hair}">KHÁM PHÁ KIỂU TÓC</a>
 				</li>
 				<li>
@@ -54,23 +51,27 @@
 				</li>
 				<!-- Nếu chưa đăng nhập vào case này -->
 				<li>
-					<div class="action" th:if="${#httpSession.getAttribute('data_user') == null}">
-						<a href="#" class="login"><i class="fa-solid fa-crown"></i> Đăng Nhập</a>
-					</div>
-					<div class="dropdown" th:if="${#httpSession.getAttribute('data_user') != null}">
-						<a href="#" class="login" data-bs-toggle="dropdown" aria-expanded="false"
-							 th:utext="${#httpSession.getAttribute('your_name')}"></a>
-						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" th:href="@{/information}">Thông Tin Cá Nhân</a></li>
-							<li><a class="dropdown-item" th:href="@{/favourite}">Danh Sách Yêu Thích</a></li>
-							<li><a class="dropdown-item" th:href="@{/history}">Lịch Sử Đặt Lịch</a></li>
-							<li><a id="out" class="dropdown-item" th:href="@{/logout}">Đăng Xuất</a></li>
-						</ul>
-					</div>
+					<th:block th:if="${#ctx.session.data_user}==null">
+						<div class="action">
+							<a th:href="@{/signIn}" class="login"><i class="fa-solid fa-crown"></i> Đăng Nhập</a>
+						</div>
+					</th:block>
+					<th:block th:unless="${#ctx.session.data_user}==null">
+						<div class="dropdown">
+							<a href="#" class="login" data-bs-toggle="dropdown" aria-expanded="false"
+								 th:utext="${#session.getAttribute('your_name')}"></a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" th:href="@{/information}">Thông Tin Cá Nhân</a></li>
+								<li><a class="dropdown-item" th:href="@{/favourite}">Danh Sách Yêu Thích</a></li>
+								<li><a class="dropdown-item" th:href="@{/history}">Lịch Sử Đặt Lịch</a></li>
+								<li><a id="out" class="dropdown-item" th:href="@{/logout}">Đăng Xuất</a></li>
+							</ul>
+						</div>
+					</th:block>
 				</li>
 			</ul>
 			<div class="menu">
-				<a href="!#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+				<a href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
 					<i class="fa-solid fa-bars"></i>
 				</a>
 			</div>

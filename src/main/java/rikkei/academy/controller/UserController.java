@@ -27,6 +27,10 @@ public class UserController {
 	@PostMapping("/handleLogin")
 	public String handleLogin(@ModelAttribute("dataLogin") UserLoginDTO userLoginDTO, HttpSession session, Model model) {
 //		System.out.println(userLoginDTO.getPassword());
+		if(userLoginDTO.getPhone().length() > 11) {
+			model.addAttribute("phone", "Số Điện Thoại Định Dạng");
+			return "user/login";
+		}
 		Users user = userService.login(userLoginDTO);
 		System.out.println(user);
 		if (user == null) {

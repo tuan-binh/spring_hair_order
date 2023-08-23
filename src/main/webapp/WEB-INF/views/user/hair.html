@@ -2,9 +2,71 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/layout/layout::head">
 </head>
+<script
+				src="https://code.jquery.com/jquery-3.7.0.js"
+				integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+				crossorigin="anonymous">
+</script>
+<script>
+	
+	
+	const handleLike = function (id, e) {
+		let heart = e.querySelector("i")
+		if (heart.style.color == "red") {
+			heart.style.color = "#fff"
+			deleteImage();
+		} else {
+			heart.style.color = "red"
+			addImage();
+		}
+		$.ajax({
+			url: `http://localhost:8080/hair/like/${id}`,
+			method: 'GET',
+			dataType: 'json',
+			headers: {
+				'Accept': 'application/json'
+			},
+			success: function (data) {
+				console.log(data);
+			},
+			error: function (error) {
+				console.error('Error:', error);
+			}
+		});
+		
+	}
+	
+	function addImage() {
+		Toastify({
+			text: "Thích Ảnh Thành Công",
+			gravity: 'top',
+			position: 'left',
+			duration: 3000
+		}).showToast();
+	}
+	
+	function deleteImage() {
+		Toastify({
+			text: "Bỏ Thích Thành Công",
+			gravity: 'top',
+			position: 'left',
+			duration: 3000,
+			style: {
+				background: "#FFFFFF",
+				backgroundImage: "linear-gradient(225deg, #FFFFFF 0%, #6284FF 19%, #FF0000 53%)"
+			}
+		}).showToast();
+	}
+
+</script>
 <body>
 <!-- link css hair style -->
-<link rel="stylesheet" href="/css/hairStyle.css" />
+<link rel="stylesheet" href="/css/hairStyle.css">
+<style>
+	.list-hair {
+		display: flex;
+	}
+</style>
 <th:block th:replace="/layout/layout::toastify"></th:block>
 
 <!-- header -->
@@ -14,16 +76,106 @@
 <main>
 	<div class="container">
 		<h3 class="title">
-			CÙNG 30SHINE KHÁM PHÁ <br />
+			CÙNG 30SHINE KHÁM PHÁ <br/>
 			<b>XU HƯỚNG TÓC HOT NHẤT</b>
 		</h3>
 		<!-- foreach -->
 		<div class="list-hair">
-<!--			<div class="row1"></div>-->
-<!--			<div class="row2"></div>-->
-<!--			<div class="row3"></div>-->
-<!--			<div class="row4"></div>-->
-<!--			<div class="row5"></div>-->
+			<div class="row1">
+				<div class="item" th:each="img:${hair1}">
+					<th:block th:if="${#ctx.session.data_user}!=null">
+						<div class="addAndDelete" th:onclick="|handleLike(${img.id},this)|" th:id="${img.id}">
+							<img th:src="@{|/img/hairStyle/${img.url}|}" alt="">
+							<th:block th:if="${#ctx.session.data_user}!=null">
+								<th:block th:if="${img.status}==true"><i style="color:red" class="fa-solid fa-heart"></i></th:block>
+								<th:block th:unless="${img.status}==true"><i class="fa-solid fa-heart"></i></th:block>
+							</th:block>
+						</div>
+					</th:block>
+					<th:block th:unless="${#ctx.session.data_user}!=null">
+						<span onclick="noLogin()">
+							<img th:src="@{|/img/hairStyle/${img.url}|}" alt="">
+							<i class="fa-solid fa-heart"></i>
+						</span>
+					</th:block>
+				</div>
+			</div>
+			<div class="row2">
+				<div class="item" th:each="img:${hair2}">
+					<th:block th:if="${#ctx.session.data_user}!=null">
+						<div class="addAndDelete" th:onclick="|handleLike(${img.id},this)|" th:id="${img.id}">
+							<img th:src="@{|/img/hairStyle/${img.url}|}" alt="">
+							<th:block th:if="${#ctx.session.data_user}!=null">
+								<th:block th:if="${img.status}==true"><i style="color:red" class="fa-solid fa-heart"></i></th:block>
+								<th:block th:unless="${img.status}==true"><i class="fa-solid fa-heart"></i></th:block>
+							</th:block>
+						</div>
+					</th:block>
+					<th:block th:unless="${#ctx.session.data_user}!=null">
+						<span onclick="noLogin()">
+							<img th:src="@{|/img/hairStyle/${img.url}|}" alt="">
+							<i class="fa-solid fa-heart"></i>
+						</span>
+					</th:block>
+				</div>
+			</div>
+			<div class="row3">
+				<div class="item" th:each="img:${hair3}">
+					<th:block th:if="${#ctx.session.data_user}!=null">
+						<div class="addAndDelete" th:onclick="|handleLike(${img.id},this)|" th:id="${img.id}">
+							<img th:src="@{|/img/hairStyle/${img.url}|}" alt="">
+							<th:block th:if="${#ctx.session.data_user}!=null">
+								<th:block th:if="${img.status} == true"><i style="color:red" class="fa-solid fa-heart"></i></th:block>
+								<th:block th:unless="${img.status} == true"><i class="fa-solid fa-heart"></i></th:block>
+							</th:block>
+						</div>
+					</th:block>
+					<th:block th:unless="${#ctx.session.data_user}!=null">
+						<span onclick="noLogin()">
+							<img th:src="@{|/img/hairStyle/${img.url}|}" alt="">
+							<i class="fa-solid fa-heart"></i>
+						</span>
+					</th:block>
+				</div>
+			</div>
+			<div class="row4">
+				<div class="item" th:each="img:${hair4}">
+					<th:block th:if="${#ctx.session.data_user}!=null">
+						<div class="addAndDelete" th:onclick="|handleLike(${img.id},this)|" th:id="${img.id}">
+							<img th:src="@{|/img/hairStyle/${img.url}|}" alt="">
+							<th:block th:if="${#ctx.session.data_user}!=null">
+								<th:block th:if="${img.status} == true"><i style="color:red" class="fa-solid fa-heart"></i></th:block>
+								<th:block th:unless="${img.status} == true"><i class="fa-solid fa-heart"></i></th:block>
+							</th:block>
+						</div>
+					</th:block>
+					<th:block th:unless="${#ctx.session.data_user}!=null">
+						<span onclick="noLogin()">
+							<img th:src="@{|/img/hairStyle/${img.url}|}" alt="">
+							<i class="fa-solid fa-heart"></i>
+						</span>
+					</th:block>
+				</div>
+			</div>
+			<div class="row5">
+				<div class="item" th:each="img:${hair5}">
+					<th:block th:if="${#ctx.session.data_user}!=null">
+						<div class="addAndDelete" th:onclick="|handleLike(${img.id},this)|" th:id="${img.id}">
+							<img th:src="@{|/img/hairStyle/${img.url}|}" alt="">
+							<th:block th:if="${#ctx.session.data_user}!=null">
+								<th:block th:if="${img.status} == true"><i style="color:red" class="fa-solid fa-heart"></i></th:block>
+								<th:block th:unless="${img.status} == true"><i class="fa-solid fa-heart"></i></th:block>
+							</th:block>
+						</div>
+					</th:block>
+					<th:block th:unless="${#ctx.session.data_user}!=null">
+						<span onclick="noLogin()">
+							<img th:src="@{|/img/hairStyle/${img.url}|}" alt="">
+							<i class="fa-solid fa-heart"></i>
+						</span>
+					</th:block>
+				</div>
+			</div>
 		</div>
 	</div>
 </main>
@@ -31,6 +183,21 @@
 <!-- footer -->
 <footer th:replace="/layout/layout::footer"></footer>
 <th:block th:replace="/layout/layout::foot"></th:block>
+
+<script>
+	function noLogin() {
+		Toastify({
+			text: "Bạn Chưa Đăng Nhập",
+			gravity: 'top',
+			position: 'center',
+			duration: 3000,
+			style: {
+				background: "#FFFFFF",
+				backgroundImage: "linear-gradient(225deg, #FFFFFF 0%, #6284FF 19%, #FF0000 53%)"
+			}
+		}).showToast();
+	}
+</script>
 
 </body>
 </html>

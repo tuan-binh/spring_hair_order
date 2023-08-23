@@ -4,7 +4,6 @@
 </head>
 <body>
 <th:block th:replace="/layout/layout::toastify"></th:block>
-
 <!-- Header -->
 <header th:replace="/layout/layout::header"></header>
 <main>
@@ -23,11 +22,18 @@
 				</div>
 			</div>
 		</div>
+		
 		<div class="order-baber">
 			<h2 class="title">Đặt lịch giữ chỗ chỉ 30 giây</h2>
 			<p class="desc">Cắt xong trả tiền, hủy lịch không sao</p>
 			<div class="order">
-				<input type="number" placeholder="Nhập vào SĐT để đặt lịch"/>
+				<th:block th:if="${#ctx.session.data_user}!=null">
+					<input type="number" placeholder="Nhập vào SĐT để đặt lịch"
+								 th:value="${session.data_user.phone}"/>
+				</th:block>
+				<th:block th:unless="${#ctx.session.data_user}!=null">
+					<input type="number" placeholder="Nhập vào SĐT để đặt lịch" required/>
+				</th:block>
 				<a th:href="@{/order}">
 					<button>Đặt lịch ngay</button>
 				</a>
@@ -40,7 +46,7 @@
 		<div class="container">
 			<h2 class="title">Trải nghiện dịnh vụ</h2>
 			<p class="desc">Thư giãn 30 phút và bạn sẽ tỏa sáng</p>
-			<div class="banner-user"  data-aos="fade-up">
+			<div class="banner-user" data-aos="fade-up">
 				<img src="/img/bannerIMG.jpg" alt="" class="image"/>
 			</div>
 			<div class="list-service">
@@ -135,7 +141,7 @@
 	</div>
 	
 	<!-- 30 shine angels -->
-	<div id="angels" class="angels"  data-aos="fade-up">
+	<div id="angels" class="angels" data-aos="fade-up">
 		<h2 class="title">30 Shine's Angels</h2>
 		<p class="desc">We can choose a hot girl massage for you</p>
 		<div class="container">
@@ -185,7 +191,7 @@
 			</p>
 			<div class="care-banner" data-aos="flip-left">
 				<div class="over">
-					<img src="/img/careBanner.jpg" alt="" />
+					<img src="/img/careBanner.jpg" alt=""/>
 				</div>
 				<div class="care-info">
 					<h3>VÌ CHẤT LƯỢNG PHỤC VỤ LÀ HÀNG ĐẦU</h3>
@@ -196,7 +202,7 @@
 				<!-- item 1 -->
 				<div class="item" data-aos="fade-up">
 					<div class="over">
-						<img src="/img/BH/2-care.png" alt="item 1" />
+						<img src="/img/BH/2-care.png" alt="item 1"/>
 					</div>
 					<div class="body-item">
 						<strong>Cắt gội massage</strong>
@@ -206,7 +212,7 @@
 				<!-- item 2 -->
 				<div class="item" data-aos="fade-up">
 					<div class="over">
-						<img src="/img/BH/30days-care.jpg" alt="item 1" />
+						<img src="/img/BH/30days-care.jpg" alt="item 1"/>
 					</div>
 					<div class="body-item">
 						<strong>Uốn nhập khẩu hàng</strong>
@@ -216,7 +222,7 @@
 				<!-- item 3 -->
 				<div class="item" data-aos="fade-up">
 					<div class="over">
-						<img src="/img/BH/2-care.png" alt="item 1" />
+						<img src="/img/BH/2-care.png" alt="item 1"/>
 					</div>
 					<div class="body-item">
 						<strong>Nhuộm nhập khẩu Ý</strong>
@@ -226,7 +232,7 @@
 				<!-- item 4 -->
 				<div class="item" data-aos="fade-up">
 					<div class="over">
-						<img src="/img/BH/4-care.png" alt="item 1" />
+						<img src="/img/BH/4-care.png" alt="item 1"/>
 					</div>
 					<div class="body-item">
 						<strong>Dịnh vụ khác</strong>
@@ -296,10 +302,10 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <!-- Initialize Swiper -->
 <script>
-    var swiper = new Swiper(".mySwiper", {
-        effect: "cards",
-        grabCursor: true,
-    });
+	var swiper = new Swiper(".mySwiper", {
+		effect: "cards",
+		grabCursor: true,
+	});
 </script>
 
 <th:block th:replace="/layout/layout::foot"></th:block>
