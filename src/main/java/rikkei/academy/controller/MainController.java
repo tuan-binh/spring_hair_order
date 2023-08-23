@@ -127,7 +127,8 @@ public class MainController {
 	}
 	
 	@GetMapping("/information")
-	public String information() {
+	public String information(Model model) {
+		model.addAttribute("address", addressService.findAll());
 		return "user/information";
 	}
 	

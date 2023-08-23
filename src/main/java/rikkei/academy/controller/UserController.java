@@ -102,4 +102,9 @@ public class UserController {
 		return "user/information";
 	}
 	
+	@PostMapping("/handleChangeAddress")
+	public String handleChangeAddress() {
+		return null;
+	}
+	
 }

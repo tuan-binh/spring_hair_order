@@ -30,14 +30,20 @@
 						<label>Số Điện Thoại: <span style="color: red">*</span></label>
 						<input class="oldPhone" th:value="${session.data_user.phone}" type="text" disabled/>
 						<label>Thông tin cá nhân:</label>
-						<form action="">
+						<form th:action="@{/user/handleChangeAddress}">
 							<div class="choose-city">
-								<input type="radio" name="city" id="hanoi"/>
-								<label class="btn btn-secondary choose_city" for="hanoi">HÀ NỘI</label>
-								<input type="radio" name="city" id="danang"/>
-								<label class="btn btn-secondary choose_city" for="danang">ĐÀ NẴNG</label>
-								<input type="radio" name="city" id="hochiminh"/>
-								<label class="btn btn-secondary choose_city" for="hochiminh">HỒ CHÍ MINH</label>
+								<th:block th:each="city:${address}">
+									<th:block th:if="${#ctx.session.data_user.address}==${city.address}">
+										<input type="radio" name="city" checked th:value="${city.id}" th:id="|hanoi${city.id}|"/>
+										<label class="btn btn-secondary choose_city active" th:for="|hanoi${city.id}|"
+													 th:text="${city.address}"></label>
+									</th:block>
+									<th:block th:unless="${#ctx.session.data_user.address}==${city.address}">
+										<input type="radio" name="city" th:value="${city.id}" th:id="|hanoi${city.id}|"/>
+										<label class="btn btn-secondary choose_city" th:for="|hanoi${city.id}|"
+													 th:text="${city.address}"></label>
+									</th:block>
+								</th:block>
 							</div>
 							<button class="btn btn-primary">Xác Nhận</button>
 						</form>
