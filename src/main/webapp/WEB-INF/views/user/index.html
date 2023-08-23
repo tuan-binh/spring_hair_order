@@ -6,6 +6,16 @@
 <th:block th:replace="/layout/layout::toastify"></th:block>
 <!-- Header -->
 <header th:replace="/layout/layout::header"></header>
+<th:block th:if="${message}=='true'">
+	<script>
+		Toastify({
+			text: "Đăng Nhập Thành Công",
+			gravity: 'top',
+			position: 'center',
+			duration: 3000
+		}).showToast();
+	</script>
+</th:block>
 <main>
 	<!-- Carousel -->
 	<div class="banner">

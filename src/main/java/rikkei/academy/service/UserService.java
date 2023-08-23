@@ -25,6 +25,10 @@ public class UserService {
 		userDAO.save(user);
 	}
 	
+	public void updateFullName(Users user) {
+		userDAO.updateFullName(user);
+	}
+	
 	public Users findById(int id) {
 		return userDAO.findById(id);
 	}
@@ -33,8 +37,8 @@ public class UserService {
 		userDAO.addNewFavourite(idUser, idHair);
 	}
 	
-	public void deleteFavourite(int idUser,int idHair) {
-		userDAO.deleteFavourite(idUser,idHair);
+	public void deleteFavourite(int idUser, int idHair) {
+		userDAO.deleteFavourite(idUser, idHair);
 	}
 	
 	public Users login(UserLoginDTO userLoginDTO) {

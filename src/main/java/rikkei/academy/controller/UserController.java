@@ -27,7 +27,7 @@ public class UserController {
 	@PostMapping("/handleLogin")
 	public String handleLogin(@ModelAttribute("dataLogin") UserLoginDTO userLoginDTO, HttpSession session, Model model) {
 //		System.out.println(userLoginDTO.getPassword());
-		if(userLoginDTO.getPhone().length() > 11) {
+		if (userLoginDTO.getPhone().length() > 11) {
 			model.addAttribute("phone", "Số Điện Thoại Định Dạng");
 			return "user/login";
 		}
@@ -73,6 +73,31 @@ public class UserController {
 		
 		userService.register(userRegisterDTO);
 		return "redirect:/";
+	}
+	
+	@PostMapping("/handleChangeName")
+	public String handleChangeName(@RequestParam("name") String newName, HttpSession session) {
+		Users user = (Users) session.getAttribute("data_user");
+		user.setFullName(newName);
+		userService.updateFullName(user);
+		session.setAttribute("data_user", user);
+		session.setAttribute("your_name", "<i class='fa-solid fa-crown'></i> " + user.getFullName());
+		return "user/information";
+	}
+	
+	@PostMapping("/handleChangePassword")
+	public String handleChangePassword(@RequestParam("pass") String newPassword, @RequestParam("confirmPass") String confirmPassword, Model model, HttpSession session) {
+		if (!Validate.checkPassword(newPassword)) {
+			model.addAttribute("message_error", "Mật Khẩu Phải Ít Nhất 6 Kí Tự");
+			return "user/information";
+		}
+		if (!newPassword.equals(confirmPassword)) {
+			model.addAttribute("message_error", "Mật Khẩu Không Trùng Nhau");
+			return "user/ìnformation";
+		}
+		Users user = (Users) session.getAttribute("data_user");
+		user.setPassword(newPassword);
+		return "user/information";
 	}
 	
 }

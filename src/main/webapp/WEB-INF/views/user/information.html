@@ -26,9 +26,9 @@
 					<div class="center">
 						<h3 class="sub-title">Tất Cả Thông Tin</h3>
 						<label>Họ Và Tên: <span style="color: red">*</span></label>
-						<input class="oldName" type="text" disabled/>
+						<input class="oldName" th:value="${session.data_user.fullName}" type="text" disabled/>
 						<label>Số Điện Thoại: <span style="color: red">*</span></label>
-						<input class="oldPhone" type="text" disabled/>
+						<input class="oldPhone" th:value="${session.data_user.phone}" type="text" disabled/>
 						<label>Thông tin cá nhân:</label>
 						<form action="">
 							<div class="choose-city">
@@ -47,8 +47,8 @@
 					<h3 class="sub-title">Thay Đổi Tên</h3>
 					<div class="center">
 						<label for="oldName">Họ Và Tên Cũ:</label>
-						<input class="oldName" id="oldName" type="text" disabled>
-						<form action="" class="newName">
+						<input class="oldName" th:value="${session.data_user.fullName}" id="oldName" type="text" disabled>
+						<form th:action="@{/user/handleChangeName}" method="post" class="newName">
 							<label for="newName">Họ Và Tên Mới:</label>
 							<input type="text" name="name" id="newName">
 							<button class="btn btn-primary">Xác Nhận</button>
@@ -59,10 +59,10 @@
 					<h3 class="sub-title">Thay Đổi Mật Khẩu</h3>
 					<div class="center">
 						<label for="oldPhone">Mật Khẩu Cũ:</label>
-						<input class="oldPS" id="oldPhone" type="text" disabled>
-						<form action="" class="newPass">
+						<input class="oldPS" th:value="${session.data_user.password}" id="oldPhone" type="text" disabled>
+						<form th:action="@{/user/handleChangePassword}" method="post" class="newPass">
 							<label for="newPass">Mật Khẩu Mới:</label>
-							<input type="text" id="newPass" name="Pass">
+							<input type="text" id="newPass" name="pass">
 							<label for="confirmPass">Xác Nhận Mật Khẩu:</label>
 							<input type="text" id="confirmPass" name="confirmPass">
 							<button class="btn btn-primary">Xác Nhận</button>
@@ -73,6 +73,35 @@
 		</div>
 	</div>
 </main>
+
+<th:block th:if="${message_error}=='Mật Khẩu Phải Ít Nhất 6 Kí Tự'">
+	<script>
+		Toastify({
+			text: "Mật Khẩu Phải Ít Nhất 6 Kí Tự",
+			gravity: 'top',
+			position: 'left',
+			duration: 3000,
+			style: {
+				background: "#FFFFFF",
+				backgroundImage: "linear-gradient(225deg, #FFFFFF 0%, #6284FF 19%, #FF0000 53%)"
+			}
+		}).showToast();
+	</script>
+</th:block>
+<th:block th:if="${message_error}=='Mật Khẩu Không Trùng Nhau'">
+	<script>
+		Toastify({
+			text: "Mật Khẩu Không Trùng Nhau",
+			gravity: 'top',
+			position: 'left',
+			duration: 3000,
+			style: {
+				background: "#FFFFFF",
+				backgroundImage: "linear-gradient(225deg, #FFFFFF 0%, #6284FF 19%, #FF0000 53%)"
+			}
+		}).showToast();
+	</script>
+</th:block>
 
 <!-- footer -->
 <footer th:replace="/layout/layout::footer"></footer>
