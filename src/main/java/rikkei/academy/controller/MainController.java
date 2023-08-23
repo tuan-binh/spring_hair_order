@@ -4,15 +4,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import rikkei.academy.dto.request.UserLoginDTO;
 import rikkei.academy.dto.request.UserRegisterDTO;
 import rikkei.academy.model.Hair;
 import rikkei.academy.model.Users;
-import rikkei.academy.service.HairService;
+import rikkei.academy.service.*;
 
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -21,6 +26,14 @@ public class MainController {
 	
 	@Autowired
 	private HairService hairService;
+	@Autowired
+	private AddressService addressService;
+	@Autowired
+	private BarberService barberService;
+	@Autowired
+	private TypeService typeService;
+	@Autowired
+	private TimeService timeService;
 	
 	@GetMapping
 	public String user() {
@@ -99,8 +112,16 @@ public class MainController {
 		return "user/location";
 	}
 	
-	@GetMapping("/order")
-	public String order() {
+	@PostMapping("/order")
+	public String order(@RequestParam("phone") String phone, Model model) {
+		model.addAttribute("phone", phone);
+		LocalDate curr = LocalDate.now();
+//		truyền đối tượng sang thymeleaf
+		model.addAttribute("address", addressService.findAll());
+		model.addAttribute("barbers", barberService.findAll());
+		model.addAttribute("types", typeService.findAll());
+		model.addAttribute("times", timeService.findAll());
+		model.addAttribute("now", curr);
 		
 		return "user/order";
 	}

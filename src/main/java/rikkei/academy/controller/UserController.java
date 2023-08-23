@@ -97,6 +97,8 @@ public class UserController {
 		}
 		Users user = (Users) session.getAttribute("data_user");
 		user.setPassword(newPassword);
+		session.setAttribute("data_user", user);
+		userService.updatePassword(user);
 		return "user/information";
 	}
 	

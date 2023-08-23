@@ -36,18 +36,18 @@
 		<div class="order-baber">
 			<h2 class="title">Đặt lịch giữ chỗ chỉ 30 giây</h2>
 			<p class="desc">Cắt xong trả tiền, hủy lịch không sao</p>
-			<div class="order">
+			<form th:action="@{/order}" method="post" class="order">
 				<th:block th:if="${#ctx.session.data_user}!=null">
-					<input type="number" placeholder="Nhập vào SĐT để đặt lịch"
+					<input type="number" name="phone" placeholder="Nhập vào SĐT để đặt lịch"
 								 th:value="${session.data_user.phone}"/>
 				</th:block>
 				<th:block th:unless="${#ctx.session.data_user}!=null">
-					<input type="number" placeholder="Nhập vào SĐT để đặt lịch" required/>
+					<input type="number" name="phone" placeholder="Nhập vào SĐT để đặt lịch" required/>
 				</th:block>
-				<a th:href="@{/order}">
-					<button>Đặt lịch ngay</button>
-				</a>
-			</div>
+				<!--				<a th:href="@{/order}">-->
+				<button>Đặt lịch ngay</button>
+				<!--				</a>-->
+			</form>
 		</div>
 	</div>
 	

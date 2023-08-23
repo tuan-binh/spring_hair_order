@@ -27,95 +27,116 @@
 			</div>
 		</div>
 	</div>
-	<!-- form order -->
-	<form action="" class="flex-form" id="hash_form" data-aos="fade-up">
-		<!-- option -->
-		<div class="order" data-aos="fade-up">
-			<div class="item">
-				<h2 class="title">Đặt Lịch Giữ Chỗ</h2>
-				<p class="info">SĐT: <span class="tel"></span></p>
-				<h5>1. Chọn địa điểm</h5>
-				<div class="choose-city">
-					<input type="radio" name="city" id="hanoi"/>
-					<label class="btn btn-secondary choose_city" for="hanoi">HÀ NỘI</label>
-					<input type="radio" name="city" id="danang"/>
-					<label class="btn btn-secondary choose_city" for="danang">ĐÀ NẴNG</label>
-					<input type="radio" name="city" id="hochiminh"/>
-					<label class="btn btn-secondary choose_city" for="hochiminh">HỒ CHÍ MINH</label>
-				</div>
-				<h5>2. Chọn dịnh vụ</h5>
-				<div class="choose-service">
-					<input type="radio" name="service" id="catgoi"/>
-					<label class="btn btn-secondary choose_service" for="catgoi">Cắt gội massage</label>
-					<input type="radio" name="service" id="uon"/>
-					<label class="btn btn-secondary choose_service" for="uon">Uốn nhập khẩu</label>
-					<input type="radio" name="service" id="nhuom"/>
-					<label class="btn btn-secondary choose_service" for="nhuom">Nhuộm nhập khẩu ý</label>
-				</div>
-				<div class="choose-your-time">
-					<h5>3. Chọn thời gian</h5>
-					<input type="date" name=""/>
-					<div class="calender-time">
-						<input type="radio" name="timeOrder" id="time1"/>
-						<label class="btn btn-outline-warning choose_time" for="time1">7h - 10h</label>
-						<input type="radio" name="timeOrder" id="time2"/>
-						<label class="btn btn-outline-warning choose_time" for="time2">10h - 12h</label>
-						<input type="radio" name="timeOrder" id="time3"/>
-						<label class="btn btn-outline-warning choose_time" for="time3">12h - 14h</label>
-						<input type="radio" name="timeOrder" id="time4"/>
-						<label class="btn btn-outline-warning choose_time" for="time4">14h - 16h</label>
-						<input type="radio" name="timeOrder" id="time5"/>
-						<label class="btn btn-outline-warning choose_time" for="time5">16h - 18h</label>
-						<input type="radio" name="timeOrder" id="time6"/>
-						<label class="btn btn-outline-warning choose_time" for="time6">18h - 20h</label>
-						<input type="radio" name="timeOrder" id="time7"/>
-						<label class="btn btn-outline-warning choose_time" for="time7">20h - 22h</label>
-						<input type="radio" name="timeOrder" id="time8"/>
-						<label class="btn btn-outline-warning choose_time" for="time8">22h - 24h</label>
+	<!-- form user no acccount -->
+	<th:block th:if="${#ctx.session.data_user}==null">
+		<form action="" class="flex-form" id="hash_form" data-aos="fade-up">
+			<!-- option -->
+			<div class="order" data-aos="fade-up">
+				<div class="item">
+					<h2 class="title">Đặt Lịch Giữ Chỗ</h2>
+					<p class="info">SĐT: <span class="tel" th:text="${phone}"></span></p>
+					<h5>1. Chọn địa điểm</h5>
+					<div class="choose-city">
+						<th:block th:each="city:${address}">
+							<input type="radio" name="city" th:value="${city.id}" th:id="|city${city.id}|"/>
+							<label class="btn btn-secondary choose_city" th:for="|city${city.id}|" th:text="${city.address}"></label>
+						</th:block>
+					</div>
+					<h5>2. Chọn dịnh vụ</h5>
+					<div class="choose-service">
+						<th:block th:each="service:${types}">
+							<input type="radio" name="service" th:value="${service.id}" th:id="|service${service.id}|"/>
+							<label class="btn btn-secondary choose_service" th:for="|service${service.id}|"
+										 th:text="${service.typeName}"></label>
+						</th:block>
+					</div>
+					<div class="choose-your-time">
+						<h5>3. Chọn thời gian</h5>
+						<input type="date" name="calender" th:value="${now}"/>
+						<div class="calender-time">
+							<th:block th:each="time:${times}">
+								<input type="radio" name="timeOrder" th:value="${time.id}" th:id="|time${time.id}|"/>
+								<label class="btn btn-outline-warning choose_time" th:for="|time${time.id}|"
+											 th:text="${time.time}"></label>
+							</th:block>
+						</div>
+					</div>
+					<div class="actionDone">
+						<button class="btn btn-warning done">Hoàn tất</button>
 					</div>
 				</div>
-				<div class="actionDone">
-					<button class="btn btn-warning done">Hoàn tất</button>
+			</div>
+			<div class="select_barber" data-aos="fade-up">
+				<h2><i class="fa-solid fa-users"></i> Lựa Chọn Barber</h2>
+				<!-- option barber -->
+				<div class="flex-barber">
+					<!-- barber -->
+					<th:block th:each="barber:${barbers}">
+						<input type="radio" name="yourBarber" th:value="${barber.id}" th:id="|barber${barber.id}|">
+						<label class="barber" th:for="|barber${barber.id}|">
+							<img th:src="|/img/barber/${barber.urlAvatar}|" alt=""/>
+						</label>
+					</th:block>
 				</div>
 			</div>
-		</div>
-		<div class="select_barber" data-aos="fade-up">
-			<h2><i class="fa-solid fa-users"></i> Lựa Chọn Barber</h2>
-			<!-- option barber -->
-			<div class="flex-barber">
-				<!-- barber -->
-				<input type="radio" name="yourBarber" id="barber1">
-				<label class="barber active_barber" for="barber1">
-					<img src="/img/barber/barber1.jpg" alt=""/>
-				</label>
-				
-				<input type="radio" name="yourBarber" id="barber2">
-				<label class="barber" for="barber2">
-					<img src="/img/barber/barber2.jpg" alt=""/>
-				</label>
-				
-				<input type="radio" name="yourBarber" id="barber3">
-				<label class="barber" for="barber3">
-					<img src="/img/barber/barber3.jpg" alt=""/>
-				</label>
-				
-				<input type="radio" name="yourBarber" id="barber4">
-				<label class="barber" for="barber4">
-					<img src="/img/barber/barber4.jpg" alt=""/>
-				</label>
-				
-				<input type="radio" name="yourBarber" id="barber5">
-				<label class="barber" for="barber5">
-					<img src="/img/barber/barber5.jpg" alt=""/>
-				</label>
-				
-				<input type="radio" name="yourBarber" id="barber6">
-				<label class="barber" for="barber6">
-					<img src="/img/barber/barber6.jpg" alt=""/>
-				</label>
+		</form>
+	</th:block>
+	<!-- form user -->
+	<th:block th:unless="${#ctx.session.data_user}==null">
+		<form action="" class="flex-form" data-aos="fade-up">
+			<!-- option -->
+			<div class="order" data-aos="fade-up">
+				<div class="item" data-aos="fade-up">
+					<h2 class="title">Đặt Lịch Giữ Chỗ</h2>
+					<p class="info">SĐT: <span class="tel" th:text="${phone}"></span></p>
+					<h5>1. Chọn địa điểm</h5>
+					<div class="choose-city">
+						<th:block th:each="city:${address}">
+							<input type="radio" name="city" th:value="${city.id}" th:id="|myCity${city.id}|"/>
+							<label class="btn btn-secondary choose_city" th:for="|myCity${city.id}|"
+										 th:text="${city.address}"></label>
+						</th:block>
+					</div>
+					<h5>2. Chọn dịnh vụ</h5>
+					<div class="choose-service">
+						<th:block th:each="service:${types}">
+							<input type="radio" name="service" th:value="${service.id}" th:id="|myService${service.id}|"/>
+							<label class="btn btn-secondary choose_service" th:for="|myService${service.id}|"
+										 th:text="${service.typeName}"></label>
+						</th:block>
+					</div>
+					<div class="choose-your-time">
+						<h5>3. Chọn thời gian</h5>
+						<input type="date" name="calender" th:value="${now}"/>
+						<div class="calender-time">
+							<th:block th:each="time:${times}">
+								<input type="radio" name="timeOrder" th:value="${time.id}" th:id="|myTime${time.id}|"/>
+								<label class="btn btn-outline-warning choose_time" th:for="|myTime${time.id}|"
+											 th:text="${time.time}"></label>
+							</th:block>
+						</div>
+					</div>
+					<div class="actionDone">
+						<button class="btn btn-warning done">Hoàn tất</button>
+					</div>
+				</div>
 			</div>
-		</div>
-	</form>
+			<div class="select_barber" data-aos="fade-up">
+				<h2><i class="fa-solid fa-users"></i> Lựa Chọn Barber</h2>
+				<!-- option barber -->
+				<div class="flex-barber">
+					<!-- barber -->
+					<th:block th:each="barber:${barbers}">
+						<input type="radio" name="yourBarber" th:value="${barber.id}" th:id="|myBarber${barber.id}|">
+						<label class="barber" th:for="|myBarber${barber.id}|">
+							<img th:src="|/img/barber/${barber.urlAvatar}|" alt=""/>
+						</label>
+					</th:block>
+				</div>
+			</div>
+		</form>
+	</th:block>
+	
 </main>
 
 <!-- footer -->

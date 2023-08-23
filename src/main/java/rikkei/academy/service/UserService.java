@@ -29,6 +29,14 @@ public class UserService {
 		userDAO.updateFullName(user);
 	}
 	
+	public void updatePassword(Users user) {
+		userDAO.updatePassword(user);
+	}
+	
+	public void updateAddress(Users user) {
+		userDAO.updateAddress(user);
+	}
+	
 	public Users findById(int id) {
 		return userDAO.findById(id);
 	}

@@ -130,7 +130,54 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 				}
 			}
 		}
-		
+	}
+	
+	public void updatePassword(Users user) {
+		try {
+			con = dataSource.getConnection();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			CallableStatement callSt = con.prepareCall("{call UPDATE_USER_PASSWORD(?,?)}");
+			callSt.setInt(1, user.getId());
+			callSt.setString(2, user.getPassword());
+			callSt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}
+	}
+	
+	public void updateAddress(Users user) {
+		try {
+			con = dataSource.getConnection();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		try {
+			CallableStatement callSt = con.prepareCall("{call UPDATE_USER_ADDRESS(?,?)}");
+			callSt.setInt(1, user.getId());
+			callSt.setString(2, user.getAddress());
+			callSt.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}
 	}
 	
 	@Override
