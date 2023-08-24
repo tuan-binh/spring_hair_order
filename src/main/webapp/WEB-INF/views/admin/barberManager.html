@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/admin/layout::head">
+</head>
+<body>
+<style>
+	table img {
+		width: 200px;
+		height: 200px;
+		object-fit: cover;
+	}
+</style>
+<div class="wrapper">
+	<th:block th:replace="/admin/layout::sidebar"></th:block>
+	<div class="main">
+		<th:block th:replace="/admin/layout::navbar"></th:block>
+		<main class="content">
+			<div class="container-fluid p-0">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">Barber Manager</h3>
+						<nav class="navbar navbar-expand-lg bg-light">
+							<div class="container-fluid">
+								<a class="navbar-brand" href="#">
+									<button type="button" class="btn btn-success">+ Create new Barber</button>
+								</a>
+								<form class="d-flex" role="search">
+									<input class="form-control me-2 fst-italic" type="search"
+												 placeholder="Enter user's name... "
+												 aria-label="Search">
+									<button class="btn btn-outline-success" type="submit">Search</button>
+								</form>
+							</div>
+						</nav>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body">
+						<table id="example1" class="table table-bordered table-striped text-center">
+							<thead>
+							<tr>
+								<th>#</th>
+								<th>Name</th>
+								<th>Avatar</th>
+								<th>Status</th>
+								<th colspan="2">Actions</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr th:each="barber,loop:${listBarber}">
+								<td th:text="${loop.count}"></td>
+								<td th:text="${barber.barberName}"></td>
+								<td><img th:src="@{|/img/barber/${barber.urlAvatar}|}" alt=""></td>
+								<td th:text="${barber.status}?'Đang Làm Việc':'Đã Nghỉ Việc'"></td>
+								<td><a class="btn btn-danger" href="">Khóa</a></td>
+								<td><a class="btn btn-primary" href="">Mở Khóa</a></td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+					<nav aria-label="Page navigation example ">
+						<ul class="pagination float-end mx-4">
+							<li class="page-item disabled">
+								<a class="page-link">Previous</a>
+							</li>
+							<li class="page-item active"><a class="page-link" href="#">1</a></li>
+							<li class="page-item"><a class="page-link" href="#">2</a></li>
+							<li class="page-item"><a class="page-link" href="#">3</a></li>
+							<li class="page-item">
+								<a class="page-link" href="#">Next</a>
+							</li>
+						</ul>
+					</nav>
+					<!-- /.card-body -->
+				</div>
+			
+			</div>
+		</main>
+		<th:block th:replace="/admin/layout::footer"></th:block>
+	</div>
+</div>
+
+<th:block th:replace="/admin/layout::script"></th:block>
+
+</body>
+</html>

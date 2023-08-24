@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/admin/layout::head">
+</head>
+<body>
+<div class="wrapper">
+	<th:block th:replace="/admin/layout::sidebar"></th:block>
+	<div class="main">
+		<th:block th:replace="/admin/layout::navbar"></th:block>
+		<main class="content">
+			<div class="container-fluid p-0">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title">Barber Manager</h3>
+						<nav class="navbar navbar-expand-lg bg-light">
+							<div class="container-fluid">
+								<a class="navbar-brand" href="#">
+									<button type="button" class="btn btn-success">+ Create new Barber</button>
+								</a>
+								<form class="d-flex" role="search">
+<!--									<input class="form-control me-2 fst-italic" type="search"-->
+<!--												 placeholder="Enter user's name... "-->
+<!--												 aria-label="Search">-->
+<!--									<button class="btn btn-outline-success" type="submit">Search</button>-->
+								</form>
+							</div>
+						</nav>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body">
+					
+					</div>
+					<!-- /.card-body -->
+				</div>
+			
+			</div>
+		</main>
+		<th:block th:replace="/admin/layout::footer"></th:block>
+	</div>
+</div>
+
+<th:block th:replace="/admin/layout::script"></th:block>
+
+</body>
+</html>

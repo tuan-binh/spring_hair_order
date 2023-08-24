@@ -186,7 +186,7 @@ public class OrderDAO implements IBaseDAO<Orders, Integer> {
 				Times time = timeDAO.findById(rs.getInt("id_time"));
 				String date = rs.getString("date");
 				String address = rs.getString("address");
-				Reviews review = getReviewByIdOrder(rs.getInt(id));
+				Reviews review = getReviewByIdOrder(id);
 				boolean status = rs.getBoolean("status");
 				order = new Orders(id, idUser, barber, type, time, date, address, review, status);
 			}

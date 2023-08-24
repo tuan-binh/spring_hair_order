@@ -38,35 +38,35 @@
 				<input type="hidden" name="id" th:value="${data_edit.id}">
 				<div class="choose-city">
 					<th:block th:each="city:${address}">
-						
-						<th:block th:if="${data_edit.address}==${city.address}">
-							<input type="radio" name="city" checked th:value="${city.id}" th:id="|myCity${city.id}|"/>
-							<label class="btn btn-secondary choose_city active" th:for="|myCity${city.id}|"
-										 th:text="${city.address}"></label>
+						<th:block th:if="${city.status}">
+							<th:block th:if="${data_edit.address}==${city.address}">
+								<input type="radio" name="city" checked th:value="${city.id}" th:id="|myCity${city.id}|"/>
+								<label class="btn btn-secondary choose_city active" th:for="|myCity${city.id}|"
+											 th:text="${city.address}"></label>
+							</th:block>
+							<th:block th:unless="${data_edit.address}==${city.address}">
+								<input type="radio" name="city" th:value="${city.id}" th:id="|myCity${city.id}|"/>
+								<label class="btn btn-secondary choose_city" th:for="|myCity${city.id}|"
+											 th:text="${city.address}"></label>
+							</th:block>
 						</th:block>
-						<th:block th:unless="${data_edit.address}==${city.address}">
-							<input type="radio" name="city" th:value="${city.id}" th:id="|myCity${city.id}|"/>
-							<label class="btn btn-secondary choose_city" th:for="|myCity${city.id}|"
-										 th:text="${city.address}"></label>
-						</th:block>
-						
 					</th:block>
 				</div>
 				<h5>2. Chọn dịnh vụ</h5>
 				<div class="choose-service">
 					<th:block th:each="service:${types}">
-						
-						<th:block th:if="${data_edit.type.id}==${service.id}">
-							<input type="radio" name="service" checked th:value="${service.id}" th:id="|myService${service.id}|"/>
-							<label class="btn btn-secondary choose_service active" th:for="|myService${service.id}|"
-										 th:text="${service.typeName}"></label>
+						<th:block th:if="${service.status}">
+							<th:block th:if="${data_edit.type.id}==${service.id}">
+								<input type="radio" name="service" checked th:value="${service.id}" th:id="|myService${service.id}|"/>
+								<label class="btn btn-secondary choose_service active" th:for="|myService${service.id}|"
+											 th:text="${service.typeName}"></label>
+							</th:block>
+							<th:block th:unless="${data_edit.type.id}==${service.id}">
+								<input type="radio" name="service" th:value="${service.id}" th:id="|myService${service.id}|"/>
+								<label class="btn btn-secondary choose_service" th:for="|myService${service.id}|"
+											 th:text="${service.typeName}"></label>
+							</th:block>
 						</th:block>
-						<th:block th:unless="${data_edit.type.id}==${service.id}">
-							<input type="radio" name="service" th:value="${service.id}" th:id="|myService${service.id}|"/>
-							<label class="btn btn-secondary choose_service" th:for="|myService${service.id}|"
-										 th:text="${service.typeName}"></label>
-						</th:block>
-						
 					</th:block>
 				</div>
 				<div class="choose-your-time">
@@ -74,18 +74,18 @@
 					<input type="date" name="calender" th:value="${now}"/>
 					<div class="calender-time">
 						<th:block th:each="time:${times}">
-							
-							<th:block th:if="${data_edit.time.id}==${time.id}">
-								<input type="radio" name="timeOrder" checked th:value="${time.id}" th:id="|myTime${time.id}|"/>
-								<label class="btn btn-outline-warning choose_time active" th:for="|myTime${time.id}|"
-											 th:text="${time.time}"></label>
+							<th:block th:if="${time.status}">
+								<th:block th:if="${data_edit.time.id}==${time.id}">
+									<input type="radio" name="timeOrder" checked th:value="${time.id}" th:id="|myTime${time.id}|"/>
+									<label class="btn btn-outline-warning choose_time active" th:for="|myTime${time.id}|"
+												 th:text="${time.time}"></label>
+								</th:block>
+								<th:block th:unless="${data_edit.time.id}==${time.id}">
+									<input type="radio" name="timeOrder" th:value="${time.id}" th:id="|myTime${time.id}|"/>
+									<label class="btn btn-outline-warning choose_time" th:for="|myTime${time.id}|"
+												 th:text="${time.time}"></label>
+								</th:block>
 							</th:block>
-							<th:block th:unless="${data_edit.time.id}==${time.id}">
-								<input type="radio" name="timeOrder" th:value="${time.id}" th:id="|myTime${time.id}|"/>
-								<label class="btn btn-outline-warning choose_time" th:for="|myTime${time.id}|"
-											 th:text="${time.time}"></label>
-							</th:block>
-							
 						</th:block>
 					</div>
 				</div>
@@ -100,20 +100,20 @@
 			<div class="flex-barber">
 				<!-- barber -->
 				<th:block th:each="barber:${barbers}">
-					
-					<th:block th:if="${data_edit.barber.id}==${barber.id}">
-						<input type="radio" name="yourBarber" checked th:value="${barber.id}" th:id="|myBarber${barber.id}|">
-						<label class="barber active_barber" th:for="|myBarber${barber.id}|">
-							<img th:src="|/img/barber/${barber.urlAvatar}|" alt=""/>
-						</label>
+					<th:block th:if="${barber.status}">
+						<th:block th:if="${data_edit.barber.id}==${barber.id}">
+							<input type="radio" name="yourBarber" checked th:value="${barber.id}" th:id="|myBarber${barber.id}|">
+							<label class="barber active_barber" th:for="|myBarber${barber.id}|">
+								<img th:src="|/img/barber/${barber.urlAvatar}|" alt=""/>
+							</label>
+						</th:block>
+						<th:block th:unless="${data_edit.barber.id}==${barber.id}">
+							<input type="radio" name="yourBarber" th:value="${barber.id}" th:id="|myBarber${barber.id}|">
+							<label class="barber" th:for="|myBarber${barber.id}|">
+								<img th:src="|/img/barber/${barber.urlAvatar}|" alt=""/>
+							</label>
+						</th:block>
 					</th:block>
-					<th:block th:unless="${data_edit.barber.id}==${barber.id}">
-						<input type="radio" name="yourBarber" th:value="${barber.id}" th:id="|myBarber${barber.id}|">
-						<label class="barber" th:for="|myBarber${barber.id}|">
-							<img th:src="|/img/barber/${barber.urlAvatar}|" alt=""/>
-						</label>
-					</th:block>
-					
 				</th:block>
 			</div>
 		</div>

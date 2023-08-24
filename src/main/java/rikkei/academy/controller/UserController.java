@@ -45,8 +45,9 @@ public class UserController {
 		
 		if (user.getRole().stream().anyMatch(role -> role.getId() == 2)) {
 			// admin
-			model.addAttribute("message", "true");
-			return null;
+			session.setAttribute("active_sidebar","home");
+			session.setAttribute("data_admin",user);
+			return "admin/index";
 		}
 		//	user
 		if (!user.isStatus()) {

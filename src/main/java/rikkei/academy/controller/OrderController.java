@@ -73,7 +73,6 @@ public class OrderController {
 		orderService.save(order);
 		user.getOrders().add(order);
 		session.setAttribute("data_user", user);
-		model.addAttribute("success", "Đặt Lịch Thành Công");
 		return "redirect:/history";
 	}
 	
@@ -178,11 +177,30 @@ public class OrderController {
 		Orders oldOrder = orderService.findById(myId);
 		
 		Orders newOrder = new Orders(myId, user.getId(), barberService.findById(barber), typeService.findById(type), timeService.findById(time), String.valueOf(localDate), city, null, false);
-
-		if(oldOrder.getBarber().getId() == newOrder.getBarber().getId() && )
 		
-		return null;
+		if (oldOrder.getBarber().getId() == newOrder.getBarber().getId() &&
+				  oldOrder.getType().getId() == newOrder.getType().getId() &&
+				  oldOrder.getTime().getId() == newOrder.getTime().getId() &&
+				  oldOrder.getDate().equals(newOrder.getDate()) &&
+				  oldOrder.getAddress().equals(newOrder.getAddress())) {
+			orderService.save(newOrder);
+			Users newUser = userService.findById(user.getId());
+			session.setAttribute("data_user", newUser);
+			return "redirect:/history";
+		}
+		
+		boolean check = checkTimeAndBarber(city, time, barber);
+		if (!check) {
+			return "redirect:/handleOrder/handleEdit/" + id;
+		}
+		
+		Orders myOrder = new Orders(myId, user.getId(), barberService.findById(barber), typeService.findById(type), timeService.findById(time), String.valueOf(localDate), city, null, false);
+		orderService.save(myOrder);
+		Users newUser = userService.findById(user.getId());
+		session.setAttribute("data_user", newUser);
+		return "redirect:/history";
 	}
+	
 	
 	public boolean checkTimeAndBarber(String city, int idTime, int idBarber) {
 		boolean check = true;
@@ -190,7 +208,9 @@ public class OrderController {
 			if (o.getBarber().getId() == idBarber) {
 				if (o.getTime().getId() == idTime) {
 					if (o.getAddress().equals(city)) {
-						check = false;
+						if (!o.isStatus()) {
+							check = false;
+						}
 					}
 				}
 			}

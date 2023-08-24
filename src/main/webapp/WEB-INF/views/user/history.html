@@ -49,8 +49,10 @@
 							<td th:text="${item.type.typeName}"></td>
 							<td th:text="|Ngày: ${item.date}  Giờ: ${item.time.time}|"></td>
 							<td>
-								<a th:href="@{/handleOrder/handleEdit/{id}(id=${item.id})}" type="button" class="btn btn-success">Sửa</a>
-								<a th:href="@{/handleOrder/handleDelete/{id}(id=${item.id})}" type="button" class="btn btn-danger">Hủy Kèo</a>
+								<a th:href="@{/handleOrder/handleEdit/{id}(id=${item.id})}" type="button"
+									 class="btn btn-success">Sửa</a>
+								<a th:href="@{/handleOrder/handleDelete/{id}(id=${item.id})}" type="button" class="btn btn-danger">Hủy
+									Kèo</a>
 							</td>
 							<td></td>
 						</tr>
@@ -90,7 +92,9 @@
 									<p><i class="fa-solid fa-circle-check"></i> Đã Đánh Giá</p>
 								</th:block>
 								<th:block th:unless="${item.reviews}!=null">
-									<a th:href="@{/handleReviews}" type="button" class="btn btn-success">Đánh Giá</a>
+									<button data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" class="btn btn-success">
+										Đánh Giá
+									</button>
 								</th:block>
 							</td>
 							<td>
@@ -107,6 +111,27 @@
 		</div>
 	</div>
 </main>
+
+<!-- Modal -->
+<!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+<!--	<div class="modal-dialog">-->
+<!--		<div class="modal-content">-->
+<!--			<div class="modal-body form-container">-->
+<!--				<div class="form">-->
+<!--					<span class="heading">Get in touch</span>-->
+<!--					<input placeholder="Email" id="mail" type="email" class="input">-->
+<!--					<textarea placeholder="Say Hello" rows="10" cols="30" id="message" name="message" class="textarea"></textarea>-->
+<!--					<div class="button-container">-->
+<!--						<div class="send-button">Send</div>-->
+<!--						<div class="reset-button-container">-->
+<!--							<div id="reset-btn" class="reset-button">Reset</div>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+<!--</div>-->
 
 <!-- footer -->
 <footer th:replace="/layout/layout::footer"></footer>
