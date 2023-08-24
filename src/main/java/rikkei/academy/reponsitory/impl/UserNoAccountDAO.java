@@ -24,11 +24,11 @@ public class UserNoAccountDAO implements IBaseDAO<UserNoAccount, Integer> {
 	private TimeDAO timeDAO;
 	@Autowired
 	private DataSource dataSource;
-	private Connection con;
 	
 	@Override
 	public List<UserNoAccount> findAll() {
 		List<UserNoAccount> list = new ArrayList<>();
+		Connection con = null;
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
@@ -43,9 +43,10 @@ public class UserNoAccountDAO implements IBaseDAO<UserNoAccount, Integer> {
 				Barbers barber = barberDAO.findById(rs.getInt("id_barber"));
 				Type type = typeDAO.findById(rs.getInt("id_type"));
 				Times time = timeDAO.findById(rs.getInt("id_time"));
+				String date = rs.getString("date");
 				String address = rs.getString("address");
 				boolean status = rs.getBoolean("status");
-				list.add(new UserNoAccount(id, phone, barber, type, time, address, status));
+				list.add(new UserNoAccount(id, phone, barber, type, time, date, address, status));
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -63,6 +64,7 @@ public class UserNoAccountDAO implements IBaseDAO<UserNoAccount, Integer> {
 	
 	@Override
 	public void save(UserNoAccount userNoAccount) {
+		Connection con = null;
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
@@ -70,23 +72,25 @@ public class UserNoAccountDAO implements IBaseDAO<UserNoAccount, Integer> {
 		}
 		try {
 			if (findById(userNoAccount.getId()) == null) {
-				CallableStatement callSt = con.prepareCall("{call INSERT_USERNOACCOUNT(?,?,?,?,?,?)}");
+				CallableStatement callSt = con.prepareCall("{call INSERT_USERNOACCOUNT(?,?,?,?,?,?,?)}");
 				callSt.setString(1, userNoAccount.getPhone());
 				callSt.setInt(2, userNoAccount.getBarber().getId());
 				callSt.setInt(3, userNoAccount.getType().getId());
 				callSt.setInt(4, userNoAccount.getTime().getId());
-				callSt.setString(5, userNoAccount.getAddress());
-				callSt.setBoolean(6, userNoAccount.isStatus());
+				callSt.setString(5, userNoAccount.getDate());
+				callSt.setString(6, userNoAccount.getAddress());
+				callSt.setBoolean(7, userNoAccount.isStatus());
 				callSt.executeUpdate();
 			} else {
-				CallableStatement callSt = con.prepareCall("{call UPDATE_USERNOACCOUNT(?,?,?,?,?,?,?)}");
+				CallableStatement callSt = con.prepareCall("{call UPDATE_USERNOACCOUNT(?,?,?,?,?,?,?,?)}");
 				callSt.setInt(1, userNoAccount.getId());
 				callSt.setString(2, userNoAccount.getPhone());
 				callSt.setInt(3, userNoAccount.getBarber().getId());
 				callSt.setInt(4, userNoAccount.getType().getId());
 				callSt.setInt(5, userNoAccount.getTime().getId());
-				callSt.setString(6, userNoAccount.getAddress());
-				callSt.setBoolean(7, userNoAccount.isStatus());
+				callSt.setString(6, userNoAccount.getDate());
+				callSt.setString(7, userNoAccount.getAddress());
+				callSt.setBoolean(8, userNoAccount.isStatus());
 				callSt.executeUpdate();
 			}
 		} catch (SQLException e) {
@@ -109,6 +113,7 @@ public class UserNoAccountDAO implements IBaseDAO<UserNoAccount, Integer> {
 	
 	@Override
 	public UserNoAccount findById(Integer id) {
+		Connection con = null;
 		UserNoAccount userNoAccount = null;
 		try {
 			con = dataSource.getConnection();
@@ -124,9 +129,10 @@ public class UserNoAccountDAO implements IBaseDAO<UserNoAccount, Integer> {
 				Barbers barber = barberDAO.findById(rs.getInt("id_barber"));
 				Type type = typeDAO.findById(rs.getInt("id_type"));
 				Times time = timeDAO.findById(rs.getInt("id_time"));
+				String date = rs.getString("date");
 				String address = rs.getString("address");
 				boolean status = rs.getBoolean("status");
-				userNoAccount = new UserNoAccount(id, phone, barber, type, time, address, status);
+				userNoAccount = new UserNoAccount(id, phone, barber, type, time, date, address, status);
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

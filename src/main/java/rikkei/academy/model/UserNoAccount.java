@@ -6,18 +6,20 @@ public class UserNoAccount {
 	private Barbers barber;
 	private Type type;
 	private Times time;
+	private String date;
 	private String address;
 	private boolean status;
 	
 	public UserNoAccount() {
 	}
 	
-	public UserNoAccount(int id, String phone, Barbers barber, Type type, Times time, String address, boolean status) {
+	public UserNoAccount(int id, String phone, Barbers barber, Type type, Times time, String date, String address, boolean status) {
 		this.id = id;
 		this.phone = phone;
 		this.barber = barber;
 		this.type = type;
 		this.time = time;
+		this.date = date;
 		this.address = address;
 		this.status = status;
 	}
@@ -60,6 +62,14 @@ public class UserNoAccount {
 	
 	public void setTime(Times time) {
 		this.time = time;
+	}
+	
+	public String getDate() {
+		return date;
+	}
+	
+	public void setDate(String date) {
+		this.date = date;
 	}
 	
 	public String getAddress() {

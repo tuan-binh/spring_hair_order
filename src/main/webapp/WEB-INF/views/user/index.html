@@ -16,6 +16,16 @@
 		}).showToast();
 	</script>
 </th:block>
+<th:block th:if="${success}=='Đặt Lịch Thành Công'">
+	<script>
+		Toastify({
+			text: "Đặt Lịch Thành Công",
+			gravity: 'top',
+			position: 'center',
+			duration: 3000
+		}).showToast();
+	</script>
+</th:block>
 <main>
 	<!-- Carousel -->
 	<div class="banner">
@@ -36,7 +46,7 @@
 		<div class="order-baber">
 			<h2 class="title">Đặt lịch giữ chỗ chỉ 30 giây</h2>
 			<p class="desc">Cắt xong trả tiền, hủy lịch không sao</p>
-			<form th:action="@{/order}" method="post" class="order">
+			<form th:action="@{/order}" method="get" class="order">
 				<th:block th:if="${#ctx.session.data_user}!=null">
 					<input type="number" name="phone" placeholder="Nhập vào SĐT để đặt lịch"
 								 th:value="${session.data_user.phone}"/>
@@ -308,6 +318,7 @@
 </main>
 
 <footer th:replace="/layout/layout::footer"></footer>
+
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 <!-- Initialize Swiper -->

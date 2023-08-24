@@ -18,10 +18,11 @@ public class BarberDAO implements IBaseDAO<Barbers, Integer> {
 	
 	@Autowired
 	private DataSource dataSource;
-	private Connection con;
 	
 	@Override
 	public List<Barbers> findAll() {
+		Connection con = null;
+		
 		List<Barbers> list = new ArrayList<>();
 		try {
 			con = dataSource.getConnection();
@@ -54,6 +55,8 @@ public class BarberDAO implements IBaseDAO<Barbers, Integer> {
 	
 	@Override
 	public void save(Barbers barbers) {
+		Connection con = null;
+		
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
@@ -94,6 +97,8 @@ public class BarberDAO implements IBaseDAO<Barbers, Integer> {
 	
 	@Override
 	public Barbers findById(Integer id) {
+		Connection con = null;
+		
 		Barbers barbers = null;
 		try {
 			con = dataSource.getConnection();

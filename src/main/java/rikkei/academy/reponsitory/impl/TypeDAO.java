@@ -18,10 +18,11 @@ public class TypeDAO implements IBaseDAO<Type, Integer> {
 	
 	@Autowired
 	private DataSource dataSource;
-	private Connection con;
+
 	
 	@Override
 	public List<Type> findAll() {
+		Connection con = null;
 		List<Type> list = new ArrayList<>();
 		try {
 			con = dataSource.getConnection();
@@ -53,6 +54,7 @@ public class TypeDAO implements IBaseDAO<Type, Integer> {
 	
 	@Override
 	public void save(Type type) {
+		Connection con = null;
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
@@ -92,6 +94,7 @@ public class TypeDAO implements IBaseDAO<Type, Integer> {
 	
 	@Override
 	public Type findById(Integer id) {
+		Connection con = null;
 		Type type = null;
 		try {
 			con = dataSource.getConnection();

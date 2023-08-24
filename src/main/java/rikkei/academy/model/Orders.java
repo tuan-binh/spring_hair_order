@@ -6,6 +6,7 @@ public class Orders {
 	private Barbers barber;
 	private Type type;
 	private Times time;
+	private String date;
 	private String address;
 	private Reviews reviews;
 	private boolean status;
@@ -13,12 +14,13 @@ public class Orders {
 	public Orders() {
 	}
 	
-	public Orders(int id, int idUser, Barbers barber, Type type, Times time, String address, Reviews reviews, boolean status) {
+	public Orders(int id, int idUser, Barbers barber, Type type, Times time, String date, String address, Reviews reviews, boolean status) {
 		this.id = id;
 		this.idUser = idUser;
 		this.barber = barber;
 		this.type = type;
 		this.time = time;
+		this.date = date;
 		this.address = address;
 		this.reviews = reviews;
 		this.status = status;
@@ -62,6 +64,14 @@ public class Orders {
 	
 	public void setTime(Times time) {
 		this.time = time;
+	}
+	
+	public String getDate() {
+		return date;
+	}
+	
+	public void setDate(String date) {
+		this.date = date;
 	}
 	
 	public String getAddress() {

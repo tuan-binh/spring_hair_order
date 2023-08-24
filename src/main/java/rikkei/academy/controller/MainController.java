@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import rikkei.academy.dto.request.UserLoginDTO;
 import rikkei.academy.dto.request.UserRegisterDTO;
 import rikkei.academy.model.Hair;
+import rikkei.academy.model.Orders;
 import rikkei.academy.model.Users;
 import rikkei.academy.service.*;
 
@@ -112,8 +113,10 @@ public class MainController {
 		return "user/location";
 	}
 	
-	@PostMapping("/order")
+	@GetMapping("/order")
 	public String order(@RequestParam("phone") String phone, Model model) {
+		
+		
 		model.addAttribute("phone", phone);
 		LocalDate curr = LocalDate.now();
 //		truyền đối tượng sang thymeleaf
@@ -138,7 +141,20 @@ public class MainController {
 	}
 	
 	@GetMapping("/history")
-	public String history() {
+	public String history(HttpSession session, Model model) {
+		Users user = (Users) session.getAttribute("data_user");
+		List<Orders> pending = new ArrayList<>();
+		List<Orders> fulfilled = new ArrayList<>();
+		for (Orders o : user.getOrders()) {
+			if (!o.isStatus()) {
+				pending.add(o);
+			} else {
+				fulfilled.add(o);
+			}
+		}
+		model.addAttribute("pending", pending);
+		model.addAttribute("fulfilled", fulfilled);
+		
 		return "user/history";
 	}
 	

@@ -30,7 +30,7 @@
 						<label>Số Điện Thoại: <span style="color: red">*</span></label>
 						<input class="oldPhone" th:value="${session.data_user.phone}" type="text" disabled/>
 						<label>Thông tin cá nhân:</label>
-						<form th:action="@{/user/handleChangeAddress}">
+						<form th:action="@{/user/handleChangeAddress}" method="post">
 							<div class="choose-city">
 								<th:block th:each="city:${address}">
 									<th:block th:if="${#ctx.session.data_user.address}==${city.address}">
@@ -80,12 +80,27 @@
 	</div>
 </main>
 
+<th:block th:if="${error_empty}=='Vui Lòng Lựa Chọn'">
+	<script>
+		Toastify({
+			text: "Vui Lòng Lựa Chọn",
+			gravity: 'top',
+			position: 'center',
+			duration: 3000,
+			style: {
+				background: "#FFFFFF",
+				backgroundImage: "linear-gradient(225deg, #FFFFFF 0%, #6284FF 19%, #FF0000 53%)"
+			}
+		}).showToast();
+	</script>
+</th:block>
+
 <th:block th:if="${message_error}=='Mật Khẩu Phải Ít Nhất 6 Kí Tự'">
 	<script>
 		Toastify({
 			text: "Mật Khẩu Phải Ít Nhất 6 Kí Tự",
 			gravity: 'top',
-			position: 'left',
+			position: 'center',
 			duration: 3000,
 			style: {
 				background: "#FFFFFF",
@@ -99,7 +114,35 @@
 		Toastify({
 			text: "Mật Khẩu Không Trùng Nhau",
 			gravity: 'top',
-			position: 'left',
+			position: 'center',
+			duration: 3000,
+			style: {
+				background: "#FFFFFF",
+				backgroundImage: "linear-gradient(225deg, #FFFFFF 0%, #6284FF 19%, #FF0000 53%)"
+			}
+		}).showToast();
+	</script>
+</th:block>
+<th:block th:if="${error_name}=='Tên Không Được Để Trống'">
+	<script>
+		Toastify({
+			text: "Tên Không Được Để Trống",
+			gravity: 'top',
+			position: 'center',
+			duration: 3000,
+			style: {
+				background: "#FFFFFF",
+				backgroundImage: "linear-gradient(225deg, #FFFFFF 0%, #6284FF 19%, #FF0000 53%)"
+			}
+		}).showToast();
+	</script>
+</th:block>
+<th:block th:if="${error_pass}=='Mật Khẩu Không Được Để Trống'">
+	<script>
+		Toastify({
+			text: "Mật Khẩu Không Được Để Trống",
+			gravity: 'top',
+			position: 'center',
 			duration: 3000,
 			style: {
 				background: "#FFFFFF",

@@ -18,10 +18,11 @@ public class AddressDAO implements IBaseDAO<Address, Integer> {
 	
 	@Autowired
 	private DataSource dataSource;
-	private Connection con;
 	
 	@Override
 	public List<Address> findAll() {
+		Connection con = null;
+		
 		List<Address> list = new ArrayList<>();
 		try {
 			con = dataSource.getConnection();
@@ -53,6 +54,8 @@ public class AddressDAO implements IBaseDAO<Address, Integer> {
 	
 	@Override
 	public void save(Address address) {
+		Connection con = null;
+		
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
@@ -86,6 +89,8 @@ public class AddressDAO implements IBaseDAO<Address, Integer> {
 	
 	@Override
 	public void delete(Integer id) {
+		Connection con = null;
+		
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
@@ -110,6 +115,8 @@ public class AddressDAO implements IBaseDAO<Address, Integer> {
 	
 	@Override
 	public Address findById(Integer id) {
+		Connection con = null;
+		
 		Address myAddress = null;
 		try {
 			con = dataSource.getConnection();

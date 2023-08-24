@@ -18,11 +18,12 @@ public class TimeDAO implements IBaseDAO<Times, Integer> {
 	
 	@Autowired
 	private DataSource dataSource;
-	private Connection con;
-	
+
 	@Override
 	public List<Times> findAll() {
 		List<Times> list = new ArrayList<>();
+		Connection con = null;
+		
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
@@ -53,6 +54,8 @@ public class TimeDAO implements IBaseDAO<Times, Integer> {
 	
 	@Override
 	public void save(Times times) {
+		Connection con = null;
+		
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
@@ -91,6 +94,8 @@ public class TimeDAO implements IBaseDAO<Times, Integer> {
 	
 	@Override
 	public Times findById(Integer id) {
+		Connection con = null;
+		
 		Times time = null;
 		try {
 			con = dataSource.getConnection();

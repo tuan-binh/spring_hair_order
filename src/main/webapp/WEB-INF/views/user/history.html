@@ -15,37 +15,95 @@
 <!-- main history -->
 <main>
 	<!-- history user order hair -->
+	
 	<div class="history">
 		<div class="container">
 			<h2 class="title">Lịch Sử Đặt Lịch 30 Shine</h2>
-			<table class="table">
-				<thead>
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">NAME</th>
-					<th scope="col">SỐ ĐIỆN THOẠI</th>
-					<th scope="col">ĐỊA ĐIỂM</th>
-					<th scope="col">DỊNH VỤ</th>
-					<th scope="col">THỜI GIAN</th>
-					<th scope="col">ACTION</th>
-					<th scope="col">STATUS</th>
-				</tr>
-				</thead>
-				<tbody>
-				<!-- <tr>
-					<th scope="row">1</th>
-					<td>Bình</td>
-					<td>0968837785</td>
-					<td>Hà Nội</td>
-					<td>Gội Đầu</td>
-					<td>Ngày: 21/4/2023 Giờ: 16h - 18h</td>
-					<td>
-						<button type="button" class="btn btn-success">Sửa</button>
-						<button type="button" class="btn btn-danger">Hủy Kèo</button>
-					</td>
-				</tr> -->
-				</tbody>
-			</table>
+			
+			<div class="tabs">
+				<div class="tab active">Đang Xử Lý</div>
+				<div class="tab">Đã Hoàn Thành</div>
+			</div>
+			
+			<div class="page action">
+				<th:block th:if="${pending.size()}>0">
+					<table class="table">
+						<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">NAME</th>
+							<th scope="col">SỐ ĐIỆN THOẠI</th>
+							<th scope="col">ĐỊA ĐIỂM</th>
+							<th scope="col">DỊNH VỤ</th>
+							<th scope="col">THỜI GIAN</th>
+							<th scope="col">ACTION</th>
+							<th scope="col">STATUS</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="item,loop:${pending}">
+							<th scope="row" th:text="${loop.count}"></th>
+							<td th:text="${session.data_user.fullName}"></td>
+							<td th:text="${session.data_user.phone}"></td>
+							<td th:text="${item.address}"></td>
+							<td th:text="${item.type.typeName}"></td>
+							<td th:text="|Ngày: ${item.date}  Giờ: ${item.time.time}|"></td>
+							<td>
+								<a th:href="@{/handleOrder/handleEdit/{id}(id=${item.id})}" type="button" class="btn btn-success">Sửa</a>
+								<a th:href="@{/handleOrder/handleDelete/{id}(id=${item.id})}" type="button" class="btn btn-danger">Hủy Kèo</a>
+							</td>
+							<td></td>
+						</tr>
+						</tbody>
+					</table>
+				</th:block>
+				<th:block th:unless="${pending.size()}>0">
+					<h3 style="text-align: center;padding: 100px;color: #999898">Your Order Empty</h3>
+				</th:block>
+			</div>
+			
+			<div class="page">
+				<th:block th:if="${fulfilled.size()}>0">
+					<table class="table">
+						<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">NAME</th>
+							<th scope="col">SỐ ĐIỆN THOẠI</th>
+							<th scope="col">ĐỊA ĐIỂM</th>
+							<th scope="col">DỊNH VỤ</th>
+							<th scope="col">THỜI GIAN</th>
+							<th scope="col">ACTION</th>
+							<th scope="col">STATUS</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr th:each="item,loop:${fulfilled}">
+							<th scope="row" th:text="${loop.count}"></th>
+							<td th:text="${session.data_user.fullName}"></td>
+							<td th:text="${session.data_user.phone}"></td>
+							<td th:text="${item.address}"></td>
+							<td th:text="${item.type.typeName}"></td>
+							<td th:text="|Ngày: ${item.date}  Giờ: ${item.time.time}|"></td>
+							<td>
+								<th:block th:if="${item.reviews}!=null">
+									<p><i class="fa-solid fa-circle-check"></i> Đã Đánh Giá</p>
+								</th:block>
+								<th:block th:unless="${item.reviews}!=null">
+									<a th:href="@{/handleReviews}" type="button" class="btn btn-success">Đánh Giá</a>
+								</th:block>
+							</td>
+							<td>
+								<i class="fa-solid fa-circle-check"></i>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</th:block>
+				<th:block th:unless="${fulfilled.size()}>0">
+					<h3 style="text-align: center;padding: 100px;color: #999898">Your Order Empty</h3>
+				</th:block>
+			</div>
 		</div>
 	</div>
 </main>
@@ -54,5 +112,21 @@
 <footer th:replace="/layout/layout::footer"></footer>
 <th:block th:replace="/layout/layout::foot"></th:block>
 
+<script>
+	let tabs = document.querySelectorAll(".tab");
+	let pages = document.querySelectorAll(".page");
+	tabs.forEach((e, i) => {
+		let page = pages[i];
+		e.addEventListener('click', function () {
+			let activeTab = document.querySelector(".tab.active");
+			let actionPage = document.querySelector(".page.action");
+			activeTab.classList.remove("active");
+			actionPage.classList.remove("action");
+			
+			e.classList.add("active");
+			page.classList.add("action");
+		})
+	})
+</script>
 </body>
 </html>

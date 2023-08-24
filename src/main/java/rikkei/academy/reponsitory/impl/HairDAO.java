@@ -18,10 +18,12 @@ public class HairDAO implements IBaseDAO<Hair, Integer> {
 	
 	@Autowired
 	private DataSource dataSource;
-	private Connection con;
+
 	
 	@Override
 	public List<Hair> findAll() {
+		Connection con = null;
+		
 		List<Hair> list = new ArrayList<>();
 		try {
 			con = dataSource.getConnection();
@@ -53,6 +55,8 @@ public class HairDAO implements IBaseDAO<Hair, Integer> {
 	
 	@Override
 	public void save(Hair hair) {
+		Connection con = null;
+		
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
@@ -78,6 +82,8 @@ public class HairDAO implements IBaseDAO<Hair, Integer> {
 	
 	@Override
 	public void delete(Integer id) {
+		Connection con = null;
+		
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
@@ -102,6 +108,8 @@ public class HairDAO implements IBaseDAO<Hair, Integer> {
 	
 	@Override
 	public Hair findById(Integer id) {
+		Connection con = null;
+		
 		Hair hair = null;
 		try {
 			con = dataSource.getConnection();

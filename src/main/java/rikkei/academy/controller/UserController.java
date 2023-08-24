@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import rikkei.academy.config.Validate;
 import rikkei.academy.dto.request.UserLoginDTO;
 import rikkei.academy.dto.request.UserRegisterDTO;
+import rikkei.academy.model.Address;
 import rikkei.academy.model.Roles;
 import rikkei.academy.model.Users;
+import rikkei.academy.service.AddressService;
 import rikkei.academy.service.RoleService;
 import rikkei.academy.service.UserService;
 
@@ -23,6 +25,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private AddressService addressService;
 	
 	@PostMapping("/handleLogin")
 	public String handleLogin(@ModelAttribute("dataLogin") UserLoginDTO userLoginDTO, HttpSession session, Model model) {
@@ -76,35 +81,53 @@ public class UserController {
 	}
 	
 	@PostMapping("/handleChangeName")
-	public String handleChangeName(@RequestParam("name") String newName, HttpSession session) {
+	public String handleChangeName(@RequestParam("name") String newName, HttpSession session, Model model) {
+		if (newName.trim().isEmpty()) {
+			model.addAttribute("error_name", "Tên Không Được Để Trống");
+			return "redirect:/information";
+		}
 		Users user = (Users) session.getAttribute("data_user");
 		user.setFullName(newName);
 		userService.updateFullName(user);
 		session.setAttribute("data_user", user);
 		session.setAttribute("your_name", "<i class='fa-solid fa-crown'></i> " + user.getFullName());
-		return "user/information";
+		return "redirect:/information";
 	}
 	
 	@PostMapping("/handleChangePassword")
 	public String handleChangePassword(@RequestParam("pass") String newPassword, @RequestParam("confirmPass") String confirmPassword, Model model, HttpSession session) {
+		if (newPassword.trim().isEmpty()) {
+			model.addAttribute("error_pass", "Mật Khẩu Không Được Để Trống");
+			return "redirect:/information";
+		}
 		if (!Validate.checkPassword(newPassword)) {
 			model.addAttribute("message_error", "Mật Khẩu Phải Ít Nhất 6 Kí Tự");
-			return "user/information";
+			return "redirect:/information";
 		}
 		if (!newPassword.equals(confirmPassword)) {
 			model.addAttribute("message_error", "Mật Khẩu Không Trùng Nhau");
-			return "user/ìnformation";
+			return "redirect:/information";
 		}
 		Users user = (Users) session.getAttribute("data_user");
 		user.setPassword(newPassword);
 		session.setAttribute("data_user", user);
 		userService.updatePassword(user);
-		return "user/information";
+		return "redirect:/information";
 	}
 	
 	@PostMapping("/handleChangeAddress")
-	public String handleChangeAddress() {
-		return null;
+	public String handleChangeAddress(@RequestParam(value = "city", defaultValue = "") Long id, HttpSession session, Model model) {
+		if (id == null) {
+			model.addAttribute("error_empty", "Vui Lòng Lựa Chọn");
+			return "redirect:/information";
+		}
+		Address address = addressService.findById(Integer.parseInt(String.valueOf(id)));
+		Users user = (Users) session.getAttribute("data_user");
+		
+		user.setAddress(address.getAddress());
+		session.setAttribute("data_user", user);
+		userService.updateAddress(user);
+		return "redirect:/information";
 	}
 	
 }

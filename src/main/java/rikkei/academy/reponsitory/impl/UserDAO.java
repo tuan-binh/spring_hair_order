@@ -30,10 +30,10 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 	private OrderDAO orderDAO;
 	@Autowired
 	private DataSource dataSource;
-	private Connection con = null;
 	
 	@Override
 	public List<Users> findAll() {
+		Connection con = null;
 		List<Users> list = new ArrayList<>();
 		try {
 			con = dataSource.getConnection();
@@ -71,6 +71,7 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 	
 	@Override
 	public void save(Users users) {
+		Connection con = null;
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
@@ -109,6 +110,7 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 	}
 	
 	public void updateFullName(Users user) {
+		Connection con = null;
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
@@ -133,6 +135,7 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 	}
 	
 	public void updatePassword(Users user) {
+		Connection con = null;
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
@@ -157,6 +160,7 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 	}
 	
 	public void updateAddress(Users user) {
+		Connection con = null;
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
@@ -187,6 +191,7 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 	
 	@Override
 	public Users findById(Integer id) {
+		Connection con = null;
 		Users user = null;
 		try {
 			con = dataSource.getConnection();
@@ -224,6 +229,7 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 	}
 	
 	public Set<Roles> getRolesByIdUser(int idUser) {
+		Connection con = null;
 		Set<Roles> roles = new HashSet<>();
 		try {
 			con = dataSource.getConnection();
@@ -252,6 +258,7 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 	}
 	
 	public Set<Hair> getHairByIdUser(int idUser) {
+		Connection con = null;
 		Set<Hair> hair = new HashSet<>();
 		try {
 			con = dataSource.getConnection();
@@ -280,6 +287,7 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 	}
 	
 	public List<Orders> getOrderByIdUser(int idUser) {
+		Connection con = null;
 		List<Orders> orders = new ArrayList<>();
 		try {
 			con = dataSource.getConnection();
@@ -308,6 +316,7 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 	}
 	
 	public void addNewFavourite(int idUser, int idHair) {
+		Connection con = null;
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
@@ -332,6 +341,7 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 	}
 	
 	public void deleteFavourite(int idUser, int idHair) {
+		Connection con = null;
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
@@ -356,6 +366,7 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 	}
 	
 	public Users login(Users user) {
+		Connection con = null;
 		Users myUser = null;
 		try {
 			con = dataSource.getConnection();
@@ -395,6 +406,7 @@ public class UserDAO implements IBaseDAO<Users, Integer> {
 	}
 	
 	public void register(Users user) {
+		Connection con = null;
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {

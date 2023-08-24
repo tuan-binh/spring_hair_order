@@ -38,7 +38,8 @@
   align-items: center;
 }
 
-.pagination .prev,.pagination .next {
+.pagination .prev,
+.pagination .next {
   background: #1c51ff;
   width: 30px;
   height: 30px;
@@ -68,7 +69,6 @@
   background: #ffcc33 !important;
   color: rgb(25, 0, 255);
   font-weight: bold;
-
 }
 
 .page-his.action {
@@ -81,4 +81,34 @@
 
 .page-his.disable {
   display: none !important;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 20px;
+  padding: 20px;
+}
+
+.tab {
+  min-width: 150px;
+  text-align: center;
+  padding: 10px 20px;
+}
+
+.tab:hover {
+  cursor: pointer;
+}
+
+.tab.active {
+  border-bottom: 5px solid #000;
+}
+
+.page {
+  display: none !important;
+}
+
+.page.action {
+  display: block !important;
 }

@@ -18,10 +18,11 @@ public class RoleDAO implements IBaseDAO<Roles, Integer> {
 	
 	@Autowired
 	private DataSource dataSource;
-	private Connection con;
 	
 	@Override
 	public List<Roles> findAll() {
+		Connection con = null;
+		
 		List<Roles> list = new ArrayList<>();
 		try {
 			con = dataSource.getConnection();
@@ -52,6 +53,8 @@ public class RoleDAO implements IBaseDAO<Roles, Integer> {
 	
 	@Override
 	public void save(Roles roles) {
+		Connection con = null;
+		
 		try {
 			con = dataSource.getConnection();
 		} catch (SQLException e) {
@@ -105,6 +108,8 @@ public class RoleDAO implements IBaseDAO<Roles, Integer> {
 	
 	@Override
 	public Roles findById(Integer id) {
+		Connection con = null;
+		
 		Roles role = null;
 		try {
 			con = dataSource.getConnection();
