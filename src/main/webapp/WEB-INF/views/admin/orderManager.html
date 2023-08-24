@@ -3,6 +3,14 @@
 <head th:replace="/admin/layout::head">
 </head>
 <body>
+
+<!-- link css history -->
+<link rel="stylesheet" href="/css/history.css">
+<style>
+	.tabs {
+		padding: 10px;
+	}
+</style>
 <div class="wrapper">
 	<th:block th:replace="/admin/layout::sidebar"></th:block>
 	<div class="main">
@@ -28,31 +36,69 @@
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-						<table id="example1" class="table table-bordered table-striped text-center">
-							<thead>
-							<tr>
-								<th>#</th>
-								<th>FullName</th>
-								<th>Phone</th>
-								<th>Password</th>
-								<th>Address</th>
-								<th>Status</th>
-								<th colspan="2">Actions</th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr th:each="user,loop:${listUser}">
-								<td th:text="${loop.count}"></td>
-								<td th:text="${user.fullName}"></td>
-								<td th:text="${user.phone}"></td>
-								<td th:text="${user.password}"></td>
-								<td th:text="${user.address}"></td>
-								<td th:text="${user.status}?'Hoạt Động':'Đã Khóa'"></td>
-								<td><a class="btn btn-danger" href="">Khóa</a></td>
-								<td><a class="btn btn-primary" href="">Mở Khóa</a></td>
-							</tr>
-							</tbody>
-						</table>
+						
+						<div class="tabs">
+							<div class="tab active">Order Has Account</div>
+							<div class="tab">Order No Account</div>
+						</div>
+						
+						<div class="page action">
+							<table id="example1" class="table table-bordered table-striped text-center">
+								<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">NAME</th>
+									<th scope="col">PHONE</th>
+									<th scope="col">ADDRESS</th>
+									<th scope="col">SERVICE</th>
+									<th scope="col">TIME</th>
+									<th scope="col">ACTION</th>
+									<th scope="col">STATUS</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr th:each="user,loop:${hasAccount}">
+									<th scope="row" th:text="${loop.count}"></th>
+									<td th:text="${user.name}"></td>
+									<td th:text="${user.phone}"></td>
+									<td th:text="${user.address}"></td>
+									<td th:text="${user.service}"></td>
+									<td th:text="${user.time}"></td>
+									<td><a class="btn btn-success" href="">Xác Nhận</a></td>
+									<td th:text="${user.status}?'Đã Hoàn Thành':'Đang Xử Lý'"></td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="page">
+							<table id="example2" class="table table-bordered table-striped text-center">
+								<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">PHONE</th>
+									<th scope="col">ADDRESS</th>
+									<th scope="col">SERVICE</th>
+									<th scope="col">TIME</th>
+									<th scope="col">ACTION</th>
+									<th scope="col">STATUS</th>
+								</tr>
+								</thead>
+								<tbody>
+								<tr th:each="user,loop:${noAccount}">
+									<th scope="row" th:text="${loop.count}"></th>
+									<td th:text="${user.phone}"></td>
+									<td th:text="${user.address}"></td>
+									<td th:text="${user.type.typeName}"></td>
+									<td th:text="|Ngày: ${user.date} Giờ: ${user.time.time}|"></td>
+									<td><a class="btn btn-success" href="">Xác Nhận</a></td>
+									<td th:text="${user.status}?'Đã Hoàn Thành':'Đang Xử Lý'"></td>
+								</tr>
+								</tbody>
+							</table>
+						
+						</div>
+					
+					
 					</div>
 					<nav aria-label="Page navigation example ">
 						<ul class="pagination float-end mx-4">
@@ -77,5 +123,21 @@
 </div>
 
 <th:block th:replace="/admin/layout::script"></th:block>
+<script>
+	let tabs = document.querySelectorAll(".tab");
+	let pages = document.querySelectorAll(".page");
+	tabs.forEach((e, i) => {
+		let page = pages[i];
+		e.addEventListener('click', function () {
+			let activeTab = document.querySelector(".tab.active");
+			let actionPage = document.querySelector(".page.action");
+			activeTab.classList.remove("active");
+			actionPage.classList.remove("action");
+			
+			e.classList.add("active");
+			page.classList.add("action");
+		})
+	})
+</script>
 </body>
 </html>

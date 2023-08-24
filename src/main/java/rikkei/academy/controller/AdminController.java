@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import rikkei.academy.dto.response.OrderHasAccountDTO;
+import rikkei.academy.model.Orders;
 import rikkei.academy.model.Users;
 import rikkei.academy.service.*;
 
@@ -29,6 +31,10 @@ public class AdminController {
 	private AddressService addressService;
 	@Autowired
 	private HairService hairService;
+	@Autowired
+	private OrderService orderService;
+	@Autowired
+	private UserNoAccountService userNoAccountService;
 	
 	
 	@GetMapping
@@ -74,26 +80,35 @@ public class AdminController {
 	}
 	
 	@GetMapping("/service")
-	public String serviceManager(HttpSession session,Model model) {
+	public String serviceManager(HttpSession session, Model model) {
 		session.setAttribute("active_sidebar", "service");
 		
-		model.addAttribute("listService",typeService.findAll());
+		model.addAttribute("listService", typeService.findAll());
 		
 		return "admin/serviceManager";
 	}
 	
 	@GetMapping("/address")
-	public String addressManager(HttpSession session,Model model) {
+	public String addressManager(HttpSession session, Model model) {
 		session.setAttribute("active_sidebar", "address");
 		
-		model.addAttribute("listAddress",addressService.findAll());
+		model.addAttribute("listAddress", addressService.findAll());
 		
 		return "admin/addressManager";
 	}
 	
 	@GetMapping("/order")
-	public String orderManager(HttpSession session,Model model) {
-		session.setAttribute("active_sidebar","order");
+	public String orderManager(HttpSession session, Model model) {
+		session.setAttribute("active_sidebar", "order");
+		
+		List<OrderHasAccountDTO> list = new ArrayList<>();
+		for (Orders o : orderService.findAll()) {
+			list.add(new OrderHasAccountDTO(o.getId(), userService.findById(o.getIdUser()).getFullName(), userService.findById(o.getIdUser()).getPhone(), o.getAddress(), o.getType().getTypeName(), "Ngày: " + o.getDate() + " Giờ: " + o.getTime().getTime(), o.isStatus()));
+		}
+		
+		model.addAttribute("hasAccount", list);
+		model.addAttribute("noAccount", userNoAccountService.findAll());
+		
 		return "admin/orderManager";
 	}
 	

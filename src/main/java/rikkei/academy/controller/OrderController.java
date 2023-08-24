@@ -43,7 +43,6 @@ public class OrderController {
 													Model model, HttpSession session) {
 		Users user = (Users) session.getAttribute("data_user");
 		if (idBarber == null || idService == null || idCity == null || idTime == null) {
-			model.addAttribute("error", "Vui Lòng Lựa Chọn Đầy Đủ");
 			return "redirect:/order?phone=" + user.getPhone();
 		}
 		// format date
@@ -71,8 +70,8 @@ public class OrderController {
 		
 		Orders order = new Orders(0, user.getId(), barberService.findById(barber), typeService.findById(type), timeService.findById(time), String.valueOf(localDate), city, null, false);
 		orderService.save(order);
-		user.getOrders().add(order);
-		session.setAttribute("data_user", user);
+		Users newUser = userService.findById(user.getId());
+		session.setAttribute("data_user", newUser);
 		return "redirect:/history";
 	}
 	
@@ -121,8 +120,8 @@ public class OrderController {
 	public String handleDelete(@PathVariable("id") Long id, HttpSession session) {
 		orderService.delete(Integer.parseInt(String.valueOf(id)));
 		Users user = (Users) session.getAttribute("data_user");
-		Users users = userService.findById(user.getId());
-		session.setAttribute("data_user", users);
+		Users newUser = userService.findById(user.getId());
+		session.setAttribute("data_user", newUser);
 		return "redirect:/history";
 	}
 	
@@ -153,7 +152,6 @@ public class OrderController {
 											  Model model, HttpSession session) {
 		Users user = (Users) session.getAttribute("data_user");
 		if (idBarber == null || idService == null || idCity == null || idTime == null) {
-			model.addAttribute("error", "Vui Lòng Lựa Chọn Đầy Đủ");
 			return "redirect:/handleOrder/handleEdit/" + id;
 		}
 		// format date
