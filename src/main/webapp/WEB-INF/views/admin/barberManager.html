@@ -41,6 +41,7 @@
 								<th>#</th>
 								<th>Name</th>
 								<th>Avatar</th>
+								<th>Quantity</th>
 								<th>Status</th>
 								<th colspan="2">Actions</th>
 							</tr>
@@ -49,10 +50,12 @@
 							<tr th:each="barber,loop:${listBarber}">
 								<td th:text="${loop.count}"></td>
 								<td th:text="${barber.barberName}"></td>
-								<td><img th:src="@{|/img/barber/${barber.urlAvatar}|}" alt=""></td>
+								<td><img th:src="@{|/img/barber/${barber.urlBarber}|}" alt=""></td>
+								<td th:text="${barber.quantity}"></td>
 								<td th:text="${barber.status}?'Đang Làm Việc':'Đã Nghỉ Việc'"></td>
 								<td><a class="btn btn-danger" th:href="@{/handleAdmin/layoffBarber/{id}(id=${barber.id})}">Khóa</a></td>
-								<td><a class="btn btn-primary" th:href="@{/handleAdmin/inviteBarber/{id}(id=${barber.id})}">Mở Khóa</a></td>
+								<td><a class="btn btn-primary" th:href="@{/handleAdmin/inviteBarber/{id}(id=${barber.id})}">Mở Khóa</a>
+								</td>
 							</tr>
 							</tbody>
 						</table>

@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/layout/layout::head">
 </head>
+<body>
 <script
 				src="https://code.jquery.com/jquery-3.7.0.js"
 				integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
@@ -10,9 +11,10 @@
 <script>
 	
 	
+	
 	const handleLike = function (id, e) {
 		let heart = e.querySelector("i")
-		if (heart.style.color == "red") {
+		if (heart.style.color === "red") {
 			heart.style.color = "#fff"
 			deleteImage();
 		} else {
@@ -20,7 +22,7 @@
 			addImage();
 		}
 		$.ajax({
-			url: `http://localhost:8080/hair/like/${id}`,
+			url: `http://localhost:8081/hair/like/${id}`,
 			method: 'GET',
 			dataType: 'json',
 			headers: {
@@ -59,7 +61,6 @@
 	}
 
 </script>
-<body>
 <!-- link css hair style -->
 <link rel="stylesheet" href="/css/hairStyle.css">
 <style>

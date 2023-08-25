@@ -6,14 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import rikkei.academy.dto.response.BarberDTO;
 import rikkei.academy.dto.response.OrderHasAccountDTO;
-import rikkei.academy.model.Hair;
-import rikkei.academy.model.Orders;
-import rikkei.academy.model.Users;
+import rikkei.academy.model.*;
 import rikkei.academy.service.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -68,10 +68,34 @@ public class AdminController {
 	public String barberManager(HttpSession session, Model model) {
 		session.setAttribute("active_sidebar", "barber");
 		
-		model.addAttribute("listBarber", barberService.findAll());
+		List<BarberDTO> list = new ArrayList<>();
+		
+		for (Barbers b : barberService.findAll()) {
+			list.add(new BarberDTO(b.getId(), b.getBarberName(), b.getUrlAvatar(), getQuantityByIdBarber(b.getId()), b.isStatus()));
+		}
+		list.sort(Comparator.comparingInt(BarberDTO::getQuantity).reversed());
+		model.addAttribute("listBarber", list);
 		
 		return "admin/barberManager";
 	}
+	
+	public int getQuantityByIdBarber(int idBarber) {
+		int count = 0;
+		for (Orders o : orderService.findAll()) {
+			if (o.getBarber().getId() == idBarber) {
+				++count;
+			}
+		}
+		
+		for (UserNoAccount u : userNoAccountService.findAll()) {
+			if (u.getBarber().getId() == idBarber) {
+				++count;
+			}
+		}
+		
+		return count;
+	}
+	
 	
 	@GetMapping("/time")
 	public String timeManager(HttpSession session, Model model) {
@@ -114,7 +138,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/hair")
-	public String hairManager(HttpSession session,Model model) {
+	public String hairManager(HttpSession session, Model model) {
 		session.setAttribute("active_sidebar", "hair");
 		
 		List<Hair> hair1 = new ArrayList<>();
