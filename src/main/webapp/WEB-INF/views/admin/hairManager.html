@@ -3,6 +3,108 @@
 <head th:replace="/admin/layout::head">
 </head>
 <body>
+
+<style>
+	.card-body {
+		width: 1300px;
+		margin: 0 auto;
+	}
+	
+	.list-hair {
+		padding: 50px 0;
+		display: flex;
+		/* flex-wrap: wrap; */
+		gap: 20px;
+	}
+	
+	.row1,
+	.row2,
+	.row3,
+	.row4,
+	.row5 {
+		width: calc(100% / 5);
+	}
+	
+	.img_item {
+		width: 100%;
+		position: relative;
+		margin-bottom: 8px;
+	}
+	
+	.img_item img {
+		width: 100%;
+		display: block;
+		border-radius: 8px;
+	}
+	
+	.img_item .close {
+		transition: all 0.4s ease;
+		opacity: 0;
+		color: red;
+		font-size: 45px;
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.3);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 8px;
+	}
+	
+	.img_item .close:hover {
+		opacity: 1;
+	}
+	
+	a {
+		text-decoration: none;
+	}
+	
+	.flex-upload {
+		display: flex;
+		justify-content: center;
+	}
+	
+	.btn_upload {
+		width: 100px;
+		height: 50px;
+		border-radius: 8px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background-color: #0093E9;
+		background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+		color: #fff;
+	}
+	
+	/* input number  */
+	input[type="number"]::-webkit-inner-spin-button,
+	input[type="number"]::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		margin: 0;
+	}
+
+</style>
+
+<!-- Toastify -->
+<th:block th:replace="/layout/layout::toastify"></th:block>
+<!--<th:block th:if="${error_empty}=='Vui Lòng Chọn Đủ'">-->
+<!--	<script>-->
+<!--		Toastify({-->
+<!--			text: "Vui Lòng Chọn Đủ",-->
+<!--			gravity: 'top',-->
+<!--			position: 'left',-->
+<!--			duration: 3000,-->
+<!--			style: {-->
+<!--				background: "#FFFFFF",-->
+<!--				backgroundImage: "linear-gradient(225deg, #FFFFFF 0%, #6284FF 19%, #FF0000 53%)"-->
+<!--			}-->
+<!--		}).showToast();-->
+<!--	</script>-->
+<!--</th:block>-->
+
+
 <div class="wrapper">
 	<th:block th:replace="/admin/layout::sidebar"></th:block>
 	<div class="main">
@@ -11,24 +113,67 @@
 			<div class="container-fluid p-0">
 				<div class="card">
 					<div class="card-header">
-						<h3 class="card-title">Barber Manager</h3>
+						<h3 class="card-title">Hair Manager</h3>
 						<nav class="navbar navbar-expand-lg bg-light">
 							<div class="container-fluid">
 								<a class="navbar-brand" href="#">
-									<button type="button" class="btn btn-success">+ Create new Barber</button>
+									<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal">+
+										Create new Hair
+									</button>
 								</a>
 								<form class="d-flex" role="search">
-<!--									<input class="form-control me-2 fst-italic" type="search"-->
-<!--												 placeholder="Enter user's name... "-->
-<!--												 aria-label="Search">-->
-<!--									<button class="btn btn-outline-success" type="submit">Search</button>-->
+									<!--									<input class="form-control me-2 fst-italic" type="search"-->
+									<!--												 placeholder="Enter user's name... "-->
+									<!--												 aria-label="Search">-->
+									<!--									<button class="btn btn-outline-success" type="submit">Search</button>-->
 								</form>
 							</div>
 						</nav>
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body">
-					
+						<div class="list-hair">
+							<div class="row1">
+								<div class="img_item" th:each="h:${hair1}">
+									<img th:src="|/img/hairStyle/${h.url}|" alt="">
+									<a th:href="@{/handleUpload/deleteImg/{id}(id=${h.id})}">
+										<div class="close"><i class="fa-regular fa-circle-xmark"></i></div>
+									</a>
+								</div>
+							</div>
+							<div class="row2">
+								<div class="img_item" th:each="h:${hair2}">
+									<img th:src="|/img/hairStyle/${h.url}|" alt="">
+									<a th:href="@{/handleUpload/deleteImg/{id}(id=${h.id})}">
+										<div class="close"><i class="fa-regular fa-circle-xmark"></i></div>
+									</a>
+								</div>
+							</div>
+							<div class="row3">
+								<div class="img_item" th:each="h:${hair3}">
+									<img th:src="|/img/hairStyle/${h.url}|" alt="">
+									<a th:href="@{/handleUpload/deleteImg/{id}(id=${h.id})}">
+										<div class="close"><i class="fa-regular fa-circle-xmark"></i></div>
+									</a>
+								</div>
+							</div>
+							<div class="row4">
+								<div class="img_item" th:each="h:${hair4}">
+									<img th:src="|/img/hairStyle/${h.url}|" alt="">
+									<a th:href="@{/handleUpload/deleteImg/{id}(id=${h.id})}">
+										<div class="close"><i class="fa-regular fa-circle-xmark"></i></div>
+									</a>
+								</div>
+							</div>
+							<div class="row5">
+								<div class="img_item" th:each="h:${hair5}">
+									<img th:src="|/img/hairStyle/${h.url}|" alt="">
+									<a th:href="@{/handleUpload/deleteImg/{id}(id=${h.id})}">
+										<div class="close"><i class="fa-regular fa-circle-xmark"></i></div>
+									</a>
+								</div>
+							</div>
+						</div>
 					</div>
 					<!-- /.card-body -->
 				</div>
@@ -38,6 +183,32 @@
 		<th:block th:replace="/admin/layout::footer"></th:block>
 	</div>
 </div>
+
+<!-- Model hair -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<form th:action="@{/handleUpload/uploadHair}" method="post" enctype="multipart/form-data">
+					<div class="mb-3">
+						<label for="category_name" class="form-label">COLUMN</label>
+						<input type="number" placeholder="Nhập cột muốn thêm.. " name="column" class="form-control"
+									 id="category_name">
+						<p style=" text-align: center;color:  red "> Nhập cột từ 1 đến 5 </p>
+					</div>
+					<div class="flex-upload">
+						<label class="btn_upload" for="img"><i class="fa-solid fa-plus"></i></label>
+						<input style="display: none" type="file" name="image" id="img">
+					</div>
+					<div class="flex-upload">
+						<button class="btn btn-success m-5" type="submit">Upload</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <th:block th:replace="/admin/layout::script"></th:block>
 

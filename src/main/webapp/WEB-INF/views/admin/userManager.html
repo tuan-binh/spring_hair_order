@@ -48,8 +48,8 @@
 								<td th:text="${user.password}"></td>
 								<td th:text="${user.address}"></td>
 								<td th:text="${user.status}?'Hoạt Động':'Đã Khóa'"></td>
-								<td><a class="btn btn-danger" href="">Khóa</a></td>
-								<td><a class="btn btn-primary" href="">Mở Khóa</a></td>
+								<td><a class="btn btn-danger" th:href="@{/handleAdmin/block/{id}(id=${user.id})}">Khóa</a></td>
+								<td><a class="btn btn-primary" th:href="@{/handleAdmin/unlock/{id}(id=${user.id})}">Mở Khóa</a></td>
 							</tr>
 							</tbody>
 						</table>

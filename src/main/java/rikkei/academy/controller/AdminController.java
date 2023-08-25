@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import rikkei.academy.dto.response.OrderHasAccountDTO;
+import rikkei.academy.model.Hair;
 import rikkei.academy.model.Orders;
 import rikkei.academy.model.Users;
 import rikkei.academy.service.*;
@@ -113,8 +114,37 @@ public class AdminController {
 	}
 	
 	@GetMapping("/hair")
-	public String hairManager(HttpSession session) {
+	public String hairManager(HttpSession session,Model model) {
 		session.setAttribute("active_sidebar", "hair");
+		
+		List<Hair> hair1 = new ArrayList<>();
+		List<Hair> hair2 = new ArrayList<>();
+		List<Hair> hair3 = new ArrayList<>();
+		List<Hair> hair4 = new ArrayList<>();
+		List<Hair> hair5 = new ArrayList<>();
+		for (Hair h : hairService.findAll()) {
+			if (h.getRow() == 1) {
+				hair1.add(h);
+			}
+			if (h.getRow() == 2) {
+				hair2.add(h);
+			}
+			if (h.getRow() == 3) {
+				hair3.add(h);
+			}
+			if (h.getRow() == 4) {
+				hair4.add(h);
+			}
+			if (h.getRow() == 5) {
+				hair5.add(h);
+			}
+		}
+		model.addAttribute("hair1", hair1);
+		model.addAttribute("hair2", hair2);
+		model.addAttribute("hair3", hair3);
+		model.addAttribute("hair4", hair4);
+		model.addAttribute("hair5", hair5);
+		
 		return "admin/hairManager";
 	}
 	

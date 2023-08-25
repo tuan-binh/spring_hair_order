@@ -51,8 +51,8 @@
 								<td th:text="${barber.barberName}"></td>
 								<td><img th:src="@{|/img/barber/${barber.urlAvatar}|}" alt=""></td>
 								<td th:text="${barber.status}?'Đang Làm Việc':'Đã Nghỉ Việc'"></td>
-								<td><a class="btn btn-danger" href="">Khóa</a></td>
-								<td><a class="btn btn-primary" href="">Mở Khóa</a></td>
+								<td><a class="btn btn-danger" th:href="@{/handleAdmin/layoffBarber/{id}(id=${barber.id})}">Khóa</a></td>
+								<td><a class="btn btn-primary" th:href="@{/handleAdmin/inviteBarber/{id}(id=${barber.id})}">Mở Khóa</a></td>
 							</tr>
 							</tbody>
 						</table>
@@ -78,6 +78,31 @@
 		<th:block th:replace="/admin/layout::footer"></th:block>
 	</div>
 </div>
+
+<!-- Model hair -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<form th:action="@{/handleUpload/uploadBarber}" method="post" enctype="multipart/form-data">
+					<div class="mb-3">
+						<label for="category_name" class="form-label">Barber Name: </label>
+						<input type="number" placeholder="Nhập cột muốn thêm.. " name="name" class="form-control"
+									 id="category_name">
+					</div>
+					<div class="flex-upload">
+						<label class="btn_upload" for="img"><i class="fa-solid fa-plus"></i></label>
+						<input style="display: none" type="file" name="image" id="img">
+					</div>
+					<div class="flex-upload">
+						<button class="btn btn-success m-5" type="submit">Upload</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 <th:block th:replace="/admin/layout::script"></th:block>
 

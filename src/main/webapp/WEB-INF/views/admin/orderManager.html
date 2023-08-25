@@ -64,7 +64,8 @@
 									<td th:text="${user.address}"></td>
 									<td th:text="${user.service}"></td>
 									<td th:text="${user.time}"></td>
-									<td><a class="btn btn-success" href="">Xác Nhận</a></td>
+									<td th:if="!${user.status}"><a class="btn btn-success" th:href="@{/handleAdmin/confirmHasAccount/{id}(id=${user.id})}">Xác Nhận</a></td>
+									<td th:unless="!${user.status}"></td>
 									<td th:text="${user.status}?'Đã Hoàn Thành':'Đang Xử Lý'"></td>
 								</tr>
 								</tbody>
@@ -90,7 +91,8 @@
 									<td th:text="${user.address}"></td>
 									<td th:text="${user.type.typeName}"></td>
 									<td th:text="|Ngày: ${user.date} Giờ: ${user.time.time}|"></td>
-									<td><a class="btn btn-success" href="">Xác Nhận</a></td>
+									<td th:if="!${user.status}"><a class="btn btn-success" th:href="@{/handleAdmin/confirmNoAccount/{id}(id=${user.id})}">Xác Nhận</a></td>
+									<td th:unless="!${user.status}"></td>
 									<td th:text="${user.status}?'Đã Hoàn Thành':'Đang Xử Lý'"></td>
 								</tr>
 								</tbody>

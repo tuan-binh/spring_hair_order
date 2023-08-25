@@ -62,7 +62,7 @@ public class OrderController {
 		int time = Integer.parseInt(String.valueOf(idTime));
 		int type = Integer.parseInt(String.valueOf(idService));
 		String city = addressService.findById(cityId).getAddress();
-		boolean check = checkTimeAndBarber(city, time, barber);
+		boolean check = checkTimeAndBarber(city, localDate,time, barber);
 		
 		if (!check) {
 			return "redirect:/order?phone=" + user.getPhone();
@@ -104,7 +104,7 @@ public class OrderController {
 		int time = Integer.parseInt(String.valueOf(idTime));
 		int type = Integer.parseInt(String.valueOf(idService));
 		String city = addressService.findById(cityId).getAddress();
-		boolean check = checkTimeAndBarber(city, time, barber);
+		boolean check = checkTimeAndBarber(city,localDate, time, barber);
 		
 		if (!check) {
 			return "redirect:/order?phone=" + phone;
@@ -187,7 +187,7 @@ public class OrderController {
 			return "redirect:/history";
 		}
 		
-		boolean check = checkTimeAndBarber(city, time, barber);
+		boolean check = checkTimeAndBarber(city, localDate, time, barber);
 		if (!check) {
 			return "redirect:/handleOrder/handleEdit/" + id;
 		}
@@ -200,14 +200,19 @@ public class OrderController {
 	}
 	
 	
-	public boolean checkTimeAndBarber(String city, int idTime, int idBarber) {
+	public boolean checkTimeAndBarber(String city, LocalDate localDate, int idTime, int idBarber) {
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		boolean check = true;
 		for (Orders o : orderService.findAll()) {
 			if (o.getBarber().getId() == idBarber) {
-				if (o.getTime().getId() == idTime) {
-					if (o.getAddress().equals(city)) {
-						if (!o.isStatus()) {
-							check = false;
+				LocalDate myDate = LocalDate.parse(o.getDate(), formatter);
+				if (myDate.isEqual(localDate)) {
+					if (o.getTime().getId() == idTime) {
+						if (o.getAddress().equals(city)) {
+							if (!o.isStatus()) {
+								check = false;
+							}
 						}
 					}
 				}
@@ -216,9 +221,14 @@ public class OrderController {
 		
 		for (UserNoAccount u : userNoAccountService.findAll()) {
 			if (u.getBarber().getId() == idBarber) {
-				if (u.getTime().getId() == idTime) {
-					if (u.getAddress().equals(city)) {
-						check = false;
+				LocalDate myDate = LocalDate.parse(u.getDate(), formatter);
+				if (myDate.isEqual(localDate)) {
+					if (u.getTime().getId() == idTime) {
+						if (u.getAddress().equals(city)) {
+							if (!u.isStatus()) {
+								check = false;
+							}
+						}
 					}
 				}
 			}

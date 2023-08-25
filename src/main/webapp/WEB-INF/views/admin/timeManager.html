@@ -15,7 +15,7 @@
 						<nav class="navbar navbar-expand-lg bg-light">
 							<div class="container-fluid">
 								<a class="navbar-brand" href="#">
-									<button type="button" class="btn btn-success">+ Create new Time</button>
+									<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addModal">+ Create new Time</button>
 								</a>
 								<form class="d-flex" role="search">
 									<input class="form-control me-2 fst-italic" type="search"
@@ -42,8 +42,8 @@
 								<td th:text="${loop.count}"></td>
 								<td th:text="${time.time}"></td>
 								<td th:text="${time.status}?'Hiển thị':'Không hiển thị'"></td>
-								<td><a class="btn btn-danger" href="">Khóa</a></td>
-								<td><a class="btn btn-primary" href="">Mở Khóa</a></td>
+								<td><a class="btn btn-danger" th:href="@{/handleAdmin/blockTime/{id}(id=${time.id})}">Khóa</a></td>
+								<td><a class="btn btn-primary" th:href="@{/handleAdmin/unlockTime/{id}(id=${time.id})}">Mở Khóa</a></td>
 							</tr>
 							</tbody>
 						</table>
@@ -67,6 +67,26 @@
 			</div>
 		</main>
 		<th:block th:replace="/admin/layout::footer"></th:block>
+	</div>
+</div>
+
+<!-- Model hair -->
+<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<form th:action="@{/handleUpload/uploadTime}" method="post" enctype="multipart/form-data">
+					<div class="mb-3">
+						<label for="category_name" class="form-label">Time: </label>
+						<input type="text" placeholder="Nhập Khoảng Thời Gian ... " name="time" class="form-control"
+									 id="category_name">
+					</div>
+					<div class="flex-upload">
+						<button class="btn btn-success m-5" type="submit">Upload</button>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
 </div>
 
