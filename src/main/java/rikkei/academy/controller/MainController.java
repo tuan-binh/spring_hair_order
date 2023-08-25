@@ -26,6 +26,8 @@ import java.util.List;
 public class MainController {
 	
 	@Autowired
+	private UserService userService;
+	@Autowired
 	private HairService hairService;
 	@Autowired
 	private AddressService addressService;
@@ -127,8 +129,8 @@ public class MainController {
 	}
 	
 	@GetMapping("/information")
-	public String information(Model model,HttpSession session) {
-		if(session.getAttribute("data_user") != null) {
+	public String information(Model model, HttpSession session) {
+		if (session.getAttribute("data_user") == null) {
 			return "user/index";
 		}
 		model.addAttribute("address", addressService.findAll());
@@ -137,7 +139,7 @@ public class MainController {
 	
 	@GetMapping("/favourite")
 	public String favourite(HttpSession session) {
-		if(session.getAttribute("data_user") != null) {
+		if (session.getAttribute("data_user") == null) {
 			return "user/index";
 		}
 		return "user/favourite";
@@ -145,14 +147,15 @@ public class MainController {
 	
 	@GetMapping("/history")
 	public String history(HttpSession session, Model model) {
-		if(session.getAttribute("data_user") != null) {
+		if (session.getAttribute("data_user") == null) {
 			return "user/index";
 		}
 		
 		Users user = (Users) session.getAttribute("data_user");
 		List<Orders> pending = new ArrayList<>();
 		List<Orders> fulfilled = new ArrayList<>();
-		for (Orders o : user.getOrders()) {
+		List<Orders> list = userService.findById(user.getId()).getOrders();
+		for (Orders o : list) {
 			if (!o.isStatus()) {
 				pending.add(o);
 			} else {

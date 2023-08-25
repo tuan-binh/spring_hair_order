@@ -79,9 +79,10 @@ public class OrderDAO implements IBaseDAO<Orders, Integer> {
 			ResultSet rs = callSt.executeQuery();
 			while (rs.next()) {
 				int id = rs.getInt("id_review");
+				int idO = rs.getInt("id_order");
 				String comment = rs.getString("comment");
 				int rate = rs.getInt("rate");
-				review = new Reviews(id, comment, rate);
+				review = new Reviews(id,idO, comment, rate);
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -140,6 +141,7 @@ public class OrderDAO implements IBaseDAO<Orders, Integer> {
 			}
 		}
 	}
+	
 	
 	@Override
 	public void delete(Integer id) {

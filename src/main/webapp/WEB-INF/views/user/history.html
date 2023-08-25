@@ -7,10 +7,24 @@
 <link rel="stylesheet" href="/css/order.css">
 <!-- link css history -->
 <link rel="stylesheet" href="/css/history.css">
+
 <th:block th:replace="/layout/layout::toastify"></th:block>
 
 <!-- header -->
 <header th:replace="/layout/layout::header"></header>
+<script
+				src="https://code.jquery.com/jquery-3.7.0.js"
+				integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+				crossorigin="anonymous">
+</script>
+<script>
+	
+	function handleRateOrder(id) {
+		console.log("ID: ", id)
+		$("#id-order").val(id)
+	}
+
+</script>
 
 <!-- main history -->
 <main>
@@ -89,10 +103,35 @@
 							<td th:text="|Ngày: ${item.date}  Giờ: ${item.time.time}|"></td>
 							<td>
 								<th:block th:if="${item.reviews}!=null">
-									<p><i class="fa-solid fa-circle-check"></i> Đã Đánh Giá</p>
+									<p style="color: #f1c40f" th:switch="${item.reviews.rate}">
+										<th:block th:case="1"><i class="fa-solid fa-star"></i></th:block>
+										<th:block th:case="2">
+											<i class="fa-solid fa-star"></i>
+											<i class="fa-solid fa-star"></i>
+										</th:block>
+										<th:block th:case="3">
+											<i class="fa-solid fa-star"></i>
+											<i class="fa-solid fa-star"></i>
+											<i class="fa-solid fa-star"></i>
+										</th:block>
+										<th:block th:case="4">
+											<i class="fa-solid fa-star"></i>
+											<i class="fa-solid fa-star"></i>
+											<i class="fa-solid fa-star"></i>
+											<i class="fa-solid fa-star"></i>
+										</th:block>
+										<th:block th:case="5">
+											<i class="fa-solid fa-star"></i>
+											<i class="fa-solid fa-star"></i>
+											<i class="fa-solid fa-star"></i>
+											<i class="fa-solid fa-star"></i>
+											<i class="fa-solid fa-star"></i>
+										</th:block>
+									</p>
 								</th:block>
 								<th:block th:unless="${item.reviews}!=null">
-									<button data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" class="btn btn-success">
+									<button th:onclick="|handleRateOrder(${item.id})|" data-bs-toggle="modal"
+													data-bs-target="#exampleModal" type="button" class="btn btn-success">
 										Đánh Giá
 									</button>
 								</th:block>
@@ -113,25 +152,59 @@
 </main>
 
 <!-- Modal -->
-<!--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--	<div class="modal-dialog">-->
-<!--		<div class="modal-content">-->
-<!--			<div class="modal-body form-container">-->
-<!--				<div class="form">-->
-<!--					<span class="heading">Get in touch</span>-->
-<!--					<input placeholder="Email" id="mail" type="email" class="input">-->
-<!--					<textarea placeholder="Say Hello" rows="10" cols="30" id="message" name="message" class="textarea"></textarea>-->
-<!--					<div class="button-container">-->
-<!--						<div class="send-button">Send</div>-->
-<!--						<div class="reset-button-container">-->
-<!--							<div id="reset-btn" class="reset-button">Reset</div>-->
-<!--						</div>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
-<!--</div>-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content" style="margin-top:300px !important">
+			<div class="modal-body form-container">
+				<form th:action="@{/handleReviews/review}" method="post">
+					<input type="hidden" id="id-order" name="idOrder"/>
+					<div class="rating">
+						<input type="radio" id="1" name="star" value="5">
+						<label for="1">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path pathLength="360"
+											d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
+							</svg>
+						</label>
+						<input type="radio" id="2" name="star" value="4">
+						<label for="2">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path pathLength="360"
+											d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
+							</svg>
+						</label>
+						<input type="radio" id="3" name="star" value="3">
+						<label for="3">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path pathLength="360"
+											d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
+							</svg>
+						</label>
+						<input type="radio" id="4" name="star" value="2">
+						<label for="4">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path pathLength="360"
+											d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
+							</svg>
+						</label>
+						<input type="radio" id="5" name="star" value="1">
+						<label for="5">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+								<path pathLength="360"
+											d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"></path>
+							</svg>
+						</label>
+					</div>
+					<div class="button-container">
+						<div class="reset-button-container">
+							<button type="submit" style="width: 100%;" id="reset-btn" class="reset-button">Send</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
 
 <!-- footer -->
 <footer th:replace="/layout/layout::footer"></footer>
