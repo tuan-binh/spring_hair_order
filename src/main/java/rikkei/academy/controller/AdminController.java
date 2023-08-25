@@ -50,6 +50,10 @@ public class AdminController {
 	
 	@GetMapping("/user")
 	public String userManager(HttpSession session, Model model) {
+		Users user = (Users) session.getAttribute("data_admin");
+		if (user == null) {
+			return "redirect:/login";
+		}
 		session.setAttribute("active_sidebar", "user");
 		
 		List<Users> users = new ArrayList<>();
@@ -66,6 +70,10 @@ public class AdminController {
 	
 	@GetMapping("/barber")
 	public String barberManager(HttpSession session, Model model) {
+		Users user = (Users) session.getAttribute("data_admin");
+		if (user == null) {
+			return "redirect:/login";
+		}
 		session.setAttribute("active_sidebar", "barber");
 		
 		List<BarberDTO> list = new ArrayList<>();
@@ -99,6 +107,10 @@ public class AdminController {
 	
 	@GetMapping("/time")
 	public String timeManager(HttpSession session, Model model) {
+		Users user = (Users) session.getAttribute("data_admin");
+		if (user == null) {
+			return "redirect:/login";
+		}
 		session.setAttribute("active_sidebar", "time");
 		model.addAttribute("listTime", timeService.findAll());
 		return "admin/timeManager";
@@ -106,6 +118,10 @@ public class AdminController {
 	
 	@GetMapping("/service")
 	public String serviceManager(HttpSession session, Model model) {
+		Users user = (Users) session.getAttribute("data_admin");
+		if (user == null) {
+			return "redirect:/login";
+		}
 		session.setAttribute("active_sidebar", "service");
 		
 		model.addAttribute("listService", typeService.findAll());
@@ -115,6 +131,10 @@ public class AdminController {
 	
 	@GetMapping("/address")
 	public String addressManager(HttpSession session, Model model) {
+		Users user = (Users) session.getAttribute("data_admin");
+		if (user == null) {
+			return "redirect:/login";
+		}
 		session.setAttribute("active_sidebar", "address");
 		
 		model.addAttribute("listAddress", addressService.findAll());
@@ -124,6 +144,10 @@ public class AdminController {
 	
 	@GetMapping("/order")
 	public String orderManager(HttpSession session, Model model) {
+		Users user = (Users) session.getAttribute("data_admin");
+		if (user == null) {
+			return "redirect:/login";
+		}
 		session.setAttribute("active_sidebar", "order");
 		
 		List<OrderHasAccountDTO> list = new ArrayList<>();
@@ -139,6 +163,10 @@ public class AdminController {
 	
 	@GetMapping("/hair")
 	public String hairManager(HttpSession session, Model model) {
+		Users user = (Users) session.getAttribute("data_admin");
+		if (user == null) {
+			return "redirect:/login";
+		}
 		session.setAttribute("active_sidebar", "hair");
 		
 		List<Hair> hair1 = new ArrayList<>();
@@ -174,6 +202,10 @@ public class AdminController {
 	
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
+		Users user = (Users) session.getAttribute("data_admin");
+		if (user == null) {
+			return "redirect:/login";
+		}
 		session.removeAttribute("data_admin");
 		return "user/index";
 	}

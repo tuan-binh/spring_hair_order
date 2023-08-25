@@ -53,11 +53,6 @@ public class MainController {
 		return "user/login";
 	}
 	
-	@GetMapping("/index")
-	public String index() {
-		return "user/index";
-	}
-	
 	@GetMapping("/service")
 	public String service() {
 		return "user/service";
@@ -115,7 +110,9 @@ public class MainController {
 	
 	@GetMapping("/order")
 	public String order(@RequestParam("phone") String phone, Model model) {
-		
+		if (phone == null) {
+			return "user/order";
+		}
 		
 		model.addAttribute("phone", phone);
 		LocalDate curr = LocalDate.now();
@@ -130,18 +127,28 @@ public class MainController {
 	}
 	
 	@GetMapping("/information")
-	public String information(Model model) {
+	public String information(Model model,HttpSession session) {
+		if(session.getAttribute("data_user") != null) {
+			return "user/index";
+		}
 		model.addAttribute("address", addressService.findAll());
 		return "user/information";
 	}
 	
 	@GetMapping("/favourite")
-	public String favourite() {
+	public String favourite(HttpSession session) {
+		if(session.getAttribute("data_user") != null) {
+			return "user/index";
+		}
 		return "user/favourite";
 	}
 	
 	@GetMapping("/history")
 	public String history(HttpSession session, Model model) {
+		if(session.getAttribute("data_user") != null) {
+			return "user/index";
+		}
+		
 		Users user = (Users) session.getAttribute("data_user");
 		List<Orders> pending = new ArrayList<>();
 		List<Orders> fulfilled = new ArrayList<>();
