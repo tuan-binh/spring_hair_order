@@ -49,7 +49,7 @@
 			<form th:action="@{/order}" method="get" class="order">
 				<th:block th:if="${#ctx.session.data_user}!=null">
 					<input type="number" name="phone" placeholder="Nhập vào SĐT để đặt lịch"
-								 th:value="${session.data_user.phone}"/>
+								 th:value="${session.data_user.phone}" readonly />
 				</th:block>
 				<th:block th:unless="${#ctx.session.data_user}!=null">
 					<input type="number" name="phone" placeholder="Nhập vào SĐT để đặt lịch" required/>

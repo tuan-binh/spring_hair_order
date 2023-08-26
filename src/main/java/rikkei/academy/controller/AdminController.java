@@ -42,7 +42,7 @@ public class AdminController {
 	public String dashboard(HttpSession session) {
 		Users user = (Users) session.getAttribute("data_admin");
 		if (user == null) {
-			return "redirect:/login";
+			return "user/login";
 		}
 		session.setAttribute("active_sidebar", "home");
 		return "admin/index";
@@ -52,7 +52,7 @@ public class AdminController {
 	public String userManager(HttpSession session, Model model) {
 		Users user = (Users) session.getAttribute("data_admin");
 		if (user == null) {
-			return "redirect:/login";
+			return "user/login";
 		}
 		session.setAttribute("active_sidebar", "user");
 		
@@ -72,7 +72,7 @@ public class AdminController {
 	public String barberManager(HttpSession session, Model model) {
 		Users user = (Users) session.getAttribute("data_admin");
 		if (user == null) {
-			return "redirect:/login";
+			return "user/login";
 		}
 		session.setAttribute("active_sidebar", "barber");
 		
@@ -109,7 +109,7 @@ public class AdminController {
 	public String timeManager(HttpSession session, Model model) {
 		Users user = (Users) session.getAttribute("data_admin");
 		if (user == null) {
-			return "redirect:/login";
+			return "user/login";
 		}
 		session.setAttribute("active_sidebar", "time");
 		model.addAttribute("listTime", timeService.findAll());
@@ -120,7 +120,7 @@ public class AdminController {
 	public String serviceManager(HttpSession session, Model model) {
 		Users user = (Users) session.getAttribute("data_admin");
 		if (user == null) {
-			return "redirect:/login";
+			return "user/login";
 		}
 		session.setAttribute("active_sidebar", "service");
 		
@@ -133,7 +133,7 @@ public class AdminController {
 	public String addressManager(HttpSession session, Model model) {
 		Users user = (Users) session.getAttribute("data_admin");
 		if (user == null) {
-			return "redirect:/login";
+			return "user/login";
 		}
 		session.setAttribute("active_sidebar", "address");
 		
@@ -146,7 +146,7 @@ public class AdminController {
 	public String orderManager(HttpSession session, Model model) {
 		Users user = (Users) session.getAttribute("data_admin");
 		if (user == null) {
-			return "redirect:/login";
+			return "user/login";
 		}
 		session.setAttribute("active_sidebar", "order");
 		
@@ -165,7 +165,7 @@ public class AdminController {
 	public String hairManager(HttpSession session, Model model) {
 		Users user = (Users) session.getAttribute("data_admin");
 		if (user == null) {
-			return "redirect:/login";
+			return "user/login";
 		}
 		session.setAttribute("active_sidebar", "hair");
 		
@@ -204,7 +204,7 @@ public class AdminController {
 	public String logout(HttpSession session) {
 		Users user = (Users) session.getAttribute("data_admin");
 		if (user == null) {
-			return "redirect:/login";
+			return "user/login";
 		}
 		session.removeAttribute("data_admin");
 		return "user/index";

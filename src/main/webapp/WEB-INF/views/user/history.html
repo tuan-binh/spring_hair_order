@@ -104,7 +104,9 @@
 							<td>
 								<th:block th:if="${item.reviews}!=null">
 									<p style="color: #f1c40f" th:switch="${item.reviews.rate}">
-										<th:block th:case="1"><i class="fa-solid fa-star"></i></th:block>
+										<th:block th:case="1">
+											<i class="fa-solid fa-star"></i>
+										</th:block>
 										<th:block th:case="2">
 											<i class="fa-solid fa-star"></i>
 											<i class="fa-solid fa-star"></i>
