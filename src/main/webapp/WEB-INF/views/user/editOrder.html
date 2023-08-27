@@ -6,6 +6,50 @@
 <!--&lt;!&ndash; link css order &ndash;&gt;-->
 <link rel="stylesheet" href="/css/order.css">
 <th:block th:replace="/layout/layout::toastify"></th:block>
+
+<th:block th:if="${session.error_order}=='Vui Lòng Nhập Đầy Đủ Thông Tin'">
+	<script>
+		Toastify({
+			text: "Vui Lòng Nhập Đầy Đủ Thông Tin",
+			gravity: 'top',
+			position: 'center',
+			duration: 3000,
+			style: {
+				background: "#FFFFFF",
+				backgroundImage: "linear-gradient(225deg, #FFFFFF 0%, #6284FF 19%, #FF0000 53%)"
+			}
+		}).showToast();
+	</script>
+</th:block>
+<th:block th:if="${session.error_order}=='Bạn Chọn Lịch Sai Rồi'">
+	<script>
+		Toastify({
+			text: "Bạn Chọn Lịch Sai Rồi",
+			gravity: 'top',
+			position: 'center',
+			duration: 3000,
+			style: {
+				background: "#FFFFFF",
+				backgroundImage: "linear-gradient(225deg, #FFFFFF 0%, #6284FF 19%, #FF0000 53%)"
+			}
+		}).showToast();
+	</script>
+</th:block>
+<th:block th:if="${session.error_order}=='Lịch Đã Bị Trùng Rồi'">
+	<script>
+		Toastify({
+			text: "Lịch Đã Bị Trùng Rồi",
+			gravity: 'top',
+			position: 'center',
+			duration: 3000,
+			style: {
+				background: "#FFFFFF",
+				backgroundImage: "linear-gradient(225deg, #FFFFFF 0%, #6284FF 19%, #FF0000 53%)"
+			}
+		}).showToast();
+	</script>
+</th:block>
+
 <!-- header -->
 <header th:replace="/layout/layout::header"></header>
 

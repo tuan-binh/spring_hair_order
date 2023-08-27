@@ -10,6 +10,28 @@
 
 <th:block th:replace="/layout/layout::toastify"></th:block>
 
+<th:block th:if="${session.delete_success}=='Hủy Kèo Thành Công'">
+	<script>
+		Toastify({
+			text: "Hủy Kèo Thành Công",
+			gravity: 'top',
+			position: 'center',
+			duration: 3000,
+		}).showToast();
+	</script>
+</th:block>
+<th:block th:if="${session.review_success}=='Đánh Giá Thành Công'">
+	<script>
+		Toastify({
+			text: "Đánh Giá Thành Công",
+			gravity: 'top',
+			position: 'center',
+			duration: 3000,
+		}).showToast();
+	</script>
+</th:block>
+
+
 <!-- header -->
 <header th:replace="/layout/layout::header"></header>
 <script

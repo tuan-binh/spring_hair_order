@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import rikkei.academy.model.Orders;
+import rikkei.academy.model.Type;
 import rikkei.academy.model.UserNoAccount;
 import rikkei.academy.model.Users;
 import rikkei.academy.service.*;
@@ -43,6 +44,7 @@ public class OrderController {
 													Model model, HttpSession session) {
 		Users user = (Users) session.getAttribute("data_user");
 		if (idBarber == null || idService == null || idCity == null || idTime == null) {
+			session.setAttribute("error_order","Vui Lòng Nhập Đầy Đủ Thông Tin");
 			return "redirect:/order?phone=" + user.getPhone();
 		}
 		// format date
@@ -54,6 +56,7 @@ public class OrderController {
 		//	System.out.println(now.isAfter(localDate));
 		// check date
 		if (localDate.isBefore(now)) {
+			session.setAttribute("error_order","Bạn Chọn Lịch Sai Rồi");
 			return "redirect:/order?phone=" + user.getPhone();
 		}
 		
@@ -62,9 +65,10 @@ public class OrderController {
 		int time = Integer.parseInt(String.valueOf(idTime));
 		int type = Integer.parseInt(String.valueOf(idService));
 		String city = addressService.findById(cityId).getAddress();
-		boolean check = checkTimeAndBarber(city, localDate,time, barber);
+		boolean check = checkTimeAndBarber(city, localDate,type,time, barber);
 		
 		if (!check) {
+			session.setAttribute("error_order","Lịch Đã Bị Trùng Rồi");
 			return "redirect:/order?phone=" + user.getPhone();
 		}
 		
@@ -82,9 +86,9 @@ public class OrderController {
 												  @RequestParam(value = "timeOrder", defaultValue = "") Long idTime,
 												  @RequestParam(value = "yourBarber", defaultValue = "") Long idBarber,
 												  @RequestParam("phone") String phone,
-												  Model model) {
+												  Model model,HttpSession session) {
 		if (idBarber == null || idService == null || idCity == null || idTime == null) {
-			model.addAttribute("error", "Vui Lòng Lựa Chọn Đầy Đủ");
+			session.setAttribute("error_order","Vui Lòng Nhập Đầy Đủ Thông Tin");
 			return "redirect:/order?phone=" + phone;
 		}
 		// format date
@@ -96,6 +100,7 @@ public class OrderController {
 		//	System.out.println(now.isAfter(localDate));
 		// check date
 		if (localDate.isBefore(now)) {
+			session.setAttribute("error_order","Bạn Chọn Lịch Sai Rồi");
 			return "redirect:/order?phone=" + phone;
 		}
 		
@@ -104,9 +109,10 @@ public class OrderController {
 		int time = Integer.parseInt(String.valueOf(idTime));
 		int type = Integer.parseInt(String.valueOf(idService));
 		String city = addressService.findById(cityId).getAddress();
-		boolean check = checkTimeAndBarber(city,localDate, time, barber);
+		boolean check = checkTimeAndBarber(city,localDate,type, time, barber);
 		
 		if (!check) {
+			session.setAttribute("error_order","Lịch Đã Bị Trùng Rồi");
 			return "redirect:/order?phone=" + phone;
 		}
 		
@@ -121,6 +127,7 @@ public class OrderController {
 		orderService.delete(Integer.parseInt(String.valueOf(id)));
 		Users user = (Users) session.getAttribute("data_user");
 		Users newUser = userService.findById(user.getId());
+		session.setAttribute("delete_success","Hủy Kèo Thành Công");
 		session.setAttribute("data_user", newUser);
 		return "redirect:/history";
 	}
@@ -152,6 +159,7 @@ public class OrderController {
 											  Model model, HttpSession session) {
 		Users user = (Users) session.getAttribute("data_user");
 		if (idBarber == null || idService == null || idCity == null || idTime == null) {
+			session.setAttribute("error_order","Vui Lòng Nhập Đầy Đủ Thông Tin");
 			return "redirect:/handleOrder/handleEdit/" + id;
 		}
 		// format date
@@ -163,6 +171,7 @@ public class OrderController {
 		//	System.out.println(now.isAfter(localDate));
 		// check date
 		if (localDate.isBefore(now)) {
+			session.setAttribute("error_order","Bạn Chọn Lịch Sai Rồi");
 			return "redirect:/handleOrder/handleEdit/" + id;
 		}
 		int myId = Integer.parseInt(String.valueOf(id));
@@ -187,8 +196,9 @@ public class OrderController {
 			return "redirect:/history";
 		}
 		
-		boolean check = checkTimeAndBarber(city, localDate, time, barber);
+		boolean check = checkTimeAndBarber(city, localDate,type, time, barber);
 		if (!check) {
+			session.setAttribute("error_order","Lịch Đã Bị Trùng Rồi");
 			return "redirect:/handleOrder/handleEdit/" + id;
 		}
 		
@@ -200,7 +210,7 @@ public class OrderController {
 	}
 	
 	
-	public boolean checkTimeAndBarber(String city, LocalDate localDate, int idTime, int idBarber) {
+	public boolean checkTimeAndBarber(String city, LocalDate localDate,int type, int idTime, int idBarber) {
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		boolean check = true;
@@ -208,10 +218,12 @@ public class OrderController {
 			if (o.getBarber().getId() == idBarber) {
 				LocalDate myDate = LocalDate.parse(o.getDate(), formatter);
 				if (myDate.isEqual(localDate)) {
-					if (o.getTime().getId() == idTime) {
-						if (o.getAddress().equals(city)) {
-							if (!o.isStatus()) {
-								check = false;
+					if(o.getType().getId() == type) {
+						if (o.getTime().getId() == idTime) {
+							if (o.getAddress().equals(city)) {
+								if (!o.isStatus()) {
+									check = false;
+								}
 							}
 						}
 					}
@@ -223,10 +235,12 @@ public class OrderController {
 			if (u.getBarber().getId() == idBarber) {
 				LocalDate myDate = LocalDate.parse(u.getDate(), formatter);
 				if (myDate.isEqual(localDate)) {
-					if (u.getTime().getId() == idTime) {
-						if (u.getAddress().equals(city)) {
-							if (!u.isStatus()) {
-								check = false;
+					if(u.getType().getId() == type) {
+						if (u.getTime().getId() == idTime) {
+							if (u.getAddress().equals(city)) {
+								if (!u.isStatus()) {
+									check = false;
+								}
 							}
 						}
 					}
