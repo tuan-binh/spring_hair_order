@@ -64,6 +64,10 @@ public class UserController {
 	
 	@PostMapping("/handleRegister")
 	public String handleRegister(@ModelAttribute("dataRegister") UserRegisterDTO userRegisterDTO, Model model) {
+		if(userRegisterDTO.getPhone().length() != 11) {
+			model.addAttribute("message_error","Số Điện Thoại Không Đúng Định Dạng");
+			return "user/register";
+		}
 		if (!userService.checkExistPhone(userRegisterDTO.getPhone())) {
 			model.addAttribute("message_error", "phone");
 			return "user/register";

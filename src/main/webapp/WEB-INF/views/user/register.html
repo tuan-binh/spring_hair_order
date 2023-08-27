@@ -101,6 +101,20 @@
 			}).showToast();
 		</script>
 	</th:block>
+	<th:block th:case="'Số Điện Thoại Không Đúng Định Dạng'">
+		<script>
+			Toastify({
+				text: "Số Điện Thoại Không Đúng Định Dạng",
+				gravity: 'top',
+				position: 'center',
+				duration: 3000,
+				style: {
+					background: "#0093E9",
+					backgroundImage: "linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)"
+				}
+			}).showToast();
+		</script>
+	</th:block>
 </th:block>
 
 
