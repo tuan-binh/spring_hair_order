@@ -13,7 +13,9 @@ import rikkei.academy.service.*;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 @Controller
 @RequestMapping("/handleOrder")
@@ -44,9 +46,19 @@ public class OrderController {
 													Model model, HttpSession session) {
 		Users user = (Users) session.getAttribute("data_user");
 		if (idBarber == null || idService == null || idCity == null || idTime == null) {
-			session.setAttribute("error_order","Vui Lòng Nhập Đầy Đủ Thông Tin");
-			return "redirect:/order?phone=" + user.getPhone();
+			model.addAttribute("phone", user.getPhone());
+			LocalDate curr = LocalDate.now();
+//		truyền đối tượng sang thymeleaf
+			model.addAttribute("address", addressService.findAll());
+			model.addAttribute("barbers", barberService.findAll());
+			model.addAttribute("types", typeService.findAll());
+			model.addAttribute("times", timeService.findAll());
+			model.addAttribute("now", curr);
+			model.addAttribute("error_order","Vui Lòng Nhập Đầy Đủ Thông Tin");
+//			return "redirect:/order?phone=" + user.getPhone();
+			return "user/order";
 		}
+		
 		// format date
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate localDate = LocalDate.parse(date, formatter);
@@ -56,8 +68,17 @@ public class OrderController {
 		//	System.out.println(now.isAfter(localDate));
 		// check date
 		if (localDate.isBefore(now)) {
-			session.setAttribute("error_order","Bạn Chọn Lịch Sai Rồi");
-			return "redirect:/order?phone=" + user.getPhone();
+			model.addAttribute("phone", user.getPhone());
+			LocalDate curr = LocalDate.now();
+//		truyền đối tượng sang thymeleaf
+			model.addAttribute("address", addressService.findAll());
+			model.addAttribute("barbers", barberService.findAll());
+			model.addAttribute("types", typeService.findAll());
+			model.addAttribute("times", timeService.findAll());
+			model.addAttribute("now", curr);
+			model.addAttribute("error_order","Bạn Chọn Lịch Sai Rồi");
+//			return "redirect:/order?phone=" + user.getPhone();
+			return "user/order";
 		}
 		
 		int barber = Integer.parseInt(String.valueOf(idBarber));
@@ -68,8 +89,17 @@ public class OrderController {
 		boolean check = checkTimeAndBarber(city, localDate,type,time, barber);
 		
 		if (!check) {
-			session.setAttribute("error_order","Lịch Đã Bị Trùng Rồi");
-			return "redirect:/order?phone=" + user.getPhone();
+			model.addAttribute("phone", user.getPhone());
+			LocalDate curr = LocalDate.now();
+//		truyền đối tượng sang thymeleaf
+			model.addAttribute("address", addressService.findAll());
+			model.addAttribute("barbers", barberService.findAll());
+			model.addAttribute("types", typeService.findAll());
+			model.addAttribute("times", timeService.findAll());
+			model.addAttribute("now", curr);
+			model.addAttribute("error_order","Lịch Đã Bị Trùng Rồi");
+//			return "redirect:/order?phone=" + user.getPhone();
+			return "user/order";
 		}
 		
 		Orders order = new Orders(0, user.getId(), barberService.findById(barber), typeService.findById(type), timeService.findById(time), String.valueOf(localDate), city, null, false);
@@ -88,8 +118,16 @@ public class OrderController {
 												  @RequestParam("phone") String phone,
 												  Model model,HttpSession session) {
 		if (idBarber == null || idService == null || idCity == null || idTime == null) {
-			session.setAttribute("error_order","Vui Lòng Nhập Đầy Đủ Thông Tin");
-			return "redirect:/order?phone=" + phone;
+			model.addAttribute("phone", phone);
+			LocalDate curr = LocalDate.now();
+//		truyền đối tượng sang thymeleaf
+			model.addAttribute("address", addressService.findAll());
+			model.addAttribute("barbers", barberService.findAll());
+			model.addAttribute("types", typeService.findAll());
+			model.addAttribute("times", timeService.findAll());
+			model.addAttribute("now", curr);
+			model.addAttribute("error_order","Vui Lòng Nhập Đầy Đủ Thông Tin");
+			return "user/order";
 		}
 		// format date
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -100,8 +138,16 @@ public class OrderController {
 		//	System.out.println(now.isAfter(localDate));
 		// check date
 		if (localDate.isBefore(now)) {
-			session.setAttribute("error_order","Bạn Chọn Lịch Sai Rồi");
-			return "redirect:/order?phone=" + phone;
+			model.addAttribute("phone", phone);
+			LocalDate curr = LocalDate.now();
+//		truyền đối tượng sang thymeleaf
+			model.addAttribute("address", addressService.findAll());
+			model.addAttribute("barbers", barberService.findAll());
+			model.addAttribute("types", typeService.findAll());
+			model.addAttribute("times", timeService.findAll());
+			model.addAttribute("now", curr);
+			model.addAttribute("error_order","Bạn Chọn Lịch Sai Rồi");
+			return "user/order";
 		}
 		
 		int barber = Integer.parseInt(String.valueOf(idBarber));
@@ -112,8 +158,16 @@ public class OrderController {
 		boolean check = checkTimeAndBarber(city,localDate,type, time, barber);
 		
 		if (!check) {
-			session.setAttribute("error_order","Lịch Đã Bị Trùng Rồi");
-			return "redirect:/order?phone=" + phone;
+			model.addAttribute("phone", phone);
+			LocalDate curr = LocalDate.now();
+//		truyền đối tượng sang thymeleaf
+			model.addAttribute("address", addressService.findAll());
+			model.addAttribute("barbers", barberService.findAll());
+			model.addAttribute("types", typeService.findAll());
+			model.addAttribute("times", timeService.findAll());
+			model.addAttribute("now", curr);
+			model.addAttribute("error_order","Lịch Đã Bị Trùng Rồi");
+			return "user/order";
 		}
 		
 		UserNoAccount userNoAccount = new UserNoAccount(0, phone, barberService.findById(barber), typeService.findById(type), timeService.findById(time), String.valueOf(date), city, false);
@@ -123,13 +177,25 @@ public class OrderController {
 	}
 	
 	@GetMapping("/handleDelete/{id}")
-	public String handleDelete(@PathVariable("id") Long id, HttpSession session) {
+	public String handleDelete(@PathVariable("id") Long id, HttpSession session,Model model) {
 		orderService.delete(Integer.parseInt(String.valueOf(id)));
 		Users user = (Users) session.getAttribute("data_user");
 		Users newUser = userService.findById(user.getId());
-		session.setAttribute("delete_success","Hủy Kèo Thành Công");
+		model.addAttribute("delete_success","Hủy Kèo Thành Công");
+		List<Orders> pending = new ArrayList<>();
+		List<Orders> fulfilled = new ArrayList<>();
+		List<Orders> list = userService.findById(user.getId()).getOrders();
+		for (Orders o : list) {
+			if (!o.isStatus()) {
+				pending.add(o);
+			} else {
+				fulfilled.add(o);
+			}
+		}
+		model.addAttribute("pending", pending);
+		model.addAttribute("fulfilled", fulfilled);
 		session.setAttribute("data_user", newUser);
-		return "redirect:/history";
+		return "user/history";
 	}
 	
 	@GetMapping("/handleEdit/{id}")
@@ -159,7 +225,15 @@ public class OrderController {
 											  Model model, HttpSession session) {
 		Users user = (Users) session.getAttribute("data_user");
 		if (idBarber == null || idService == null || idCity == null || idTime == null) {
-			session.setAttribute("error_order","Vui Lòng Nhập Đầy Đủ Thông Tin");
+			model.addAttribute("phone", user.getPhone());
+			LocalDate curr = LocalDate.now();
+//		truyền đối tượng sang thymeleaf
+			model.addAttribute("address", addressService.findAll());
+			model.addAttribute("barbers", barberService.findAll());
+			model.addAttribute("types", typeService.findAll());
+			model.addAttribute("times", timeService.findAll());
+			model.addAttribute("now", curr);
+			model.addAttribute("error_order","Vui Lòng Nhập Đầy Đủ Thông Tin");
 			return "redirect:/handleOrder/handleEdit/" + id;
 		}
 		// format date
@@ -171,7 +245,15 @@ public class OrderController {
 		//	System.out.println(now.isAfter(localDate));
 		// check date
 		if (localDate.isBefore(now)) {
-			session.setAttribute("error_order","Bạn Chọn Lịch Sai Rồi");
+			model.addAttribute("phone", user.getPhone());
+			LocalDate curr = LocalDate.now();
+//		truyền đối tượng sang thymeleaf
+			model.addAttribute("address", addressService.findAll());
+			model.addAttribute("barbers", barberService.findAll());
+			model.addAttribute("types", typeService.findAll());
+			model.addAttribute("times", timeService.findAll());
+			model.addAttribute("now", curr);
+			model.addAttribute("error_order","Bạn Chọn Lịch Sai Rồi");
 			return "redirect:/handleOrder/handleEdit/" + id;
 		}
 		int myId = Integer.parseInt(String.valueOf(id));
@@ -198,7 +280,15 @@ public class OrderController {
 		
 		boolean check = checkTimeAndBarber(city, localDate,type, time, barber);
 		if (!check) {
-			session.setAttribute("error_order","Lịch Đã Bị Trùng Rồi");
+			model.addAttribute("phone", user.getPhone());
+			LocalDate curr = LocalDate.now();
+//		truyền đối tượng sang thymeleaf
+			model.addAttribute("address", addressService.findAll());
+			model.addAttribute("barbers", barberService.findAll());
+			model.addAttribute("types", typeService.findAll());
+			model.addAttribute("times", timeService.findAll());
+			model.addAttribute("now", curr);
+			model.addAttribute("error_order","Lịch Đã Bị Trùng Rồi");
 			return "redirect:/handleOrder/handleEdit/" + id;
 		}
 		

@@ -10,7 +10,7 @@
 
 <th:block th:replace="/layout/layout::toastify"></th:block>
 
-<th:block th:if="${session.delete_success}=='Hủy Kèo Thành Công'">
+<th:block th:if="${delete_success}=='Hủy Kèo Thành Công'">
 	<script>
 		Toastify({
 			text: "Hủy Kèo Thành Công",
@@ -20,7 +20,7 @@
 		}).showToast();
 	</script>
 </th:block>
-<th:block th:if="${session.review_success}=='Đánh Giá Thành Công'">
+<th:block th:if="${review_success}=='Đánh Giá Thành Công'">
 	<script>
 		Toastify({
 			text: "Đánh Giá Thành Công",
@@ -71,6 +71,7 @@
 							<th scope="col">PHONE</th>
 							<th scope="col">ADDRESS</th>
 							<th scope="col">SERVICE</th>
+							<th scope="col">BARBER</th>
 							<th scope="col">TIME</th>
 							<th scope="col">ACTION</th>
 							<th scope="col">STATUS</th>
@@ -83,6 +84,7 @@
 							<td th:text="${session.data_user.phone}"></td>
 							<td th:text="${item.address}"></td>
 							<td th:text="${item.type.typeName}"></td>
+							<td th:text="${item.barber.barberName}"></td>
 							<td th:text="|Ngày: ${item.date}  Giờ: ${item.time.time}|"></td>
 							<td>
 								<a th:href="@{/handleOrder/handleEdit/{id}(id=${item.id})}" type="button"
@@ -110,6 +112,7 @@
 							<th scope="col">PHONE</th>
 							<th scope="col">ADDRESS</th>
 							<th scope="col">SERVICE</th>
+							<th scope="col">BARBER</th>
 							<th scope="col">TIME</th>
 							<th scope="col">ACTION</th>
 							<th scope="col">STATUS</th>
@@ -122,6 +125,7 @@
 							<td th:text="${session.data_user.phone}"></td>
 							<td th:text="${item.address}"></td>
 							<td th:text="${item.type.typeName}"></td>
+							<td th:text="${item.barber.barberName}"></td>
 							<td th:text="|Ngày: ${item.date}  Giờ: ${item.time.time}|"></td>
 							<td>
 								<th:block th:if="${item.reviews}!=null">

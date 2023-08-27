@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/css/order.css">
 <th:block th:replace="/layout/layout::toastify"></th:block>
 
-<th:block th:if="${session.error_order}=='Vui Lòng Nhập Đầy Đủ Thông Tin'">
+<th:block th:if="${error_order}=='Vui Lòng Nhập Đầy Đủ Thông Tin'">
 	<script>
 		Toastify({
 			text: "Vui Lòng Nhập Đầy Đủ Thông Tin",
@@ -21,7 +21,7 @@
 		}).showToast();
 	</script>
 </th:block>
-<th:block th:if="${session.error_order}=='Bạn Chọn Lịch Sai Rồi'">
+<th:block th:if="${error_order}=='Bạn Chọn Lịch Sai Rồi'">
 	<script>
 		Toastify({
 			text: "Bạn Chọn Lịch Sai Rồi",
@@ -35,7 +35,7 @@
 		}).showToast();
 	</script>
 </th:block>
-<th:block th:if="${session.error_order}=='Lịch Đã Bị Trùng Rồi'">
+<th:block th:if="${error_order}=='Lịch Đã Bị Trùng Rồi'">
 	<script>
 		Toastify({
 			text: "Lịch Đã Bị Trùng Rồi",
